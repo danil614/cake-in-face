@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 	void Start()
 	{
 		cam = Camera.main;
-		cake.DesactivateRb();
+		//cake.DesactivateRb();
 	}
 
 	void Update()
@@ -56,14 +56,14 @@ public class GameManager : MonoBehaviour
 
 	void OnDragStart()
 	{
-		cake.DesactivateRb();
+		//cake.DesactivateRb();
 		startPoint = cam.ScreenToWorldPoint(Input.mousePosition);
 
 		trajectory.Show();
 	}
 	void OnDragEnd()
 	{
-		cake.ActivateRb();
+		//cake.ActivateRb();
 		cake.Push(force);
 		trajectory.Hide();
 	}
