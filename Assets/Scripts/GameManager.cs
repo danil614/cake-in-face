@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
 		if (isClicking)
 		{
-			OnClick();
+			OnClick(); // Обновление траектории при нажатии
 		}
 	}
 
