@@ -60,6 +60,12 @@ public class GameManager : MonoBehaviour
 
 		trajectory.Show();
 	}
+	void OnDragEnd()
+	{
+		cake.ActivateRb();
+		cake.Push(force);
+		trajectory.Hide();
+	}
 
 	void OnDrag()
 	{
@@ -73,11 +79,5 @@ public class GameManager : MonoBehaviour
 
 
 		trajectory.UpdateDots(cake.Position, force);
-	}
-
-	void OnDragEnd()
-	{
-		cake.Push(force);
-		trajectory.Hide();
 	}
 }
