@@ -23,6 +23,9 @@ public class Cake : MonoBehaviour
 		DeleteObjects(); // Удаляем старые торты
 	}
 
+	/// <summary>
+	/// Удаляет объекты со сцены при превышении допустимого количества
+	/// </summary>
 	public void DeleteObjects()
     {
 		if (objectsOnScene.Count > allowedNumberCakes)
