@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Cake : MonoBehaviour
 {
+	[SerializeField] GameObject cake;
 	[HideInInspector] public Rigidbody2D body2d;
 	//[HideInInspector] public BoxCollider2D collider2d;
 
@@ -18,6 +19,11 @@ public class Cake : MonoBehaviour
 	public void Push(Vector2 force)
 	{
 		body2d.AddForce(force, ForceMode2D.Impulse);
+		Instantiate(cake, transform.position, Quaternion.identity);
+	}
+	public void ActivateRb()
+	{
+		body2d.isKinematic = false; // При начале движения становится Dynamic
 	}
 
 	public void DesactivateRb()
