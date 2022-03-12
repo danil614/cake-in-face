@@ -476,6 +476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cake: {fileID: 1969027711}
+  hero: {fileID: 0}
   trajectory: {fileID: 559925818}
   pushForce: 4
 --- !u!4 &767235376
@@ -795,7 +796,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398318013}
   m_LocalRotation: {x: -0, y: -0, z: 0.094146706, w: 0.9955583}
-  m_LocalPosition: {x: 0.9969, y: -2.6799, z: 0}
+  m_LocalPosition: {x: 0.84, y: -3.54, z: 0}
   m_LocalScale: {x: 0.13819852, y: 0.13819852, z: 0.13819852}
   m_Children: []
   m_Father: {fileID: 0}
@@ -855,8 +856,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDrag: 1
+  m_AngularDrag: 0.03
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
