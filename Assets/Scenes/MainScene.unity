@@ -430,8 +430,8 @@ MonoBehaviour:
   dotsParent: {fileID: 559925817}
   dotPrefab: {fileID: 431955106157030863, guid: 03837addd4f31964e9c4ffcbbf65ef23, type: 3}
   dotSpacing: 0.03
-  dotMinScale: 0.18
-  dotMaxScale: 0.4
+  dotMinScale: 0.05
+  dotMaxScale: 0.2
 --- !u!4 &559925819
 Transform:
   m_ObjectHideFlags: 0
@@ -440,7 +440,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 559925817}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.77095187, y: 0.50147414, z: -18.157026}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -486,7 +486,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 767235374}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.054141957, y: -0.08308513, z: -16.590357}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
