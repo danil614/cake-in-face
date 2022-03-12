@@ -4,81 +4,58 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	public static GameManager Instance;
-
-	void Awake()
-	{
-		if (Instance == null)
-		{
-			Instance = this;
-		}
-	}
-
-	Camera cam;
-
+	private Camera mainCamera;
 	public Cake cake;
-	public Hero hero;
 	public Trajectory trajectory;
-	[SerializeField] float pushForce = 4f;
+	[SerializeField] float pushForce; // Сила нажатия
 
-	bool isDragging = false;
-	
-	Vector2 startPoint;
-	Vector2 endPoint;
-	Vector2 direction;
-	Vector2 force;
-	float distance;
+	bool isClicking = false; // Нажатие на экран
+	Vector2 force; // Сила метания торта
 
 	void Start()
 	{
-		cam = Camera.main;
-		//cake.DesactivateRb();
+		mainCamera = Camera.main;
 	}
 
 	void Update()
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
-			isDragging = true;
-			OnDragStart();
+			isClicking = true;
+			trajectory.Show(); // Показываем траекторию
 		}
+
 		if (Input.GetMouseButtonUp(0))
 		{
-			isDragging = false;
-			OnDragEnd();
+			isClicking = false;
+			cake.Push(force); // Метаем торт
+			trajectory.Hide(); // Прячем траекторию
 		}
 
-		if (isDragging)
+		if (isClicking)
 		{
-			OnDrag();
+			OnClick();
 		}
 	}
 
-	void OnDragStart()
+	/// <summary>
+	/// Построение траектории при нажатии
+	/// </summary>
+	void OnClick()
 	{
-		//cake.DesactivateRb();
-		startPoint = cam.ScreenToWorldPoint(Input.mousePosition);
+		// Точки начала и конца направляющей линии траектории
+		Vector2 startPoint = cake.Position;
+		Vector2 endPoint = mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
-		trajectory.Show();
-	}
-	void OnDragEnd()
-	{
-		//cake.ActivateRb();
-		cake.Push(force);
-		trajectory.Hide();
-	}
-
-	void OnDrag()
-	{
-		endPoint = cam.ScreenToWorldPoint(Input.mousePosition);
-		distance = Vector2.Distance(startPoint, endPoint);
-		direction = (startPoint - endPoint).normalized;
-		force = direction * distance * pushForce;
-
-		//just for debug
+		// Направляющая линия для отладки
 		Debug.DrawLine(startPoint, endPoint);
 
+		float distance = Vector2.Distance(endPoint, startPoint);
+		Vector2 direction = (endPoint - startPoint).normalized;
 
+		force = distance * pushForce * direction;
+
+		// Расставить все точки по траектории полета
 		trajectory.UpdateDots(cake.Position, force);
 	}
 }
