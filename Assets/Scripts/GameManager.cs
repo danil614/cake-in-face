@@ -17,11 +17,12 @@ public class GameManager : MonoBehaviour
 	Camera cam;
 
 	public Cake cake;
+	public Hero hero;
 	public Trajectory trajectory;
 	[SerializeField] float pushForce = 4f;
 
 	bool isDragging = false;
-
+	
 	Vector2 startPoint;
 	Vector2 endPoint;
 	Vector2 direction;
