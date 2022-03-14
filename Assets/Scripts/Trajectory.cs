@@ -4,26 +4,24 @@ using UnityEngine;
 
 public class Trajectory : MonoBehaviour
 {
-	[SerializeField] int dotsNumber;
-	[SerializeField] GameObject dotsParent;
-	[SerializeField] GameObject dotPrefab;
-	[SerializeField] float dotSpacing;
-	[SerializeField][Range(0.01f, 0.3f)] float dotMinScale;
-	[SerializeField][Range(0.1f, 1f)] float dotMaxScale;
+	[SerializeField] int dotsNumber; // Количество точек в траектории
+	[SerializeField] GameObject dotsParent; // Группировка всех точек
+	[SerializeField] GameObject dotPrefab; // Объект - точка
+	[SerializeField] float dotSpacing; // Расстояние между точками
+	[SerializeField][Range(0.01f, 0.3f)] float dotMinScale; // Минимальный размер точек
+	[SerializeField][Range(0.1f, 1f)] float dotMaxScale; // Максимальный размер точек
 
-	Transform[] dotsList;
-
-	Vector2 pos;
-	float timeStamp;
+	Transform[] dotsList; // Массив точек для траектории
 
 	void Start()
 	{
-		//hide trajectory in the start
-		Hide();
-		//prepare dots
+		Hide(); // Спрятать траекторию
 		PrepareDots();
 	}
 
+	/// <summary>
+	/// Создает точки для траектории и рассчитывает их размер
+	/// </summary>
 	void PrepareDots()
 	{
 		dotsList = new Transform[dotsNumber];
@@ -38,29 +36,45 @@ public class Trajectory : MonoBehaviour
 			dotsList[i].parent = dotsParent.transform;
 
 			dotsList[i].localScale = Vector3.one * scale;
+			
 			if (scale > dotMinScale)
+			{
 				scale -= scaleFactor;
+			}
 		}
 	}
 
-	public void UpdateDots(Vector3 ballPos, Vector2 forceApplied)
+	/// <summary>
+	/// Устанавливает позиции всех точек траектории
+	/// </summary>
+	/// <param name="startPosition">Начальная позиция</param>
+	/// <param name="forceApplied">Приложенная сила</param>
+	public void UpdateDots(Vector3 startPosition, Vector2 forceApplied)
 	{
-		timeStamp = dotSpacing;
+		Vector2 position;
+		float timeStamp = dotSpacing;
+
 		for (int i = 0; i < dotsNumber; i++)
 		{
-			pos.x = (ballPos.x + forceApplied.x * timeStamp);
-			pos.y = (ballPos.y + forceApplied.y * timeStamp) - (Physics2D.gravity.magnitude * timeStamp * timeStamp) / 2f;
+			position.x = (startPosition.x + forceApplied.x * timeStamp);
+			position.y = (startPosition.y + forceApplied.y * timeStamp) - (Physics2D.gravity.magnitude * timeStamp * timeStamp) / 2f;
 
-			dotsList[i].position = pos;
+			dotsList[i].position = position;
 			timeStamp += dotSpacing;
 		}
 	}
 
+	/// <summary>
+	/// Показывает траекторию
+	/// </summary>
 	public void Show()
 	{
 		dotsParent.SetActive(true);
 	}
 
+	/// <summary>
+	/// Прячет траекторию
+	/// </summary>
 	public void Hide()
 	{
 		dotsParent.SetActive(false);

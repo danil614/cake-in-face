@@ -4,80 +4,58 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	public static GameManager Instance;
-
-	void Awake()
-	{
-		if (Instance == null)
-		{
-			Instance = this;
-		}
-	}
-
-	Camera cam;
+	private Camera mainCamera;
 	public Cake cake;
-	public Hero hero;
 	public Trajectory trajectory;
-	[SerializeField] float pushForce = 4f;
+	[SerializeField] float pushForce; // Ñèëà íàæàòèÿ
 
-	bool isDragging = false;
-	
-	Vector2 startPoint;
-	Vector2 endPoint;
-	Vector2 direction;
-	Vector2 force;
-	float distance;
+	bool isClicking = false; // Íàæàòèå íà ýêðàí
+	Vector2 force; // Ñèëà ìåòàíèÿ òîðòà
 
 	void Start()
 	{
-		cam = Camera.main;
-		//cake.DesactivateRb();
+		mainCamera = Camera.main;
 	}
 
 	void Update()
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
-			isDragging = true;
-			OnDragStart();
+			isClicking = true;
+			trajectory.Show(); // Ïîêàçûâàåì òðàåêòîðèþ
 		}
+
 		if (Input.GetMouseButtonUp(0))
 		{
-			isDragging = false;
-			OnDragEnd();
+			isClicking = false;
+			cake.Push(force); // Ìåòàåì òîðò
+			trajectory.Hide(); // Ïðÿ÷åì òðàåêòîðèþ
 		}
 
-		if (isDragging)
+		if (isClicking)
 		{
-			OnDrag();
+			OnClick(); // Îáíîâëåíèå òðàåêòîðèè ïðè íàæàòèè
 		}
 	}
 
-	void OnDragStart()
+	/// <summary>
+	/// Ïîñòðîåíèå òðàåêòîðèè ïðè íàæàòèè
+	/// </summary>
+	void OnClick()
 	{
-		//cake.DesactivateRb();
-		startPoint = cam.ScreenToWorldPoint(Input.mousePosition);
+		// Òî÷êè íà÷àëà è êîíöà íàïðàâëÿþùåé ëèíèè òðàåêòîðèè
+		Vector2 startPoint = cake.Position;
+		Vector2 endPoint = mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
-		trajectory.Show();
-	}
-	void OnDragEnd()
-	{
-		//cake.ActivateRb();
-		cake.Push(force);
-		trajectory.Hide();
-	}
-
-	void OnDrag()
-	{
-		endPoint = cam.ScreenToWorldPoint(Input.mousePosition);
-		distance = Vector2.Distance(startPoint, endPoint);
-		direction = (startPoint - endPoint).normalized;
-		force = direction * distance * pushForce;
-
-		//just for debug
+		// Íàïðàâëÿþùàÿ ëèíèÿ äëÿ îòëàäêè
 		Debug.DrawLine(startPoint, endPoint);
 
+		float distance = Vector2.Distance(endPoint, startPoint);
+		Vector2 direction = (endPoint - startPoint).normalized;
 
+		force = distance * pushForce * direction;
+
+		// Ðàññòàâèòü âñå òî÷êè ïî òðàåêòîðèè ïîëåòà
 		trajectory.UpdateDots(cake.Position, force);
 	}
 }
