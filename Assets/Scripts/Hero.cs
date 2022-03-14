@@ -4,5 +4,9 @@ using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
+	
+	public void Show()
+    {
 
+    }
 }

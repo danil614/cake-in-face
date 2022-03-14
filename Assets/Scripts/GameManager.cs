@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
 	}
 
 	Camera cam;
-
 	public Cake cake;
 	public Hero hero;
 	public Trajectory trajectory;
