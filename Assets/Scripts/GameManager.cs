@@ -7,10 +7,10 @@ public class GameManager : MonoBehaviour
 	private Camera mainCamera;
 	public Cake cake;
 	public Trajectory trajectory;
-	[SerializeField] float pushForce; // Сила нажатия
+	[SerializeField] float pushForce; // Г‘ГЁГ«Г  Г­Г Г¦Г ГІГЁГї
 
-	bool isClicking = false; // Нажатие на экран
-	Vector2 force; // Сила метания торта
+	bool isClicking = false; // ГЌГ Г¦Г ГІГЁГҐ Г­Г  ГЅГЄГ°Г Г­
+	Vector2 force; // Г‘ГЁГ«Г  Г¬ГҐГІГ Г­ГЁГї ГІГ®Г°ГІГ 
 
 	void Start()
 	{
@@ -22,32 +22,32 @@ public class GameManager : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			isClicking = true;
-			trajectory.Show(); // Показываем траекторию
+			trajectory.Show(); // ГЏГ®ГЄГ Г§Г»ГўГ ГҐГ¬ ГІГ°Г ГҐГЄГІГ®Г°ГЁГѕ
 		}
 
 		if (Input.GetMouseButtonUp(0))
 		{
 			isClicking = false;
-			cake.Push(force); // Метаем торт
-			trajectory.Hide(); // Прячем траекторию
+			cake.Push(force); // ГЊГҐГІГ ГҐГ¬ ГІГ®Г°ГІ
+			trajectory.Hide(); // ГЏГ°ГїГ·ГҐГ¬ ГІГ°Г ГҐГЄГІГ®Г°ГЁГѕ
 		}
 
 		if (isClicking)
 		{
-			OnClick(); // Обновление траектории при нажатии
+			OnClick(); // ГЋГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ ГІГ°Г ГҐГЄГІГ®Г°ГЁГЁ ГЇГ°ГЁ Г­Г Г¦Г ГІГЁГЁ
 		}
 	}
 
 	/// <summary>
-	/// Построение траектории при нажатии
+	/// ГЏГ®Г±ГІГ°Г®ГҐГ­ГЁГҐ ГІГ°Г ГҐГЄГІГ®Г°ГЁГЁ ГЇГ°ГЁ Г­Г Г¦Г ГІГЁГЁ
 	/// </summary>
 	void OnClick()
 	{
-		// Точки начала и конца направляющей линии траектории
+		// Г’Г®Г·ГЄГЁ Г­Г Г·Г Г«Г  ГЁ ГЄГ®Г­Г¶Г  Г­Г ГЇГ°Г ГўГ«ГїГѕГ№ГҐГ© Г«ГЁГ­ГЁГЁ ГІГ°Г ГҐГЄГІГ®Г°ГЁГЁ
 		Vector2 startPoint = cake.Position;
 		Vector2 endPoint = mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
-		// Направляющая линия для отладки
+		// ГЌГ ГЇГ°Г ГўГ«ГїГѕГ№Г Гї Г«ГЁГ­ГЁГї Г¤Г«Гї Г®ГІГ«Г Г¤ГЄГЁ
 		Debug.DrawLine(startPoint, endPoint);
 
 		float distance = Vector2.Distance(endPoint, startPoint);
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
 
 		force = distance * pushForce * direction;
 
-		// Расставить все точки по траектории полета
+		// ГђГ Г±Г±ГІГ ГўГЁГІГј ГўГ±ГҐ ГІГ®Г·ГЄГЁ ГЇГ® ГІГ°Г ГҐГЄГІГ®Г°ГЁГЁ ГЇГ®Г«ГҐГІГ 
 		trajectory.UpdateDots(cake.Position, force);
 	}
 }
