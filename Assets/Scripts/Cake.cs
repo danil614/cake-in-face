@@ -6,32 +6,32 @@ public class Cake : MonoBehaviour
 {
 	[HideInInspector] public Vector3 Position { get => transform.position; }
 	[SerializeField] private GameObject cake;
-	[SerializeField] private int allowedNumberCakes; // Допустимое количество тортов на сцене
+	[SerializeField] private int allowedNumberCakes; // Р”РѕРїСѓСЃС‚РёРјРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ С‚РѕСЂС‚РѕРІ РЅР° СЃС†РµРЅРµ
 	private List<GameObject> objectsOnScene = new List<GameObject>();
 
 	/// <summary>
-	/// Создает торт и задает ему силу метания
+	/// РЎРѕР·РґР°РµС‚ С‚РѕСЂС‚ Рё Р·Р°РґР°РµС‚ РµРјСѓ СЃРёР»Сѓ РјРµС‚Р°РЅРёСЏ
 	/// </summary>
-	/// <param name="force">Сила метания</param>
+	/// <param name="force">РЎРёР»Р° РјРµС‚Р°РЅРёСЏ</param>
 	public void Push(Vector2 force)
 	{
-		GameObject cakeClone = Instantiate(cake, transform.position, Quaternion.identity); // Создаем новый торт
-		cakeClone.transform.rotation = transform.rotation; // Изменеям угол вращения
-		Rigidbody2D body2d = cakeClone.GetComponent<Rigidbody2D>(); // Получаем Rigidbody2D
-		body2d.AddForce(force, ForceMode2D.Impulse); // Устанавливаем скорость полета торта
-		objectsOnScene.Add(cakeClone); // Добавляем в список объектов
-		DeleteObjects(); // Удаляем старые торты
+		GameObject cakeClone = Instantiate(cake, transform.position, Quaternion.identity); // РЎРѕР·РґР°РµРј РЅРѕРІС‹Р№ С‚РѕСЂС‚
+		cakeClone.transform.rotation = transform.rotation; // РР·РјРµРЅРµСЏРј СѓРіРѕР» РІСЂР°С‰РµРЅРёСЏ
+		Rigidbody2D body2d = cakeClone.GetComponent<Rigidbody2D>(); // РџРѕР»СѓС‡Р°РµРј Rigidbody2D
+		body2d.AddForce(force, ForceMode2D.Impulse); // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЃРєРѕСЂРѕСЃС‚СЊ РїРѕР»РµС‚Р° С‚РѕСЂС‚Р°
+		objectsOnScene.Add(cakeClone); // Р”РѕР±Р°РІР»СЏРµРј РІ СЃРїРёСЃРѕРє РѕР±СЉРµРєС‚РѕРІ
+		DeleteObjects(); // РЈРґР°Р»СЏРµРј СЃС‚Р°СЂС‹Рµ С‚РѕСЂС‚С‹
 	}
 
 	/// <summary>
-	/// Удаляет объекты со сцены при превышении допустимого количества
+	/// РЈРґР°Р»СЏРµС‚ РѕР±СЉРµРєС‚С‹ СЃРѕ СЃС†РµРЅС‹ РїСЂРё РїСЂРµРІС‹С€РµРЅРёРё РґРѕРїСѓСЃС‚РёРјРѕРіРѕ РєРѕР»РёС‡РµСЃС‚РІР°
 	/// </summary>
 	public void DeleteObjects()
     {
 		if (objectsOnScene.Count > allowedNumberCakes)
         {
-			Destroy(objectsOnScene[0]); // Удаляем со сцены
-			objectsOnScene.RemoveAt(0); // Удаляем из списка
+			Destroy(objectsOnScene[0]); // РЈРґР°Р»СЏРµРј СЃРѕ СЃС†РµРЅС‹
+			objectsOnScene.RemoveAt(0); // РЈРґР°Р»СЏРµРј РёР· СЃРїРёСЃРєР°
         }
     }
 }
