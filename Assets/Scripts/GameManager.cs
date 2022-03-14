@@ -7,10 +7,10 @@ public class GameManager : MonoBehaviour
 	private Camera mainCamera;
 	public Cake cake;
 	public Trajectory trajectory;
-	[SerializeField] float pushForce; // Ñèëà íàæàòèÿ
+	[SerializeField] float pushForce; // Сила нажатия
 
-	bool isClicking = false; // Íàæàòèå íà ýêðàí
-	Vector2 force; // Ñèëà ìåòàíèÿ òîðòà
+	bool isClicking = false; // Нажатие на экран
+	Vector2 force; // Сила метания торта
 
 	void Start()
 	{
@@ -22,32 +22,32 @@ public class GameManager : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			isClicking = true;
-			trajectory.Show(); // Ïîêàçûâàåì òðàåêòîðèþ
+			trajectory.Show(); // Показываем траекторию
 		}
 
 		if (Input.GetMouseButtonUp(0))
 		{
 			isClicking = false;
-			cake.Push(force); // Ìåòàåì òîðò
-			trajectory.Hide(); // Ïðÿ÷åì òðàåêòîðèþ
+			cake.Push(force); // Метаем торт
+			trajectory.Hide(); // Прячем траекторию
 		}
 
 		if (isClicking)
 		{
-			OnClick(); // Îáíîâëåíèå òðàåêòîðèè ïðè íàæàòèè
+			OnClick(); // Обновление траектории при нажатии
 		}
 	}
 
 	/// <summary>
-	/// Ïîñòðîåíèå òðàåêòîðèè ïðè íàæàòèè
+	/// Построение траектории при нажатии
 	/// </summary>
 	void OnClick()
 	{
-		// Òî÷êè íà÷àëà è êîíöà íàïðàâëÿþùåé ëèíèè òðàåêòîðèè
+		// Точки начала и конца направляющей линии траектории
 		Vector2 startPoint = cake.Position;
 		Vector2 endPoint = mainCamera.ScreenToWorldPoint(Input.mousePosition);
 
-		// Íàïðàâëÿþùàÿ ëèíèÿ äëÿ îòëàäêè
+		// Направляющая линия для отладки
 		Debug.DrawLine(startPoint, endPoint);
 
 		float distance = Vector2.Distance(endPoint, startPoint);
@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
 
 		force = distance * pushForce * direction;
 
-		// Ðàññòàâèòü âñå òî÷êè ïî òðàåêòîðèè ïîëåòà
+		// Расставить все точки по траектории полета
 		trajectory.UpdateDots(cake.Position, force);
 	}
 }

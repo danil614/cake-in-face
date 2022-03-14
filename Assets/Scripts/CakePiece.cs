@@ -7,7 +7,7 @@ public class CakePiece : MonoBehaviour
 	public GameObject piece;
 	public GameObject hero;
 	/// <summary>
-	/// При столкновении уничтожается объект
+	/// РџСЂРё СЃС‚РѕР»РєРЅРѕРІРµРЅРёРё СѓРЅРёС‡С‚РѕР¶Р°РµС‚СЃСЏ РѕР±СЉРµРєС‚
 	/// </summary>
 	/// <param name="collision"></param>
 	private void OnCollisionEnter2D(Collision2D collision) 
@@ -20,7 +20,7 @@ public class CakePiece : MonoBehaviour
 				Vector2 collisionPoint = collisionContact.point;
 				Transform pieces;
 				pieces = Instantiate(piece, new Vector3(collisionPoint.x+0.1f, collisionPoint.y, 0), Quaternion.identity).transform;
-				pieces.parent = hero.transform; // Удочеряем 
+				pieces.parent = hero.transform; // РЈРґРѕС‡РµСЂСЏРµРј 
 				break;
 			}
 

@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class Trajectory : MonoBehaviour
 {
-	[SerializeField] int dotsNumber; // Количество точек в траектории
-	[SerializeField] GameObject dotsParent; // Группировка всех точек
-	[SerializeField] GameObject dotPrefab; // Объект - точка
-	[SerializeField] float dotSpacing; // Расстояние между точками
-	[SerializeField][Range(0.01f, 0.3f)] float dotMinScale; // Минимальный размер точек
-	[SerializeField][Range(0.1f, 1f)] float dotMaxScale; // Максимальный размер точек
+	[SerializeField] int dotsNumber; // РљРѕР»РёС‡РµСЃС‚РІРѕ С‚РѕС‡РµРє РІ С‚СЂР°РµРєС‚РѕСЂРёРё
+	[SerializeField] GameObject dotsParent; // Р“СЂСѓРїРїРёСЂРѕРІРєР° РІСЃРµС… С‚РѕС‡РµРє
+	[SerializeField] GameObject dotPrefab; // РћР±СЉРµРєС‚ - С‚РѕС‡РєР°
+	[SerializeField] float dotSpacing; // Р Р°СЃСЃС‚РѕСЏРЅРёРµ РјРµР¶РґСѓ С‚РѕС‡РєР°РјРё
+	[SerializeField][Range(0.01f, 0.3f)] float dotMinScale; // РњРёРЅРёРјР°Р»СЊРЅС‹Р№ СЂР°Р·РјРµСЂ С‚РѕС‡РµРє
+	[SerializeField][Range(0.1f, 1f)] float dotMaxScale; // РњР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СЂР°Р·РјРµСЂ С‚РѕС‡РµРє
 
-	Transform[] dotsList; // Массив точек для траектории
+	Transform[] dotsList; // РњР°СЃСЃРёРІ С‚РѕС‡РµРє РґР»СЏ С‚СЂР°РµРєС‚РѕСЂРёРё
 
 	void Start()
 	{
-		Hide(); // Спрятать траекторию
+		Hide(); // РЎРїСЂСЏС‚Р°С‚СЊ С‚СЂР°РµРєС‚РѕСЂРёСЋ
 		PrepareDots();
 	}
 
 	/// <summary>
-	/// Создает точки для траектории и рассчитывает их размер
+	/// РЎРѕР·РґР°РµС‚ С‚РѕС‡РєРё РґР»СЏ С‚СЂР°РµРєС‚РѕСЂРёРё Рё СЂР°СЃСЃС‡РёС‚С‹РІР°РµС‚ РёС… СЂР°Р·РјРµСЂ
 	/// </summary>
 	void PrepareDots()
 	{
@@ -45,10 +45,10 @@ public class Trajectory : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Устанавливает позиции всех точек траектории
+	/// РЈСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ РїРѕР·РёС†РёРё РІСЃРµС… С‚РѕС‡РµРє С‚СЂР°РµРєС‚РѕСЂРёРё
 	/// </summary>
-	/// <param name="startPosition">Начальная позиция</param>
-	/// <param name="forceApplied">Приложенная сила</param>
+	/// <param name="startPosition">РќР°С‡Р°Р»СЊРЅР°СЏ РїРѕР·РёС†РёСЏ</param>
+	/// <param name="forceApplied">РџСЂРёР»РѕР¶РµРЅРЅР°СЏ СЃРёР»Р°</param>
 	public void UpdateDots(Vector3 startPosition, Vector2 forceApplied)
 	{
 		Vector2 position;
@@ -65,7 +65,7 @@ public class Trajectory : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Показывает траекторию
+	/// РџРѕРєР°Р·С‹РІР°РµС‚ С‚СЂР°РµРєС‚РѕСЂРёСЋ
 	/// </summary>
 	public void Show()
 	{
@@ -73,7 +73,7 @@ public class Trajectory : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Прячет траекторию
+	/// РџСЂСЏС‡РµС‚ С‚СЂР°РµРєС‚РѕСЂРёСЋ
 	/// </summary>
 	public void Hide()
 	{
