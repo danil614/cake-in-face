@@ -6,10 +6,10 @@ public class CakePiece : MonoBehaviour
 {
 	public GameObject piece;
 	public GameObject hero;
+
 	/// <summary>
 	/// При столкновении уничтожается объект
 	/// </summary>
-	/// <param name="collision"></param>
 	private void OnCollisionEnter2D(Collision2D collision) 
 	{
 		if (collision.gameObject.tag == "Cake")

@@ -1,16 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
 	private Camera mainCamera;
-	public Cake cake;
-	public Trajectory trajectory;
-	[SerializeField] float pushForce; // Сила нажатия
 
-	bool isClicking = false; // Нажатие на экран
-	Vector2 force; // Сила метания торта
+	[SerializeField]
+	private Cake cake;
+
+	[SerializeField]
+	private Trajectory trajectory;
+
+	[SerializeField]
+	private Transform trajectoryEndPoint;
+
+	[SerializeField]
+	private float pushForce; // Сила нажатия
+
+	[SerializeField]
+	private float startTime; // Стартовое время
+
+	private bool isClicking = false; // Нажатие на экран
+	private Vector2 force; // Сила метания торта
+	private float time; // Подсчет времени для роста траектории
 
 	void Start()
 	{
@@ -22,6 +33,7 @@ public class GameManager : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			isClicking = true;
+			time = startTime; // Обнуляем время
 			trajectory.Show(); // Показываем траекторию
 		}
 
@@ -34,6 +46,7 @@ public class GameManager : MonoBehaviour
 
 		if (isClicking)
 		{
+			time += Time.deltaTime; // Считаем время нажатия
 			OnClick(); // Обновление траектории при нажатии
 		}
 	}
@@ -45,7 +58,7 @@ public class GameManager : MonoBehaviour
 	{
 		// Точки начала и конца направляющей линии траектории
 		Vector2 startPoint = cake.Position;
-		Vector2 endPoint = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+		Vector2 endPoint = trajectoryEndPoint.position;
 
 		// Направляющая линия для отладки
 		Debug.DrawLine(startPoint, endPoint);
@@ -53,7 +66,7 @@ public class GameManager : MonoBehaviour
 		float distance = Vector2.Distance(endPoint, startPoint);
 		Vector2 direction = (endPoint - startPoint).normalized;
 
-		force = distance * pushForce * direction;
+		force = distance * pushForce * time * direction;
 
 		// Расставить все точки по траектории полета
 		trajectory.UpdateDots(cake.Position, force);

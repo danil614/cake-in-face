@@ -7,7 +7,7 @@ public class Cake : MonoBehaviour
 	[HideInInspector] public Vector3 Position { get => transform.position; }
 	[SerializeField] private GameObject cake;
 	[SerializeField] private int allowedNumberCakes; // Допустимое количество тортов на сцене
-	private List<GameObject> objectsOnScene = new List<GameObject>();
+	private List<GameObject> objectsOnScene = new List<GameObject>(); // Коллекция для хранения тортов на сцене
 
 	/// <summary>
 	/// Создает торт и задает ему силу метания
