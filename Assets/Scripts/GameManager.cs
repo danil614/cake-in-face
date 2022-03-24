@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	private Camera mainCamera;
-
 	[SerializeField]
 	private Cake cake;
 
@@ -11,29 +9,24 @@ public class GameManager : MonoBehaviour
 	private Trajectory trajectory;
 
 	[SerializeField]
-	private Transform trajectoryEndPoint;
+	private Transform turningPoint; // Точка поворота
 
 	[SerializeField]
 	private float pushForce; // Сила нажатия
 
 	[SerializeField]
-	private float startTime; // Стартовое время
+	private float startPushForce; // Стартовая сила нажатия
 
 	private bool isClicking = false; // Нажатие на экран
 	private Vector2 force; // Сила метания торта
 	private float time; // Подсчет времени для роста траектории
-
-	void Start()
-	{
-		mainCamera = Camera.main;
-	}
 
 	void Update()
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
 			isClicking = true;
-			time = startTime; // Обнуляем время
+			SetStartPushForce(); // Обнуляем время
 			trajectory.Show(); // Показываем траекторию
 		}
 
@@ -52,21 +45,31 @@ public class GameManager : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Построение траектории при нажатии
+	/// Устанавливает стартовую силу полета торта.
+	/// </summary>
+	private void SetStartPushForce()
+    {
+		Vector2 startPoint = turningPoint.position;
+		Vector2 endPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		time = Vector2.Distance(endPoint, startPoint) * startPushForce; // Устанваливаем стартовое время
+
+		Debug.Log(time);
+	}
+
+	/// <summary>
+	/// Построение траектории при нажатии.
 	/// </summary>
 	void OnClick()
 	{
 		// Точки начала и конца направляющей линии траектории
-		Vector2 startPoint = cake.Position;
-		Vector2 endPoint = trajectoryEndPoint.position;
+		Vector2 startPoint = turningPoint.position;
+		Vector2 endPoint = cake.Position;
 
-		// Направляющая линия для отладки
-		Debug.DrawLine(startPoint, endPoint);
-
-		float distance = Vector2.Distance(endPoint, startPoint);
+		// Направляющий вектор длиной 1
 		Vector2 direction = (endPoint - startPoint).normalized;
 
-		force = distance * pushForce * time * direction;
+		// Сила метания торта
+		force = time * pushForce * direction;
 
 		// Расставить все точки по траектории полета
 		trajectory.UpdateDots(cake.Position, force);

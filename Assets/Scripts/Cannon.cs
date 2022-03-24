@@ -5,7 +5,7 @@ using UnityEngine;
 public class Cannon : MonoBehaviour
 {
     [SerializeField]
-    private Transform turningPoint;
+    private Transform turningPoint; // Точка поворота пушки
 
     [SerializeField]
     private float shiftAngle; // Сдвиг угла поворота пушки
