@@ -1,34 +1,60 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Hero : MonoBehaviour, IDragHandler, IBeginDragHandler
+public class Hero : MonoBehaviour, IDragHandler, IBeginDragHandler, IPointerEnterHandler, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler, ISelectHandler
 {
-    Vector3 startClick;
+    private Vector2 shiftCenterHero; // Смещение центра Hero
+    private bool isDragging = false;
 
+    private void Update()
+    {
+        if (isDragging)
+        {
+            Vector2 endClick = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Получаем координаты нажатия
+            Vector2 shiftVector = endClick - shiftCenterHero; // Смещаем нажатие для смещения центра Hero
+            GetComponent<Rigidbody2D>().MovePosition(shiftVector); // Перемещаем Hero
+        }
+    }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        startClick = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        //startClick = //Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //startPoint = transform.position;//Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //transform.position += new Vector3(eventData.delta.x, eventData.delta.y);
-        Debug.Log("Start Drag");
+        //shiftCenterHero = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position; // Получаем смещение Hero
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        //transform.position = eventData.pointerCurrentRaycast.screenPosition;
-        //eventData.pointerCurrentRaycast.gameObject.transform.position = Input.mousePosition;
-        //Debug.Log("OnDrag!");
-        //eventData.pointerCurrentRaycast.gameObject.transform.position = eventData.pointerCurrentRaycast.screenPosition;
-        //GetComponent<Rigidbody2D>().MovePosition(eventData.position);
+        //Vector2 endClick = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Получаем координаты нажатия
+        //Vector2 shiftVector = endClick - shiftCenterHero; // Смещаем нажатие для смещения центра Hero
+        //GetComponent<Rigidbody2D>().MovePosition(shiftVector); // Перемещаем Hero
+    }
 
-        //Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //transform.position = mousePosition;
-        Vector3 endClick = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 clickVector = endClick - startClick;
-        //clickVector -= new Vector2(transform.position.x, transform.position.y);
-        //transform.position += clickVector;
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Debug.Log("Click");
+    }
 
-        GetComponent<Rigidbody2D>().MovePosition(clickVector);
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        //shiftCenterHero = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position; // Получаем смещение Hero
+        Debug.Log("Down");
+        isDragging = true;
+        shiftCenterHero = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position; // Получаем смещение Hero
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("Enter");
+
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        Debug.Log("Up");
+        isDragging = false;
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        Debug.Log("Select");
+
     }
 }
