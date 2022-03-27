@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Trajectory : MonoBehaviour
@@ -20,7 +18,7 @@ public class Trajectory : MonoBehaviour
 
 	Transform[] dotsList; // Массив точек для траектории
 
-    void Start()
+    private void Start()
 	{
 		Hide(); // Прячем траекторию
 		PrepareDots(); // Подготавливаем точки для траектории
@@ -29,7 +27,7 @@ public class Trajectory : MonoBehaviour
 	/// <summary>
 	/// Создает точки для траектории и рассчитывает их размер.
 	/// </summary>
-	void PrepareDots()
+	private void PrepareDots()
 	{
 		dotsList = new Transform[dotsNumber]; // Создаем массив точек траектории
 		dotPrefab.transform.localScale = Vector3.one * dotMaxScale; // Устанавливаем максимальный размер точек

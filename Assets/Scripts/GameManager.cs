@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 	private Vector2 force; // Сила метания торта
 	private float time; // Подсчет времени для роста траектории
 
-	void Update()
+	private void Update()
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
 	/// <summary>
 	/// Построение траектории при нажатии.
 	/// </summary>
-	void OnClick()
+	private void OnClick()
 	{
 		// Точки начала и конца направляющей линии траектории
 		Vector2 startPoint = turningPoint.position;
