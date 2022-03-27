@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
 	private Trajectory trajectory;
 
 	[SerializeField]
+	private Hero hero;
+
+	[SerializeField]
 	private Transform turningPoint; // Точка поворота
 
 	[SerializeField]
@@ -23,24 +26,27 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetMouseButtonDown(0))
-		{
-			isClicking = true;
-			SetStartPushForce(); // Обнуляем время
-			trajectory.Show(); // Показываем траекторию
-		}
+		if (!hero.IsDragging)
+        {
+			if (Input.GetMouseButtonDown(0))
+			{
+				isClicking = true;
+				SetStartPushForce(); // Обнуляем время
+				trajectory.Show(); // Показываем траекторию
+			}
 
-		if (Input.GetMouseButtonUp(0))
-		{
-			isClicking = false;
-			cake.Push(force); // Метаем торт
-			trajectory.Hide(); // Прячем траекторию
-		}
+			if (isClicking && Input.GetMouseButtonUp(0))
+			{
+				isClicking = false;
+				cake.Push(force); // Метаем торт
+				trajectory.Hide(); // Прячем траекторию
+			}
 
-		if (isClicking)
-		{
-			time += Time.deltaTime; // Считаем время нажатия
-			OnClick(); // Обновление траектории при нажатии
+			if (isClicking)
+			{
+				time += Time.deltaTime; // Считаем время нажатия
+				OnClick(); // Обновление траектории при нажатии
+			}
 		}
 	}
 
