@@ -45,9 +45,12 @@ public class Cannon : MonoBehaviour
     {
         Vector3 clickedPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Получаем позицию нажатия
         Vector3 direction = clickedPosition - transform.position; // Получаем направляющий вектор
+        
         Vector2 parallelVector = GetParallelVector(direction); // Получаем параллельный вектор
+        
         float angle = Mathf.Atan2(parallelVector.y, parallelVector.x) * Mathf.Rad2Deg; // Получаем угол параллельной прямой
         float limitedAngle = Mathf.Clamp(angle + shiftAngle, minAngle, maxAngle); // Ограничиваем угол поворота
+        
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, limitedAngle), Time.deltaTime * turningSpeed); // Плавно поворачиваем
     }
 }

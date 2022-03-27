@@ -4,34 +4,47 @@ using UnityEngine;
 
 public class Cake : MonoBehaviour
 {
-	[HideInInspector] public Vector3 Position { get => transform.position; }
-	[SerializeField] private GameObject cake;
-	[SerializeField] private int allowedNumberCakes; // Допустимое количество тортов на сцене
-	private List<GameObject> objectsOnScene = new List<GameObject>(); // Коллекция для хранения тортов на сцене
+	[HideInInspector]
+	public Vector3 Position { get => transform.position; }
 
-	/// <summary>
-	/// Создает торт и задает ему силу метания
-	/// </summary>
-	/// <param name="force">Сила метания</param>
-	public void Push(Vector2 force)
+	[SerializeField]
+	private GameObject cakePrefab;
+
+	[SerializeField]
+	private int allowedNumberCakes; // Допустимое количество тортов на сцене
+
+	private List<GameObject> cakesOnScene; // Коллекция для хранения тортов на сцене
+
+    private void Start()
+    {
+		cakesOnScene = new List<GameObject>(); // Инициализируем коллекцию
+	}
+
+    /// <summary>
+    /// Создает торт и задает ему силу метания.
+    /// </summary>
+    /// <param name="force">Сила метания</param>
+    public void Push(Vector2 force)
 	{
-		GameObject cakeClone = Instantiate(cake, transform.position, Quaternion.identity); // Создаем новый торт
+		GameObject cakeClone = Instantiate(cakePrefab, transform.position, Quaternion.identity); // Создаем новый торт
 		cakeClone.transform.rotation = transform.rotation; // Изменеям угол вращения
+
 		Rigidbody2D body2d = cakeClone.GetComponent<Rigidbody2D>(); // Получаем Rigidbody2D
 		body2d.AddForce(force, ForceMode2D.Impulse); // Устанавливаем скорость полета торта
-		objectsOnScene.Add(cakeClone); // Добавляем в список объектов
-		DeleteObjects(); // Удаляем старые торты
+		
+		cakesOnScene.Add(cakeClone); // Добавляем в список тортов
+		DeleteOldCake(); // Удаляем старый торт
 	}
 
 	/// <summary>
-	/// Удаляет объекты со сцены при превышении допустимого количества
+	/// Удаляет объекты со сцены при превышении допустимого количества.
 	/// </summary>
-	public void DeleteObjects()
+	public void DeleteOldCake()
     {
-		if (objectsOnScene.Count > allowedNumberCakes)
+		if (cakesOnScene != null && cakesOnScene.Count > 0 && cakesOnScene.Count > allowedNumberCakes)
         {
-			Destroy(objectsOnScene[0]); // Удаляем со сцены
-			objectsOnScene.RemoveAt(0); // Удаляем из списка
+			Destroy(cakesOnScene[0]); // Удаляем со сцены самый старый торт
+			cakesOnScene.RemoveAt(0); // Удаляем из списка
         }
     }
 }

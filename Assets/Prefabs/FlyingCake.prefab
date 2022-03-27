@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1683477814728604973}
   - component: {fileID: 1683477814728604972}
   m_Layer: 0
-  m_Name: Cake
+  m_Name: FlyingCake
   m_TagString: Cake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

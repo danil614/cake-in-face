@@ -45,15 +45,13 @@ public class GameManager : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Устанавливает стартовую силу полета торта.
+	/// Устанавливает стартовую силу полета торта в зависимости от расстояния до нажатия.
 	/// </summary>
 	private void SetStartPushForce()
     {
 		Vector2 startPoint = turningPoint.position;
 		Vector2 endPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		time = Vector2.Distance(endPoint, startPoint) * startPushForce; // Устанваливаем стартовое время
-
-		Debug.Log(time);
 	}
 
 	/// <summary>
