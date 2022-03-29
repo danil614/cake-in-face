@@ -1210,7 +1210,7 @@ WheelJoint2D:
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
-    m_MaximumMotorForce: 200
+    m_MaximumMotorForce: 100
 --- !u!50 &920778696
 Rigidbody2D:
   serializedVersion: 4
@@ -1245,6 +1245,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cannonWheelRigidbody: {fileID: 304191104}
+  leftSpeed: 600
+  leftWait: 0.02
+  rightSpeed: 100
+  rightWait: 0.1
 --- !u!1 &924576182
 GameObject:
   m_ObjectHideFlags: 0

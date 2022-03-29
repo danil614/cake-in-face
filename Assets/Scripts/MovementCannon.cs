@@ -8,36 +8,37 @@ public class MovementCannon : MonoBehaviour
     [SerializeField]
     private Rigidbody2D cannonWheelRigidbody;
 
-    void Start()
+    [SerializeField]
+    private float leftSpeed;
+    [SerializeField]
+    private float leftWait;
+
+    [SerializeField]
+    private float rightSpeed;
+    [SerializeField]
+    private float rightWait;
+
+    private void Start()
     {
         wheels = gameObject.GetComponents<WheelJoint2D>();
         cannonRigidbody = GetComponent<Rigidbody2D>();
-        //StartCoroutine(MoveBackCannon());
     }
 
-    void Update()
+    public IEnumerator DoCannonKickback()
     {
-        //if (Input.GetAxis("Horizontal") < -0.8 || Input.GetAxis("Horizontal") > 0.8)
-        //{
-        //    foreach (WheelJoint2D joint in wheels)
-        //    {
-        //        var motor = joint.motor;
-        //        motor.motorSpeed = 1000 * Input.GetAxis("Horizontal") * -1;
-        //        joint.motor = motor;
-        //        joint.useMotor = true;
-        //    }
-        //}
-        //else
-        //{
-        //    foreach (WheelJoint2D joint in wheels)
-        //    {
-        //        var motor = joint.motor;
-        //        motor.motorSpeed = 0;
-        //        joint.motor = motor;
-        //        joint.useMotor = false;
-        //    }
-        //}
+        SetRigidbodyType(cannonRigidbody, false);
+        SetRigidbodyType(cannonWheelRigidbody, false);
 
+        SetMotorSpeed(leftSpeed, true);
+        yield return new WaitForSeconds(leftWait);
+        SetMotorSpeed(0, false);
+
+        SetMotorSpeed(-rightSpeed, true);
+        yield return new WaitForSeconds(rightWait);
+        SetMotorSpeed(0, false);
+
+        SetRigidbodyType(cannonRigidbody, true);
+        SetRigidbodyType(cannonWheelRigidbody, true);
     }
 
     private void SetMotorSpeed(float speed, bool useMotor)
@@ -61,26 +62,5 @@ public class MovementCannon : MonoBehaviour
         {
             rigidbody.bodyType = RigidbodyType2D.Dynamic;
         }
-    }
-
-    public IEnumerator DoCannonKickback()
-    {
-        SetRigidbodyType(cannonRigidbody, false);
-        SetRigidbodyType(cannonWheelRigidbody, false);
-
-        Debug.Log("Start Right");
-        SetMotorSpeed(10000, true);
-        yield return new WaitForSeconds(0.2f);
-        SetMotorSpeed(0, false);
-        Debug.Log("Stop Right");
-
-        Debug.Log("Start Left");
-        SetMotorSpeed(-1000, true);
-        yield return new WaitForSeconds(0.5f);
-        SetMotorSpeed(0, false);
-        Debug.Log("Stop Left");
-
-        SetRigidbodyType(cannonRigidbody, true);
-        SetRigidbodyType(cannonWheelRigidbody, true);
     }
 }
