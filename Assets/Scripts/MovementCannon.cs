@@ -3,54 +3,54 @@ using System.Collections;
 
 public class MovementCannon : MonoBehaviour
 {
-    private WheelJoint2D[] wheels; // Колеса
-    private Rigidbody2D cannonRigidbody; // Rigidbody самой пушки
+    private WheelJoint2D[] wheels; // РљРѕР»РµСЃР°
+    private Rigidbody2D cannonRigidbody; // Rigidbody СЃР°РјРѕР№ РїСѓС€РєРё
 
     [SerializeField]
-    private Rigidbody2D cannonWheelRigidbody; // Rigidbody колеса от пушки
+    private Rigidbody2D cannonWheelRigidbody; // Rigidbody РєРѕР»РµСЃР° РѕС‚ РїСѓС€РєРё
 
     [SerializeField]
-    private float leftSpeed; // Скорость пушки влево
+    private float leftSpeed; // РЎРєРѕСЂРѕСЃС‚СЊ РїСѓС€РєРё РІР»РµРІРѕ
     [SerializeField]
-    private float leftWait; // Ожидание при левом движении
+    private float leftWait; // РћР¶РёРґР°РЅРёРµ РїСЂРё Р»РµРІРѕРј РґРІРёР¶РµРЅРёРё
 
     [SerializeField]
-    private float rightSpeed; // Скорость пушки вправо
+    private float rightSpeed; // РЎРєРѕСЂРѕСЃС‚СЊ РїСѓС€РєРё РІРїСЂР°РІРѕ
     [SerializeField]
-    private float rightWait; // Ожидание при правом движении
+    private float rightWait; // РћР¶РёРґР°РЅРёРµ РїСЂРё РїСЂР°РІРѕРј РґРІРёР¶РµРЅРёРё
 
     private void Start()
     {
-        wheels = gameObject.GetComponents<WheelJoint2D>(); // Получаем все колеса от пушки
-        cannonRigidbody = GetComponent<Rigidbody2D>(); // Получаем Rigidbody самой пушки
+        wheels = gameObject.GetComponents<WheelJoint2D>(); // РџРѕР»СѓС‡Р°РµРј РІСЃРµ РєРѕР»РµСЃР° РѕС‚ РїСѓС€РєРё
+        cannonRigidbody = GetComponent<Rigidbody2D>(); // РџРѕР»СѓС‡Р°РµРј Rigidbody СЃР°РјРѕР№ РїСѓС€РєРё
     }
 
     public IEnumerator DoCannonKickback()
     {
-        // Устанавливаем Dynamic на Rigidbody пушки и колеса
+        // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј Dynamic РЅР° Rigidbody РїСѓС€РєРё Рё РєРѕР»РµСЃР°
         SetRigidbodyType(cannonRigidbody, false);
         SetRigidbodyType(cannonWheelRigidbody, false);
 
-        // Сначала двигаем пушку влево
+        // РЎРЅР°С‡Р°Р»Р° РґРІРёРіР°РµРј РїСѓС€РєСѓ РІР»РµРІРѕ
         SetMotorSpeed(leftSpeed, true);
         yield return new WaitForSeconds(leftWait);
         SetMotorSpeed(0, false);
 
-        // Далее, двигаем вправо
+        // Р”Р°Р»РµРµ, РґРІРёРіР°РµРј РІРїСЂР°РІРѕ
         SetMotorSpeed(-rightSpeed, true);
         yield return new WaitForSeconds(rightWait);
         SetMotorSpeed(0, false);
 
-        // Устанавливаем Static на Rigidbody пушки и колеса
+        // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј Static РЅР° Rigidbody РїСѓС€РєРё Рё РєРѕР»РµСЃР°
         SetRigidbodyType(cannonRigidbody, true);
         SetRigidbodyType(cannonWheelRigidbody, true);
     }
 
     /// <summary>
-    /// Устанавливает скорость колеса.
+    /// РЈСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ СЃРєРѕСЂРѕСЃС‚СЊ РєРѕР»РµСЃР°.
     /// </summary>
-    /// <param name="speed">Скорость колеса</param>
-    /// <param name="useMotor">Использовать поворот колеса?</param>
+    /// <param name="speed">РЎРєРѕСЂРѕСЃС‚СЊ РєРѕР»РµСЃР°</param>
+    /// <param name="useMotor">РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РїРѕРІРѕСЂРѕС‚ РєРѕР»РµСЃР°?</param>
     private void SetMotorSpeed(float speed, bool useMotor)
     {
         foreach (WheelJoint2D wheel in wheels)
@@ -63,10 +63,10 @@ public class MovementCannon : MonoBehaviour
     }
 
     /// <summary>
-    /// Устанавливает тип Rigidbody.
+    /// РЈСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ С‚РёРї Rigidbody.
     /// </summary>
     /// <param name="rigidbody">Rigidbody</param>
-    /// <param name="isStatic">Установить статичный тип?</param>
+    /// <param name="isStatic">РЈСЃС‚Р°РЅРѕРІРёС‚СЊ СЃС‚Р°С‚РёС‡РЅС‹Р№ С‚РёРї?</param>
     private void SetRigidbodyType(Rigidbody2D rigidbody, bool isStatic)
     {
         if (isStatic)
