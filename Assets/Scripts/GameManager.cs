@@ -43,8 +43,7 @@ public class GameManager : MonoBehaviour
 				isClicking = false;
 				cake.Push(force); // Метаем торт
 				trajectory.Hide(); // Прячем траекторию
-				//StartCoroutine(movementCannon.MoveRightCannon());
-				StartCoroutine(movementCannon.DoCannonKickback());
+				StartCoroutine(movementCannon.DoCannonKickback()); // Делаем отдачу пушки при стрельбе
 			}
 
 			if (isClicking)
