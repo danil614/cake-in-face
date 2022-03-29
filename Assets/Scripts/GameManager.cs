@@ -3,6 +3,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 	[SerializeField]
+	private MovementCannon movementCannon;
+
+	[SerializeField]
 	private Cake cake;
 
 	[SerializeField]
@@ -40,6 +43,8 @@ public class GameManager : MonoBehaviour
 				isClicking = false;
 				cake.Push(force); // Метаем торт
 				trajectory.Hide(); // Прячем траекторию
+				//StartCoroutine(movementCannon.MoveRightCannon());
+				StartCoroutine(movementCannon.DoCannonKickback());
 			}
 
 			if (isClicking)
