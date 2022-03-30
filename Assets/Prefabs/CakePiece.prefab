@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5707817726147023211}
   - component: {fileID: 4370789269229066736}
-  - component: {fileID: 6197831735654816557}
+  - component: {fileID: 7437330562249764179}
   m_Layer: 0
   m_Name: CakePiece
   m_TagString: Untagged
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 1
   m_SpriteSortPoint: 0
---- !u!114 &6197831735654816557
+--- !u!114 &7437330562249764179
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,4 +95,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd6887978c382d4981801fb9b1b0066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 10
+  lifeTime: 5
+  speed: 1

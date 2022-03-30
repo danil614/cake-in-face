@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1683477814728605137}
   - component: {fileID: 1683477814728604973}
   - component: {fileID: 7321975060535936875}
+  - component: {fileID: 7543298319010349817}
   m_Layer: 0
   m_Name: FlyingCake
   m_TagString: Cake
@@ -121,3 +122,17 @@ CapsuleCollider2D:
   m_Offset: {x: -0.00000012696812, y: -1.0650859}
   m_Size: {x: 31.840008, y: 25.369629}
   m_Direction: 1
+--- !u!114 &7543298319010349817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683477814728605136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecd6887978c382d4981801fb9b1b0066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 10
+  speed: 1
