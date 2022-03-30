@@ -23,6 +23,10 @@ public class MovementCannon : MonoBehaviour
     {
         wheels = gameObject.GetComponents<WheelJoint2D>(); // Получаем все колеса от пушки
         cannonRigidbody = GetComponent<Rigidbody2D>(); // Получаем Rigidbody самой пушки
+
+        // Устанавливаем Static на Rigidbody пушки и колеса
+        SetRigidbodyType(cannonRigidbody, true);
+        SetRigidbodyType(cannonWheelRigidbody, true);
     }
 
     public IEnumerator DoCannonKickback()

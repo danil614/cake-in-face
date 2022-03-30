@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{
-		if (!hero.IsDragging)
+		if (!hero.IsDragging) // Если не перетаскиваем персонажа
         {
 			if (Input.GetMouseButtonDown(0))
 			{
