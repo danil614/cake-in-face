@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Cannon : MonoBehaviour
+public class RotateCannon : MonoBehaviour
 {
     [SerializeField]
     private Transform turningPoint; // Точка поворота пушки
