@@ -31,14 +31,14 @@ public class GameManager : MonoBehaviour
 	{
 		if (!hero.IsDragging) // Если не перетаскиваем персонажа
         {
-			if (Input.GetMouseButtonDown(0))
+			if (Input.GetMouseButtonDown(0)) // Если кнопка была нажата
 			{
 				isClicking = true;
 				SetStartPushForce(); // Обнуляем время
 				trajectory.Show(); // Показываем траекторию
 			}
 
-			if (isClicking && Input.GetMouseButtonUp(0))
+			if (isClicking && Input.GetMouseButtonUp(0)) // Если кнопка была отпущена, но перед этим была нажата
 			{
 				isClicking = false;
 				cake.Push(force); // Метаем торт
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 				StartCoroutine(movementCannon.DoCannonKickback()); // Делаем отдачу пушки при стрельбе
 			}
 
-			if (isClicking)
+			if (isClicking) // Если держим нажатие кнопки
 			{
 				time += Time.deltaTime; // Считаем время нажатия
 				OnClick(); // Обновление траектории при нажатии

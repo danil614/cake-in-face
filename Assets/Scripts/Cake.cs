@@ -40,7 +40,7 @@ public class Cake : MonoBehaviour
 	/// </summary>
 	public void DeleteOldCake()
     {
-		if (cakesOnScene != null && cakesOnScene.Count > 0 && cakesOnScene.Count > allowedNumberCakes)
+		if (cakesOnScene != null && cakesOnScene.Count > allowedNumberCakes)
         {
 			Destroy(cakesOnScene[0]); // Удаляем со сцены самый старый торт
 			cakesOnScene.RemoveAt(0); // Удаляем из списка
