@@ -1,32 +1,55 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CannonArea : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler, IPointerEnterHandler
+public class CannonArea : MonoBehaviour //, IPointerEnterHandler, IPointerExitHandler
 {
-    private bool isPressing = false;
+    [SerializeField]
+    private float speed;
 
-    [HideInInspector]
-    public bool IsPressing { get { return isPressing; } }
+    private Vector2 startPosition;
 
-    public void OnDrag(PointerEventData eventData)
+    private void Start()
     {
-        Debug.Log("CannonArea OnDrag");
+        startPosition = transform.position; // ”станавливаем начальную позицию пушки
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    private void Update()
     {
-        Debug.Log("CannonArea OnPointerDown");
-        isPressing = true;
+        transform.position = Vector2.Lerp(transform.position, startPosition, speed * Time.deltaTime);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        Debug.Log("CannonArea OnPointerEnter");
-    }
+    //private bool isPressing = false;
 
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        Debug.Log("CannonArea OnPointerUp");
-        isPressing = false;
-    }
+    //[HideInInspector]
+    //public bool IsPressing { get { return isPressing; } }
+
+    //public void OnPointerEnter(PointerEventData eventData)
+    //{
+    //    //Debug.Log("CannonArea OnPointerEnter");
+    //    //isPressing = true;
+    //}
+
+    //public void OnPointerExit(PointerEventData eventData)
+    //{
+    //    Debug.Log("CannonArea OnPointerExit");
+    //    isPressing = false;
+    //}
+
+    ////private void OnCollisionEnter2D(Collision2D collision)
+    ////{
+    ////}
+
+    ////private void OnTriggerEnter2D(Collider2D collision)
+    ////{
+
+    ////}
+
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Hero"))
+    //    {
+    //        Debug.Log("CannonArea OnTriggerStay2D");
+    //        isPressing = true;
+    //    }
+    //}
 }
