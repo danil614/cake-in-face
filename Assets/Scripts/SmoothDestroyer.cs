@@ -13,24 +13,24 @@ public class SmoothDestroyer : MonoBehaviour
     private float stepColor;
 
     [SerializeField]
-    private float delayColor; // Время для исчезновение пятна
+    private float delayColor; // Р’СЂРµРјСЏ РґР»СЏ РёСЃС‡РµР·РЅРѕРІРµРЅРёРµ РїСЏС‚РЅР°
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        color = spriteRenderer.color; // Считывание цвета с объекта
-        StartCoroutine(SlowDelete()); // Вызов корутины
+        color = spriteRenderer.color; // РЎС‡РёС‚С‹РІР°РЅРёРµ С†РІРµС‚Р° СЃ РѕР±СЉРµРєС‚Р°
+        StartCoroutine(SlowDelete()); // Р’С‹Р·РѕРІ РєРѕСЂСѓС‚РёРЅС‹
     }
 
     private void Update()
     {
         if (isDisappearing)
         {
-            alpha -= Time.deltaTime * stepColor; // Уменьшаем альфа канал с каждым Update
-            color.a = alpha; // Присваиваем альфа каналу новое значение
+            alpha -= Time.deltaTime * stepColor; // РЈРјРµРЅСЊС€Р°РµРј Р°Р»СЊС„Р° РєР°РЅР°Р» СЃ РєР°Р¶РґС‹Рј Update
+            color.a = alpha; // РџСЂРёСЃРІР°РёРІР°РµРј Р°Р»СЊС„Р° РєР°РЅР°Р»Сѓ РЅРѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ
             spriteRenderer.color = color;
 
-            if (alpha <= 0.0f) // Когда пятна не видно, уничтожаем объект
+            if (alpha <= 0.0f) // РљРѕРіРґР° РїСЏС‚РЅР° РЅРµ РІРёРґРЅРѕ, СѓРЅРёС‡С‚РѕР¶Р°РµРј РѕР±СЉРµРєС‚
             {
                 Destroy(gameObject);
             }
