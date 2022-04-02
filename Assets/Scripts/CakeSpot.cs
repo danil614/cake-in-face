@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CakeSpot : MonoBehaviour
@@ -11,7 +9,14 @@ public class CakeSpot : MonoBehaviour
 
 	private void Start()
 	{
-		animator = GetComponent<Animator>();
+        try
+        {
+            animator = GetComponent<Animator>();
+        }
+        catch (MissingComponentException)
+        {
+            animator = null;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -32,7 +37,10 @@ public class CakeSpot : MonoBehaviour
                 Instantiate(particle, new Vector3(collisionPoint.x, collisionPoint.y, 0), Quaternion.identity); // Создание эффекта брызг
             }
 
-            animator.SetTrigger("Angry"); // Проигрывание анимации
+            if (animator != null)
+            {
+                animator.SetTrigger("Angry"); // Проигрывание анимации
+            }
         }    
     }
 }
