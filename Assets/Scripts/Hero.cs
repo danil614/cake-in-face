@@ -12,7 +12,7 @@ public class Hero : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     [SerializeField]
     private CannonArea cannonArea;
 
-    private bool isDragging = false; // РџРµСЂРµС‚Р°СЃРєРёРІР°РЅРёРµ Hero
+    private bool isDragging = false; // Перетаскивание Hero
 
     private Rigidbody2D heroCenterRigidbody;
 
@@ -20,7 +20,7 @@ public class Hero : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     private Vector2 endClick;
 
     /// <summary>
-    /// РќР°С‡Р°С‚Рѕ Р»Рё РїРµСЂРµС‚Р°СЃРєРёРІР°РЅРёРµ?
+    /// Начато ли перетаскивание?
     /// </summary>
     [HideInInspector]
     public bool IsDragging { get => isDragging; }
@@ -36,10 +36,10 @@ public class Hero : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         {
             if (!cannonArea.IsPressing)
             {
-                endClick = Camera.main.ScreenToWorldPoint(Input.mousePosition); // РџРѕР»СѓС‡Р°РµРј РєРѕРѕСЂРґРёРЅР°С‚С‹ РЅР°Р¶Р°С‚РёСЏ
+                endClick = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Получаем координаты нажатия
             }
 
-            //heroCenterRigidbody.MovePosition(endClick); // РџРµСЂРµРјРµС‰Р°РµРј hero
+            //heroCenterRigidbody.MovePosition(endClick); // Перемещаем hero
 
             //heroCenterRigidbody.AddForce((endClick - startClick) * speed);
             //heroCenter.transform.Translate(speed * Time.fixedDeltaTime * (endClick - startClick));
@@ -48,7 +48,7 @@ public class Hero : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
             //heroCenter.position = Vector3.Lerp(heroCenter.position, endClick, speed * Time.deltaTime);
 
-            //endClick = Camera.main.ScreenToWorldPoint(Input.mousePosition); // РџРѕР»СѓС‡Р°РµРј РєРѕРѕСЂРґРёРЅР°С‚С‹ РЅР°Р¶Р°С‚РёСЏ
+            //endClick = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Получаем координаты нажатия
             heroCenterRigidbody.MovePosition(Vector2.Lerp(heroCenter.position, endClick, speed * Time.deltaTime));
         }
     }
@@ -67,25 +67,25 @@ public class Hero : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     //}
 
     /// <summary>
-    /// Р’С‹РїРѕР»РЅСЏРµС‚СЃСЏ РїСЂРё РЅР°Р¶Р°С‚РёРё РЅР° РѕР±СЉРµРєС‚.
+    /// Выполняется при нажатии на объект.
     /// </summary>
     public void OnPointerDown(PointerEventData eventData)
     {
-        isDragging = true; // РџРµСЂРµС‚Р°СЃРєРёРІР°РЅРёРµ РЅР°С‡Р°С‚Рѕ
+        isDragging = true; // Перетаскивание начато
 
-        transform.parent = null; // Р”Р»СЏ РёР·РјРµРЅРµРЅРёСЏ РїРѕР·РёС†РёРё СѓР±РёСЂР°РµРј РіСЂСѓРїРїРёСЂРѕРІРєСѓ РѕС‚ СЃРїСЂР°Р№С‚Р°
+        transform.parent = null; // Для изменения позиции убираем группировку от спрайта
 
-        startClick = Camera.main.ScreenToWorldPoint(Input.mousePosition); // РџРѕР·РёС†РёСЏ РЅР°Р¶Р°С‚РёСЏ
-        heroCenter.SetPositionAndRotation(startClick, transform.rotation); // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїРѕР·РёС†РёСЋ Рё СѓРіРѕР» РїРѕРІРѕСЂРѕС‚Р°
+        startClick = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Позиция нажатия
+        heroCenter.SetPositionAndRotation(startClick, transform.rotation); // Устанавливаем позицию и угол поворота
 
-        transform.parent = heroCenter; // РЎС‚Р°РІРёРј РіСЂСѓРїРїРёСЂРѕРІРєСѓ РґР»СЏ СЃРїСЂР°Р№С‚Р°
+        transform.parent = heroCenter; // Ставим группировку для спрайта
     }
 
     /// <summary>
-    /// Р’С‹РїРѕР»РЅСЏРµС‚СЃСЏ РїСЂРё РѕС‚РїСѓСЃРєР°РЅРёРё РЅР°Р¶Р°С‚РёСЏ РЅР° РѕР±СЉРµРєС‚.
+    /// Выполняется при отпускании нажатия на объект.
     /// </summary>
     public void OnPointerUp(PointerEventData eventData)
     {
-        isDragging = false; // РџРµСЂРµС‚Р°СЃРєРёРІР°РЅРёРµ Р·Р°РєРѕРЅС‡РµРЅРѕ
+        isDragging = false; // Перетаскивание закончено
     }
 }
