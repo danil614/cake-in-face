@@ -19,8 +19,6 @@ public class MovementCannon : MonoBehaviour
     private WheelJoint2D[] wheels; // Колеса
     private Rigidbody2D cannonRigidbody; // Rigidbody самой пушки
 
-    //private Vector2 startPosition;
-
     private void Start()
     {
         wheels = GetComponents<WheelJoint2D>(); // Получаем все колеса от пушки
@@ -29,8 +27,6 @@ public class MovementCannon : MonoBehaviour
         // Устанавливаем Static на Rigidbody пушки и колеса
         SetRigidbodyType(cannonRigidbody, true);
         SetRigidbodyType(cannonWheelRigidbody, true);
-
-        //startPosition = transform.position; // Устанавливаем начальную позицию пушки
     }
 
     public IEnumerator DoCannonKickback()
@@ -63,8 +59,8 @@ public class MovementCannon : MonoBehaviour
     {
         foreach (WheelJoint2D wheel in wheels)
         {
-            JointMotor2D motor = wheel.motor;
-            motor.motorSpeed = speed;
+            JointMotor2D motor = wheel.motor; // Для перемещения пушки будем использовать мотор
+            motor.motorSpeed = speed; // Устанавливаем скорость мотора
             wheel.motor = motor;
             wheel.useMotor = useMotor;
         }

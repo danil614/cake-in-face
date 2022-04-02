@@ -3,25 +3,25 @@ using UnityEngine.EventSystems;
 
 public class CannonArea : MonoBehaviour //, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField]
-    private float speed;
+    private bool isPressing = false;
 
-    private Vector2 startPosition;
+    [HideInInspector]
+    public bool IsPressing { get { return isPressing; } }
 
-    private void Start()
-    {
-        startPosition = transform.position; // ”станавливаем начальную позицию пушки
-    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Hero"))
+    //    {
+    //        Debug.Log("CannonArea OnCollisionEnter2D");
+    //        isPressing = true;
+    //    }
+    //}
 
-    private void Update()
-    {
-        transform.position = Vector2.Lerp(transform.position, startPosition, speed * Time.deltaTime);
-    }
-
-    //private bool isPressing = false;
-
-    //[HideInInspector]
-    //public bool IsPressing { get { return isPressing; } }
+    //private void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    Debug.Log("CannonArea OnCollisionExit2D");
+    //    isPressing = false;
+    //}
 
     //public void OnPointerEnter(PointerEventData eventData)
     //{
@@ -35,14 +35,14 @@ public class CannonArea : MonoBehaviour //, IPointerEnterHandler, IPointerExitHa
     //    isPressing = false;
     //}
 
-    ////private void OnCollisionEnter2D(Collision2D collision)
-    ////{
-    ////}
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //}
 
-    ////private void OnTriggerEnter2D(Collider2D collision)
-    ////{
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
 
-    ////}
+    //}
 
     //private void OnTriggerStay2D(Collider2D collision)
     //{

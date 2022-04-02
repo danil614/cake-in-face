@@ -9,8 +9,8 @@ public class Hero : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     [SerializeField]
     private float speed;
 
-    //[SerializeField]
-    //private CannonArea cannonArea;
+    [SerializeField]
+    private CannonArea cannonArea;
 
     private bool isDragging = false; // Перетаскивание Hero
 
@@ -34,10 +34,10 @@ public class Hero : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         if (isDragging)
         {
-            //if (!cannonArea.IsPressing)
-            //{
-            //    endClick = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Получаем координаты нажатия
-            //}
+            if (!cannonArea.IsPressing)
+            {
+                endClick = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Получаем координаты нажатия
+            }
 
             //heroCenterRigidbody.MovePosition(endClick); // Перемещаем hero
 
@@ -48,7 +48,7 @@ public class Hero : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
             //heroCenter.position = Vector3.Lerp(heroCenter.position, endClick, speed * Time.deltaTime);
 
-            endClick = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Получаем координаты нажатия
+            //endClick = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Получаем координаты нажатия
             heroCenterRigidbody.MovePosition(Vector2.Lerp(heroCenter.position, endClick, speed * Time.deltaTime));
         }
     }
