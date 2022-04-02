@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 9448272}
   - component: {fileID: 9448273}
   m_Layer: 0
-  m_Name: BrowR
+  m_Name: RightBrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -334,7 +334,7 @@ GameObject:
   - component: {fileID: 188711462}
   - component: {fileID: 188711463}
   m_Layer: 0
-  m_Name: BrowL
+  m_Name: LeftBrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1452,7 +1452,7 @@ GameObject:
   - component: {fileID: 894006563}
   - component: {fileID: 894006564}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Cook
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1911,7 +1911,7 @@ GameObject:
   - component: {fileID: 1352434272}
   - component: {fileID: 1352434273}
   m_Layer: 0
-  m_Name: HnadL
+  m_Name: LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2850,7 +2850,7 @@ GameObject:
   - component: {fileID: 1799580308}
   - component: {fileID: 1799580309}
   m_Layer: 0
-  m_Name: HandR
+  m_Name: RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2983,7 +2983,7 @@ GameObject:
   - component: {fileID: 2026529463}
   - component: {fileID: 2026529464}
   m_Layer: 0
-  m_Name: LegR
+  m_Name: RightLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3116,7 +3116,7 @@ GameObject:
   - component: {fileID: 2027383039}
   - component: {fileID: 2027383040}
   m_Layer: 0
-  m_Name: LegL
+  m_Name: LeftLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

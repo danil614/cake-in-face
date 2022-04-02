@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7686903702400255553}
   - component: {fileID: -3235331106670173567}
   m_Layer: 0
-  m_Name: splat4
+  m_Name: Splat4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,4 +97,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDisappearing: 0
   stepColor: 0.5
-  delayColor: 10
+  delayColor: 5

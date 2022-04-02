@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1671302818658758201}
   - component: {fileID: 7834973440051571059}
   m_Layer: 0
-  m_Name: splat2
+  m_Name: Splat2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,4 +97,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDisappearing: 0
   stepColor: 0.5
-  delayColor: 10
+  delayColor: 5

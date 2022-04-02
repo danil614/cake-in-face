@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4370789269229066736}
   - component: {fileID: 8864449362894168774}
   m_Layer: 0
-  m_Name: CakeSpot
+  m_Name: Splat1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,4 +97,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDisappearing: 0
   stepColor: 0.5
-  delayColor: 10
+  delayColor: 5
