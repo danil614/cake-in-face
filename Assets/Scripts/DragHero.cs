@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Hero : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class DragHero : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField]
     private Transform heroCenter;
@@ -15,9 +15,12 @@ public class Hero : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     private bool isDragging = false; // Перетаскивание Hero
 
     private Rigidbody2D heroCenterRigidbody;
+    //private Rigidbody2D heroRigidbody;
 
-    private Vector2 startClick;
-    private Vector2 endClick;
+    //private Vector2 startClick;
+    //private Vector2 endClick;
+
+    private Camera mainCamera;
 
     /// <summary>
     /// Начато ли перетаскивание?
@@ -28,43 +31,27 @@ public class Hero : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     private void Start()
     {
         heroCenterRigidbody = heroCenter.GetComponent<Rigidbody2D>();
+        //heroRigidbody = GetComponent<Rigidbody2D>();
+        mainCamera = Camera.main;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (isDragging)
+        if (isDragging && !cannonArea.IsPressing)
         {
-            if (!cannonArea.IsPressing)
-            {
-                endClick = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Получаем координаты нажатия
-            }
+            Vector2 endClick = mainCamera.ScreenToWorldPoint(Input.mousePosition); // Получаем координаты нажатия
+                                                                                   //heroCenterRigidbody.velocity = endClick * speed;
+                                                                                   //heroRigidbody.velocity = (endClick - startClick) * speed;
+                                                                                   //startClick = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            //heroCenterRigidbody.MovePosition(endClick); // Перемещаем hero
+            //heroRigidbody.MovePosition(Vector2.Lerp(heroRigidbody.position, endClick, speed * Time.deltaTime));
 
-            //heroCenterRigidbody.AddForce((endClick - startClick) * speed);
-            //heroCenter.transform.Translate(speed * Time.fixedDeltaTime * (endClick - startClick));
-            //var targetPosition = endClick;
-            //heroCenter.position = Vector3.Lerp(startClick, targetPosition, speed);
+            //heroRigidbody.MovePosition(endClick); // Перемещаем hero
+            //transform.position = Vector3.Lerp(transform.position, endClick, speed * Time.fixedDeltaTime);
 
-            //heroCenter.position = Vector3.Lerp(heroCenter.position, endClick, speed * Time.deltaTime);
-
-            //endClick = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Получаем координаты нажатия
-            heroCenterRigidbody.MovePosition(Vector2.Lerp(heroCenter.position, endClick, speed * Time.deltaTime));
+            heroCenterRigidbody.MovePosition(Vector2.Lerp(heroCenter.position, endClick, speed * Time.fixedDeltaTime));
         }
     }
-
-    //private void FixedUpdate()
-    //{
-
-    //}
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Hero"))
-    //    {
-
-    //    }
-    //}
 
     /// <summary>
     /// Выполняется при нажатии на объект.
@@ -75,7 +62,7 @@ public class Hero : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
         transform.parent = null; // Для изменения позиции убираем группировку от спрайта
 
-        startClick = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Позиция нажатия
+        Vector2 startClick = mainCamera.ScreenToWorldPoint(Input.mousePosition); // Позиция нажатия
         heroCenter.SetPositionAndRotation(startClick, transform.rotation); // Устанавливаем позицию и угол поворота
 
         transform.parent = heroCenter; // Ставим группировку для спрайта

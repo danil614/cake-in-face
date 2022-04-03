@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 	private Trajectory trajectory;
 
 	[SerializeField]
-	private Hero hero;
+	private DragHero dragHero;
 
 	[SerializeField]
 	private Transform turningPoint; // Точка поворота
@@ -27,9 +27,16 @@ public class GameManager : MonoBehaviour
 	private Vector2 force; // Сила метания торта
 	private float time; // Подсчет времени для роста траектории
 
+	private Camera mainCamera;
+
+	private void Start()
+	{
+		mainCamera = Camera.main;
+	}
+
 	private void Update()
 	{
-		if (!hero.IsDragging) // Если не перетаскиваем персонажа
+		if (!dragHero.IsDragging) // Если не перетаскиваем персонажа
         {
 			if (Input.GetMouseButtonDown(0)) // Если кнопка была нажата
 			{
@@ -60,7 +67,7 @@ public class GameManager : MonoBehaviour
 	private void SetStartPushForce()
     {
 		Vector2 startPoint = turningPoint.position;
-		Vector2 endPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		Vector2 endPoint = mainCamera.ScreenToWorldPoint(Input.mousePosition);
 		time = Vector2.Distance(endPoint, startPoint) * startPushForce; // Устанваливаем стартовое время
 	}
 

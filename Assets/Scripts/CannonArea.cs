@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CannonArea : MonoBehaviour //, IPointerEnterHandler, IPointerExitHandler
+public class CannonArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private bool isPressing = false;
 
@@ -23,17 +23,17 @@ public class CannonArea : MonoBehaviour //, IPointerEnterHandler, IPointerExitHa
     //    isPressing = false;
     //}
 
-    //public void OnPointerEnter(PointerEventData eventData)
-    //{
-    //    //Debug.Log("CannonArea OnPointerEnter");
-    //    //isPressing = true;
-    //}
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("CannonArea OnPointerEnter");
+        isPressing = true;
+    }
 
-    //public void OnPointerExit(PointerEventData eventData)
-    //{
-    //    Debug.Log("CannonArea OnPointerExit");
-    //    isPressing = false;
-    //}
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Debug.Log("CannonArea OnPointerExit");
+        isPressing = false;
+    }
 
     //private void OnCollisionEnter2D(Collision2D collision)
     //{
@@ -41,7 +41,11 @@ public class CannonArea : MonoBehaviour //, IPointerEnterHandler, IPointerExitHa
 
     //private void OnTriggerEnter2D(Collider2D collision)
     //{
-
+    //    if (collision.gameObject.CompareTag("Hero"))
+    //    {
+    //        Debug.Log("CannonArea OnTriggerEnter2D");
+    //        isPressing = true;
+    //    }
     //}
 
     //private void OnTriggerStay2D(Collider2D collision)

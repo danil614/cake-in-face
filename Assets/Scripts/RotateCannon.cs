@@ -17,6 +17,13 @@ public class RotateCannon : MonoBehaviour
     [SerializeField]
     private float maxAngle; // Максимальный угол поворота
 
+    private Camera mainCamera;
+
+    private void Start()
+    {
+        mainCamera = Camera.main;
+    }
+
     private void Update()
     {
         TurnCannon(); // Поворачиваем пушку
@@ -41,7 +48,7 @@ public class RotateCannon : MonoBehaviour
     /// </summary>
     private void TurnCannon()
     {
-        Vector3 clickedPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Получаем позицию нажатия
+        Vector3 clickedPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition); // Получаем позицию нажатия
         Vector3 direction = clickedPosition - transform.position; // Получаем направляющий вектор
         
         Vector2 parallelVector = GetParallelVector(direction); // Получаем параллельный вектор
