@@ -4,22 +4,19 @@ using UnityEngine.EventSystems;
 public class DragHero : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField]
-    private Transform heroCenter;
+    private Transform heroCenter; // Точка поворота hero
 
     [SerializeField]
-    private float speed;
+    private float speed; // Скорость перетаскивания hero
 
     [SerializeField]
-    private CannonArea cannonArea;
+    private CannonArea cannonArea; // Область пушки
+
+    [SerializeField]
+    private float shiftCenterOfMassY; // Смещение центра масс по Y
 
     private bool isDragging = false; // Перетаскивание Hero
-
-    private Rigidbody2D heroCenterRigidbody;
-    //private Rigidbody2D heroRigidbody;
-
-    //private Vector2 startClick;
-    //private Vector2 endClick;
-
+    private Rigidbody2D heroCenterRigidbody; // Rigidbody2D точки поворота hero
     private Camera mainCamera;
 
     /// <summary>
@@ -30,26 +27,20 @@ public class DragHero : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     private void Start()
     {
-        heroCenterRigidbody = heroCenter.GetComponent<Rigidbody2D>();
-        //heroRigidbody = GetComponent<Rigidbody2D>();
         mainCamera = Camera.main;
+
+        heroCenterRigidbody = heroCenter.GetComponent<Rigidbody2D>();
+        
+        Rigidbody2D heroRigidbody = GetComponent<Rigidbody2D>(); // Получаем компонент
+        heroRigidbody.centerOfMass = new Vector2(0, shiftCenterOfMassY); // Сдвигаем центр масс по Y
     }
 
     private void FixedUpdate()
     {
-        if (isDragging && !cannonArea.IsPressing)
+        if (isDragging && !cannonArea.IsPressing) // Если есть нажатие на hero, и hero не в области пушки
         {
             Vector2 endClick = mainCamera.ScreenToWorldPoint(Input.mousePosition); // Получаем координаты нажатия
-                                                                                   //heroCenterRigidbody.velocity = endClick * speed;
-                                                                                   //heroRigidbody.velocity = (endClick - startClick) * speed;
-                                                                                   //startClick = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            //heroRigidbody.MovePosition(Vector2.Lerp(heroRigidbody.position, endClick, speed * Time.deltaTime));
-
-            //heroRigidbody.MovePosition(endClick); // Перемещаем hero
-            //transform.position = Vector3.Lerp(transform.position, endClick, speed * Time.fixedDeltaTime);
-
-            heroCenterRigidbody.MovePosition(Vector2.Lerp(heroCenter.position, endClick, speed * Time.fixedDeltaTime));
+            heroCenterRigidbody.MovePosition(Vector2.Lerp(heroCenter.position, endClick, speed * Time.fixedDeltaTime)); // Плавно передвигаем
         }
     }
 

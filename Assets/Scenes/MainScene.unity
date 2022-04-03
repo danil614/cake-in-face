@@ -1617,9 +1617,9 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 2
+  m_LinearDrag: 1
   m_AngularDrag: 10
-  m_GravityScale: 2
+  m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 7390334cf9ee05b4b818bc48bfc8f98e, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -1640,6 +1640,7 @@ MonoBehaviour:
   heroCenter: {fileID: 1319193449}
   speed: 10
   cannonArea: {fileID: 1248784979}
+  shiftCenterOfMassY: -4
 --- !u!60 &752465048
 PolygonCollider2D:
   m_ObjectHideFlags: 0

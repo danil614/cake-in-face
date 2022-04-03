@@ -5,55 +5,25 @@ public class CannonArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 {
     private bool isPressing = false;
 
+    /// <summary>
+    /// Показывает, есть ли нажатие в области пушки.
+    /// </summary>
     [HideInInspector]
     public bool IsPressing { get { return isPressing; } }
 
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Hero"))
-    //    {
-    //        Debug.Log("CannonArea OnCollisionEnter2D");
-    //        isPressing = true;
-    //    }
-    //}
-
-    //private void OnCollisionExit2D(Collision2D collision)
-    //{
-    //    Debug.Log("CannonArea OnCollisionExit2D");
-    //    isPressing = false;
-    //}
-
+    /// <summary>
+    /// Срабатывает, если курсор в области объекта.
+    /// </summary>
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("CannonArea OnPointerEnter");
         isPressing = true;
     }
 
+    /// <summary>
+    /// Срабатывает, если курсор выходит из области объекта.
+    /// </summary>
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("CannonArea OnPointerExit");
         isPressing = false;
     }
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //}
-
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Hero"))
-    //    {
-    //        Debug.Log("CannonArea OnTriggerEnter2D");
-    //        isPressing = true;
-    //    }
-    //}
-
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Hero"))
-    //    {
-    //        Debug.Log("CannonArea OnTriggerStay2D");
-    //        isPressing = true;
-    //    }
-    //}
 }
