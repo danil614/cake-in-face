@@ -14,6 +14,7 @@ public class HeroAnimator : MonoBehaviour
         if (collision.gameObject.CompareTag("Cake"))
         {
             animator.SetTrigger("Angry"); // Проигрывание анимации
+            transform.localScale += new Vector3(0.001f, 0.001f, 0.001f);
         }
     }
 }

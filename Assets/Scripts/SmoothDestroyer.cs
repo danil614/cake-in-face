@@ -8,8 +8,8 @@ public class SmoothDestroyer : MonoBehaviour
     private bool isDisappearing;
     private SpriteRenderer spriteRenderer;
 
-    private float stepColor = 1f;  // Скорость угасания объекта
-    private float delayColor = 100f; // Задержка удаления объекта
+    private float stepColor;  // Скорость угасания объекта
+    private float delayColor; // Задержка удаления объекта
     private ObjectPool objectPool; // Пул объектов
 
     [HideInInspector] public float StepColor { set { stepColor = value; } }

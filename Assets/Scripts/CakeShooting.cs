@@ -32,7 +32,7 @@ public class CakeShooting : MonoBehaviour
 			// Плавно сдвигаем объект из текущей позиции в стартовую
 			cakeClone.transform.position = Vector2.Lerp(cakeClone.transform.position, transform.position, speed * Time.deltaTime);
 
-			if (Vector3.Distance(cakeClone.transform.position, transform.position) <= 0.01f)
+			if (Vector3.Distance(cakeClone.transform.position, transform.position) <= 0.05f)
 			{
 				isReloading = false;
             }

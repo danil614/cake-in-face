@@ -7,21 +7,30 @@ public class CakeBreaking : MonoBehaviour
     [SerializeField][Header("Пул объектов")] private ObjectPool objectPool;
     [SerializeField][Header("Скорость угасания пятна")] private float stepColor;
     [SerializeField][Header("Задержка удаления пятна")] private float delayColor;
+    [SerializeField][Header("Скорость для разрушения")] private float speedDestruction;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Cake"))
         {
-            GameManager.StopSmoothDestroyer(collision.gameObject); // Останавливаем компонент плавного удаления
-            objectPool.ReturnObject(collision.gameObject); // Убираем торт в пул объектов
-
-            if (collision.contactCount > 0)
+            if (IsBreak(collision.relativeVelocity))
             {
-                Vector2 collisionPoint = collision.GetContact(0).point; // Точка касания
-                CreateSplat(collisionPoint);
-                CreateSplashes(collisionPoint);
+                GameManager.StopSmoothDestroyer(collision.gameObject); // Останавливаем компонент плавного удаления
+                objectPool.ReturnObject(collision.gameObject); // Убираем торт в пул объектов
+
+                if (collision.contactCount > 0)
+                {
+                    Vector2 collisionPoint = collision.GetContact(0).point; // Точка касания
+                    CreateSplat(collisionPoint);
+                    CreateSplashes(collisionPoint);
+                }
             }
         }
+    }
+
+    private bool IsBreak(Vector2 velocity)
+    {
+        return velocity.magnitude > speedDestruction;
     }
 
     private void CreateSplat(Vector2 collisionPoint)
