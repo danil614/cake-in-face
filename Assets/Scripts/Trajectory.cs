@@ -2,19 +2,11 @@ using UnityEngine;
 
 public class Trajectory : MonoBehaviour
 {
-	[SerializeField]
-	int dotsNumber; // Количество точек в траектории
-
-	[SerializeField]
-	GameObject dotPrefab; // Объект - точка
-
-	[SerializeField]
-	float dotSpacing; // Расстояние между точками
-
-	[SerializeField][Range(0.01f, 0.3f)]
-	float dotMinScale; // Минимальный размер точек
-	[SerializeField][Range(0.1f, 1f)]
-	float dotMaxScale; // Максимальный размер точек
+	[SerializeField] int dotsNumber; // Количество точек в траектории
+	[SerializeField] GameObject dotPrefab; // Префаб точки
+	[SerializeField] float dotSpacing; // Расстояние между точками
+	[SerializeField][Range(0.01f, 0.3f)] float dotMinScale; // Минимальный размер точек
+	[SerializeField][Range(0.1f, 1f)] float dotMaxScale; // Максимальный размер точек
 
 	Transform[] dotsList; // Массив точек для траектории
 
@@ -37,9 +29,7 @@ public class Trajectory : MonoBehaviour
 
 		for (int i = 0; i < dotsNumber; i++)
 		{
-			dotsList[i] = Instantiate(dotPrefab, null).transform; // Создаем точку
-			dotsList[i].parent = transform; // Группируем точку
-
+			dotsList[i] = Instantiate(dotPrefab, transform).transform; // Создаем точку и группируем точку 
 			dotsList[i].localScale = Vector3.one * scale; // Устанавливаем новый размер точки
 			
 			if (scale > dotMinScale)

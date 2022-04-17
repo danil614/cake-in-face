@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1671302818658758201}
   - component: {fileID: 7834973440051571059}
   m_Layer: 0
-  m_Name: Splat2
+  m_Name: splat2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: c1140c51b7768d548bcabf0c83693f5c, type: 3}
   m_Color: {r: 1, g: 0.8235295, b: 0.64705884, a: 1}
   m_FlipX: 0
