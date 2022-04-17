@@ -3,17 +3,10 @@ using UnityEngine.EventSystems;
 
 public class DragHero : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    [SerializeField]
-    private Transform heroCenter; // Точка поворота hero
-
-    [SerializeField]
-    private float speed; // Скорость перетаскивания hero
-
-    [SerializeField]
-    private CannonArea cannonArea; // Область пушки
-
-    [SerializeField]
-    private float shiftCenterOfMassY; // Смещение центра масс по Y
+    [SerializeField] private Transform heroCenter; // Точка поворота hero
+    [SerializeField] private float speed; // Скорость перетаскивания hero
+    [SerializeField] private CannonArea cannonArea; // Область пушки
+    [SerializeField] private float shiftCenterOfMassY; // Смещение центра масс по Y
 
     private bool isDragging = false; // Перетаскивание Hero
     private Rigidbody2D heroCenterRigidbody; // Rigidbody2D точки поворота hero
@@ -22,8 +15,7 @@ public class DragHero : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     /// <summary>
     /// Начато ли перетаскивание?
     /// </summary>
-    [HideInInspector]
-    public bool IsDragging { get => isDragging; }
+    [HideInInspector] public bool IsDragging { get => isDragging; }
 
     private void Start()
     {

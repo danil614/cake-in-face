@@ -2,20 +2,11 @@ using UnityEngine;
 
 public class RotateCannon : MonoBehaviour
 {
-    [SerializeField]
-    private Transform turningPoint; // Точка поворота пушки
-
-    [SerializeField]
-    private float shiftAngle; // Сдвиг угла поворота пушки
-
-    [SerializeField]
-    private float turningSpeed; // Скорость поворота пушки
-
-    [SerializeField]
-    private float minAngle; // Минимальный угол поворота
-
-    [SerializeField]
-    private float maxAngle; // Максимальный угол поворота
+    [SerializeField] private Transform turningPoint; // Точка поворота пушки
+    [SerializeField] private float shiftAngle; // Сдвиг угла поворота пушки
+    [SerializeField] private float turningSpeed; // Скорость поворота пушки
+    [SerializeField] private float minAngle; // Минимальный угол поворота
+    [SerializeField] private float maxAngle; // Максимальный угол поворота
 
     private Camera mainCamera;
 

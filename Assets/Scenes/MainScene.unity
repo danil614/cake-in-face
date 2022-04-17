@@ -1469,7 +1469,8 @@ MonoBehaviour:
   - {fileID: 7096541750905434158, guid: 4829abce96f2b60498a5fc68f7e66449, type: 3}
   - {fileID: 7115310549053150713, guid: 83ac86a8f6e4a904e9034001cc71b910, type: 3}
   - {fileID: 4907538703474254670, guid: 2fe0be015dc52094ea486cf4e783df5d, type: 3}
-  numberObjects: 5
+  numberObjects: 10
+  cakeDestroyer: {fileID: 885440492}
 --- !u!4 &641977656
 Transform:
   m_ObjectHideFlags: 0
@@ -1872,7 +1873,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 752465044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 631232899173e434da5fb1bdce0a3ff1, type: 3}
+  m_Script: {fileID: 11500000, guid: a90cd5028bc12e444bc1d3290f2de10d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   splashes: {fileID: 5573652158426897167, guid: 97620172bede27f4d8709cfabbcb4973, type: 3}
@@ -1883,6 +1884,8 @@ MonoBehaviour:
   - {fileID: 7115310549053150713, guid: 83ac86a8f6e4a904e9034001cc71b910, type: 3}
   - {fileID: 4907538703474254670, guid: 2fe0be015dc52094ea486cf4e783df5d, type: 3}
   objectPool: {fileID: 641977655}
+  stepColor: 1
+  delayColor: 10
 --- !u!1 &767235374
 GameObject:
   m_ObjectHideFlags: 0
@@ -1913,7 +1916,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementCannon: {fileID: 920778697}
-  cake: {fileID: 885440491}
+  cakeShooting: {fileID: 885440491}
   trajectory: {fileID: 559925818}
   dragHero: {fileID: 752465047}
   turningPoint: {fileID: 1122316544}
@@ -1944,6 +1947,7 @@ GameObject:
   - component: {fileID: 885440490}
   - component: {fileID: 885440489}
   - component: {fileID: 885440491}
+  - component: {fileID: 885440492}
   m_Layer: 0
   m_Name: Cake
   m_TagString: Cake
@@ -2025,10 +2029,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 885440488}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9b512e54e1f62e438b7feed4158ac82, type: 3}
+  m_Script: {fileID: 11500000, guid: 48e1bd70e53c68a4d93ebe4601e89336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cakePrefab: {fileID: 1683477814728605136, guid: 0f156a5fdf2d30648bb5db6cda2a588b, type: 3}
+  destroyer: {fileID: 885440492}
+  objectPool: {fileID: 641977655}
+  stepColor: 1
+  delayColor: 20
+--- !u!114 &885440492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885440488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecd6887978c382d4981801fb9b1b0066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   allowedNumberCakes: 10
   objectPool: {fileID: 641977655}
 --- !u!1 &894006558
@@ -2042,6 +2062,7 @@ GameObject:
   - component: {fileID: 894006559}
   - component: {fileID: 894006561}
   - component: {fileID: 894006560}
+  - component: {fileID: 894006564}
   - component: {fileID: 894006562}
   - component: {fileID: 894006563}
   m_Layer: 0
@@ -2156,14 +2177,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 631232899173e434da5fb1bdce0a3ff1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splashes: {fileID: 5573652158426897167, guid: 97620172bede27f4d8709cfabbcb4973, type: 3}
-  splats:
-  - {fileID: 7497288037506800528, guid: 713af993d7172fb40b140edceec5aa95, type: 3}
-  - {fileID: 2736037559916749346, guid: cc0123cdb362882409d891102f88bdb8, type: 3}
-  - {fileID: 7096541750905434158, guid: 4829abce96f2b60498a5fc68f7e66449, type: 3}
-  - {fileID: 7115310549053150713, guid: 83ac86a8f6e4a904e9034001cc71b910, type: 3}
-  - {fileID: 4907538703474254670, guid: 2fe0be015dc52094ea486cf4e783df5d, type: 3}
-  objectPool: {fileID: 641977655}
 --- !u!95 &894006563
 Animator:
   serializedVersion: 3
@@ -2183,6 +2196,28 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &894006564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894006558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a90cd5028bc12e444bc1d3290f2de10d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  splashes: {fileID: 5573652158426897167, guid: 97620172bede27f4d8709cfabbcb4973, type: 3}
+  splats:
+  - {fileID: 7497288037506800528, guid: 713af993d7172fb40b140edceec5aa95, type: 3}
+  - {fileID: 2736037559916749346, guid: cc0123cdb362882409d891102f88bdb8, type: 3}
+  - {fileID: 7096541750905434158, guid: 4829abce96f2b60498a5fc68f7e66449, type: 3}
+  - {fileID: 7115310549053150713, guid: 83ac86a8f6e4a904e9034001cc71b910, type: 3}
+  - {fileID: 4907538703474254670, guid: 2fe0be015dc52094ea486cf4e783df5d, type: 3}
+  objectPool: {fileID: 641977655}
+  stepColor: 1
+  delayColor: 10
 --- !u!1 &920778691
 GameObject:
   m_ObjectHideFlags: 0

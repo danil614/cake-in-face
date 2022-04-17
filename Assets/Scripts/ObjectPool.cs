@@ -5,11 +5,13 @@ public class ObjectPool : MonoBehaviour
 {
     [SerializeField][Header("Объекты, хранящиеся в пуле")] private GameObject[] prefabs;
     [SerializeField][Header("Количество объектов, хранящихся в пуле")] private int numberObjects = 10;
-    private Dictionary<int, Stack<GameObject>> pool; // Словарь - пул объектов
+    [SerializeField][Header("Разрушитель тортов")] private Destroyer cakeDestroyer;
+
+    private Dictionary<string, Stack<GameObject>> pool; // Словарь - пул объектов
 
     private void Awake()
     {
-        pool = new Dictionary<int, Stack<GameObject>>();
+        pool = new Dictionary<string, Stack<GameObject>>();
         
         // Предварительное заполнение пула
         foreach (GameObject prefab in prefabs)
@@ -19,10 +21,11 @@ public class ObjectPool : MonoBehaviour
             {
                 GameObject gameObject = Instantiate(prefab, transform); // Создаем объект
                 gameObject.SetActive(false); // Скрываем объект
+                gameObject.name = prefab.name; // Меняем имя
                 stackObjects.Push(gameObject); // Добавляем в стек
             }
 
-            pool.Add(prefab.GetInstanceID(), stackObjects); // Добавляем в пул
+            pool.Add(prefab.name, stackObjects); // Добавляем в пул
         }
     }
 
@@ -33,22 +36,21 @@ public class ObjectPool : MonoBehaviour
     /// <returns>Объект на сцене</returns>
     public GameObject GetObject(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent)
     {
-        int objectId = prefab.GetInstanceID(); // Получаем id префаба
-
-        if (pool.TryGetValue(objectId, out Stack<GameObject> stackObjects)) // Получаем объект из словаря
+        if (pool.TryGetValue(prefab.name, out Stack<GameObject> stackObjects)) // Получаем объект из словаря
         {
             if (stackObjects.Count > 0) // Если объекты есть
             {
                 GameObject gameObject = stackObjects.Pop(); // Возвращаем и удаляем верхний элемент стека
                 gameObject.SetActive(true); // Активируем объект
-                gameObject.transform.position = position; // Устанавливаем позицию
-                gameObject.transform.rotation = rotation; // Устанавливаем поворот
-                gameObject.transform.parent = parent; // Группируем
+                SetTranform(gameObject.transform, position, rotation, parent);
                 return gameObject;
             }
             else
             {
-                return Instantiate(prefab); // Создаем новый
+                GameObject gameObject = Instantiate(prefab); // Создаем новый
+                gameObject.name = prefab.name; // Меняем имя
+                SetTranform(gameObject.transform, position, rotation, parent);
+                return gameObject;
             }
         }
         else
@@ -65,9 +67,8 @@ public class ObjectPool : MonoBehaviour
     {
         gameObject.SetActive(false); // Скрываем объект
         gameObject.transform.parent = transform; // Группируем
-        int objectId = gameObject.GetInstanceID(); // Получаем id объекта
 
-        if (pool.TryGetValue(objectId, out Stack<GameObject> stackObjects)) // Получаем объект из словаря
+        if (pool.TryGetValue(gameObject.name, out Stack<GameObject> stackObjects)) // Получаем объект из словаря
         {
             stackObjects.Push(gameObject); // Добавляем в стек
         }
@@ -75,7 +76,20 @@ public class ObjectPool : MonoBehaviour
         {
             stackObjects = new Stack<GameObject>(); // Стек объектов
             stackObjects.Push(gameObject); // Добавляем в стек
-            pool.Add(objectId, stackObjects); // Добавляем в пул
+            pool.Add(gameObject.name, stackObjects); // Добавляем в пул
         }
+
+        // Нужно для удаления тортов по количеству
+        if (gameObject.CompareTag("Cake"))
+        {
+            cakeDestroyer.DeleteFromCollection(); // Удаляем из коллекции тортов
+        }
+    }
+
+    private void SetTranform(Transform transform, Vector3 position, Quaternion rotation, Transform parent)
+    {
+        transform.parent = null; // Снимаем группировку
+        transform.SetPositionAndRotation(position, rotation); // Устанавливаем позицию и поворот
+        transform.parent = parent; // Группируем
     }
 }

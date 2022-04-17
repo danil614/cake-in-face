@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CakeBreaking : MonoBehaviour
@@ -7,12 +5,14 @@ public class CakeBreaking : MonoBehaviour
     [SerializeField] private GameObject splashes; // Эффект брызг
     [SerializeField] private GameObject[] splats; // Разные формы пятен
     [SerializeField][Header("Пул объектов")] private ObjectPool objectPool;
+    [SerializeField][Header("Скорость угасания пятна")] private float stepColor;
+    [SerializeField][Header("Задержка удаления пятна")] private float delayColor;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Cake"))
         {
-            objectPool.ReturnObject(collision.gameObject); // Убираем в пул объектов
+            objectPool.ReturnObject(collision.gameObject); // Убираем торт в пул объектов
 
             if (collision.contactCount > 0)
             {
@@ -30,12 +30,14 @@ public class CakeBreaking : MonoBehaviour
 
         float shift = Random.Range(5, 14) / 10; // Сдвиг пятна
         Vector3 splatPosition = new Vector3(collisionPoint.x + shift, collisionPoint.y, 0);
-        objectPool.GetObject(prefab, splatPosition, Quaternion.identity, transform); // Создание пятна на поваре
+        GameObject splat = objectPool.GetObject(prefab, splatPosition, Quaternion.identity, transform); // Создание пятна на поваре
+        GameManager.StartSmoothDestroyer(splat, objectPool, delayColor, stepColor); // Перезапускаем компонент для плавного удаления по времени
     }
 
     private void CreateSplashes(Vector2 collisionPoint)
     {
         Vector3 splashesPosition = new Vector3(collisionPoint.x, collisionPoint.y, 0);
-        objectPool.GetObject(splashes, splashesPosition, Quaternion.identity, null);
+        GameObject splashesClone = objectPool.GetObject(splashes, splashesPosition, Quaternion.identity, null);
+        GameManager.StartParticleSystemManager(splashesClone, objectPool); // Перезапускаем компонент для активации и деактивации системы частиц
     }
 }

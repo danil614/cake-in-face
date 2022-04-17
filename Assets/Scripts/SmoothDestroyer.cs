@@ -5,23 +5,26 @@ public class SmoothDestroyer : MonoBehaviour
 {
     private Color currentColor;
     private float currentAlpha;
-    private bool isDisappearing = false;
+    private bool isDisappearing;
     private SpriteRenderer spriteRenderer;
-    private ObjectPool pool;
 
-    [SerializeField] private float stepColor;
-    [SerializeField] private float delayColor; // Задержка удаления объекта
-    [SerializeField][Header("Пул объектов")] private GameObject objectPool;
+    private float stepColor;  // Скорость угасания объекта
+    private float delayColor; // Задержка удаления объекта
+    private ObjectPool objectPool; // Пул объектов
 
+    [HideInInspector] public float StepColor { set { stepColor = value; } }
+    [HideInInspector] public float DelayColor { set { delayColor = value; } }
+    [HideInInspector] public ObjectPool ObjectPool { set { objectPool = value; } }
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        pool = objectPool.GetComponent<ObjectPool>();
     }
 
-    private void Start()
+    public void Start()
     {
+        isDisappearing = false;
+        StopCoroutine(Delay());
         currentColor = spriteRenderer.color; // Считывание цвета с объекта
         currentAlpha = currentColor.a; // Получаем альфа канал
         StartCoroutine(Delay()); // Задержка удаления
@@ -37,7 +40,10 @@ public class SmoothDestroyer : MonoBehaviour
 
             if (currentAlpha <= 0.0f) // Когда объект не виден
             {
-                pool.ReturnObject(gameObject); // Убираем в пул объектов
+                objectPool.ReturnObject(gameObject); // Убираем в пул объектов
+                isDisappearing = false;
+                currentColor.a = 1.0f; // Присваиваем альфа каналу стандартное значение
+                spriteRenderer.color = currentColor;
             }
         }
     }

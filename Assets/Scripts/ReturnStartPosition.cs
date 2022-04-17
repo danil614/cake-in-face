@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class ReturnStartPosition : MonoBehaviour
 {
-    [SerializeField]
-    private float speed; // Скорость перемещения объекта
+    [SerializeField] private float speed; // Скорость перемещения объекта
 
     private Vector2 startPosition; // Стартовая позиция
 

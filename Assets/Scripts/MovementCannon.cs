@@ -3,18 +3,13 @@ using System.Collections;
 
 public class MovementCannon : MonoBehaviour
 {
-    [SerializeField]
-    private Rigidbody2D cannonWheelRigidbody; // Rigidbody колеса от пушки
+    [SerializeField] private Rigidbody2D cannonWheelRigidbody; // Rigidbody колеса от пушки
 
-    [SerializeField]
-    private float leftSpeed; // Скорость пушки влево
-    [SerializeField]
-    private float leftWait; // Ожидание при левом движении
+    [SerializeField] private float leftSpeed; // Скорость пушки влево
+    [SerializeField] private float leftWait; // Ожидание при левом движении
 
-    [SerializeField]
-    private float rightSpeed; // Скорость пушки вправо
-    [SerializeField]
-    private float rightWait; // Ожидание при правом движении
+    [SerializeField] private float rightSpeed; // Скорость пушки вправо
+    [SerializeField] private float rightWait; // Ожидание при правом движении
 
     private WheelJoint2D[] wheels; // Колеса
     private Rigidbody2D cannonRigidbody; // Rigidbody самой пушки
