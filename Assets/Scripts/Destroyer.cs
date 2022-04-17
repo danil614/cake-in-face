@@ -37,7 +37,7 @@ public class Destroyer : MonoBehaviour
 		if (objectsOnScene != null && objectsOnScene.Count > allowedNumberCakes)
 		{
 			GameObject oldObject = objectsOnScene.Peek(); // Получаем самый старый объект объект
-			objectPool.ReturnObject(oldObject); // Удаляем со сцены
+			GameManager.StartSmoothDestroyer(oldObject, objectPool, 0, 1); // Плавно удаляем со сцены
 		}
 	}
 }

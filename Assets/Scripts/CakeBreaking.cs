@@ -12,6 +12,7 @@ public class CakeBreaking : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Cake"))
         {
+            GameManager.StopSmoothDestroyer(collision.gameObject); // Останавливаем компонент плавного удаления
             objectPool.ReturnObject(collision.gameObject); // Убираем торт в пул объектов
 
             if (collision.contactCount > 0)

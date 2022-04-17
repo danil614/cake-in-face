@@ -86,7 +86,16 @@ public class GameManager : MonoBehaviour
 		smoothDestroyer.ObjectPool = objectPool;
 		smoothDestroyer.DelayColor = delayColor;
 		smoothDestroyer.StepColor = stepColor;
-		smoothDestroyer.Start();
+		smoothDestroyer.StartSmoothDestroyer();
+	}
+
+	/// <summary>
+	/// Останваливает компонент для плавного удаления по времени.
+	/// </summary>
+	public static void StopSmoothDestroyer(GameObject gameObject)
+	{
+		SmoothDestroyer smoothDestroyer = gameObject.GetComponent<SmoothDestroyer>();
+		smoothDestroyer.ResetSettings(); // Сбрасываем все настройки
 	}
 
 	/// <summary>
