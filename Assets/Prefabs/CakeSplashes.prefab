@@ -8,15 +8,12 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8791141939441543153}
-  - component: {fileID: 3968532652187122981}
-  - component: {fileID: 4366209931124179072}
-  - component: {fileID: -5267038866422244876}
   - component: {fileID: 6343076056805677845}
+  - component: {fileID: -5267038866422244876}
   - component: {fileID: 1518914286555316673}
   - component: {fileID: 2202453567215975524}
   m_Layer: 0
-  m_Name: CakeSplashes 2
+  m_Name: CakeSplashes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,6 +33,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5267038866422244876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8025093541793130475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f106cff45f8c6c4cbdddbfe6c7b8893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &1518914286555316673
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4867,15 +4876,3 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &-5267038866422244876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5573652158426897167}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f106cff45f8c6c4cbdddbfe6c7b8893, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
