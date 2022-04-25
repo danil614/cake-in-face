@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Cake
   - Hero
+  - LeftHand
   layers:
   - Default
   - TransparentFX
