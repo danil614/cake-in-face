@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Останваливает компонент для плавного удаления по времени.
+	/// Останавливает компонент для плавного удаления по времени.
 	/// </summary>
 	public static void StopSmoothDestroyer(GameObject gameObject)
 	{
