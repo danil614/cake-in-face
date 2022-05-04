@@ -21,13 +21,27 @@ public class SmoothDestroyer : MonoBehaviour
         isDisappearing = false;
     }
 
+    /// <summary>
+    /// Начать плавное удаление объекта.
+    /// </summary>
+    public void StartDestroy(bool withDelay)
+    {
+        if (withDelay)
+        {
+            StartCoroutine(Delay()); // Задержка удаления
+        }
+        else
+        {
+            isDisappearing = true;
+        }
+    }
+
     private void OnEnable()
     {
         isDisappearing = false;
         spriteRenderer.color = originalColor; // Устанавливаем изначальный цвет объекта
         currentColor = originalColor; // Устанавливаем текущий цвет объекта
         currentAlpha = originalColor.a; // Устанавливаем текущий альфа канал
-        StartCoroutine(Delay()); // Задержка удаления
     }
 
     /// <summary>
@@ -58,14 +72,5 @@ public class SmoothDestroyer : MonoBehaviour
                 objectPool.ReturnObject(gameObject); // Убираем в пул объектов
             }
         }
-    }
-
-    /// <summary>
-    /// Начать плавное удаление объекта.
-    /// </summary>
-    public void StartDestroy()
-    {
-        StopCoroutine(Delay());
-        isDisappearing = true;
     }
 }

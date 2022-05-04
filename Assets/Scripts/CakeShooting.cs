@@ -51,6 +51,7 @@ public class CakeShooting : MonoBehaviour
 		currentCakeCollider.enabled = true; // Включаем коллайдер
 
 		destroyerByNumber.AddToCollection(currentCake); // Добавляем торт в коллекцию
+		GameManager.StartSmoothDestroyer(currentCake, true); // Запускаем плавное удаление торта по времени
 		ReloadCake(); // Перезаряжаем пушку
 	}
 

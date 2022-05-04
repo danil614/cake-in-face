@@ -80,9 +80,9 @@ public class GameManager : MonoBehaviour
 	/// <summary>
 	/// Запускает плавное удаление объекта.
 	/// </summary>
-	public static void StartSmoothDestroyer(GameObject gameObject)
+	public static void StartSmoothDestroyer(GameObject gameObject, bool withDelay)
 	{
 		SmoothDestroyer smoothDestroyer = gameObject.GetComponent<SmoothDestroyer>();
-		smoothDestroyer.StartDestroy();
+		smoothDestroyer.StartDestroy(withDelay);
 	}
 }

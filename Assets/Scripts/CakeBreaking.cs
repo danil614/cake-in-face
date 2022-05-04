@@ -37,7 +37,8 @@ public class CakeBreaking : MonoBehaviour
 
         float shift = Random.Range(5, 14) / 10; // Сдвиг пятна
         Vector3 splatPosition = new Vector3(collisionPoint.x + shift, collisionPoint.y, 0);
-        objectPool.GetObject(prefab, splatPosition, Quaternion.identity, transform); // Создание пятна на поваре
+        GameObject currentSplat = objectPool.GetObject(prefab, splatPosition, Quaternion.identity, transform); // Создание пятна на поваре
+        GameManager.StartSmoothDestroyer(currentSplat, true); // Запускаем плавное удаление пятна по времени
     }
 
     private void CreateSplashes(Vector2 collisionPoint)

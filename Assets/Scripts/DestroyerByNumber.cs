@@ -20,10 +20,16 @@ public class DestroyerByNumber : MonoBehaviour
 		StartCoroutine(DeleteOldObjectByNumber()); // Удаление тортов по количеству
 	}
 
+	/// <summary>
+	/// Удаляет торты по количеству с задержкой.
+	/// </summary>
 	private IEnumerator DeleteOldObjectByNumber()
 	{
-		yield return new WaitForSeconds(delay);
-		DeleteOldObject(); // Удаляем самый старый торт
+		while (true)
+		{
+			yield return new WaitForSeconds(delay);
+			DeleteOldObject(); // Удаляем самый старый торт
+		}
 	}
 
 	/// <summary>
@@ -56,7 +62,7 @@ public class DestroyerByNumber : MonoBehaviour
 		if (objectsOnScene != null && objectsOnScene.Count > allowedNumber)
 		{
 			GameObject oldObject = objectsOnScene.First.Value; // Получаем самый старый объект
-			GameManager.StartSmoothDestroyer(oldObject); // Плавно удаляем со сцены
+			GameManager.StartSmoothDestroyer(oldObject, false); // Плавно удаляем со сцены
 		}
 	}
 }
