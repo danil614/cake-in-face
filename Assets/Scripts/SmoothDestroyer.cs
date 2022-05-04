@@ -3,30 +3,47 @@ using UnityEngine;
 
 public class SmoothDestroyer : MonoBehaviour
 {
-    private Color currentColor;
-    private float currentAlpha;
-    private bool isDisappearing;
-    private SpriteRenderer spriteRenderer;
+    const string ObjectPoolName = "ObjectPool";
 
-    private float stepColor;  // Скорость угасания объекта
-    private float delayColor; // Задержка удаления объекта
+    private Color originalColor; // Изначальный цвет объекта
+    private float currentAlpha; // Текущий альфа канал
+    private Color currentColor; // Текущий цвет
+    private bool isDisappearing; // Исчезание
+    private SpriteRenderer spriteRenderer; // Спрайт
     private ObjectPool objectPool; // Пул объектов
 
-    [HideInInspector] public float StepColor { set { stepColor = value; } }
-    [HideInInspector] public float DelayColor { set { delayColor = value; } }
-    [HideInInspector] public ObjectPool ObjectPool { set { objectPool = value; } }
+    [SerializeField][Header("Скорость угасания объекта")] private float stepColor = 1;
+    [SerializeField][Header("Задержка удаления объекта")] private float delayColor = 20;
 
     private void Awake()
     {
+        objectPool = GameObject.Find(ObjectPoolName).GetComponent<ObjectPool>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        originalColor = spriteRenderer.color;
         isDisappearing = false;
     }
 
-    public void StartSmoothDestroyer()
+    private void OnEnable()
     {
-        currentColor = spriteRenderer.color; // Считывание цвета с объекта
-        currentAlpha = currentColor.a; // Получаем альфа канал
+        isDisappearing = false;
+        spriteRenderer.color = originalColor; // Устанавливаем изначальный цвет объекта
+        currentColor = originalColor; // Устанавливаем текущий цвет объекта
+        currentAlpha = originalColor.a; // Устанавливаем текущий альфа канал
         StartCoroutine(Delay()); // Задержка удаления
+    }
+
+    /// <summary>
+    /// Задержка угасания объекта.
+    /// </summary>
+    private IEnumerator Delay()
+    {
+        yield return new WaitForSeconds(delayColor);
+        isDisappearing = true;
+    }
+
+    private void OnDisable()
+    {
+        StopCoroutine(Delay());
     }
 
     private void Update()
@@ -39,23 +56,18 @@ public class SmoothDestroyer : MonoBehaviour
 
             if (currentAlpha <= 0.0f) // Когда объект не виден
             {
-                ResetSettings();
+                isDisappearing = false;
                 objectPool.ReturnObject(gameObject); // Убираем в пул объектов
             }
         }
     }
 
-    private IEnumerator Delay()
-    {
-        yield return new WaitForSeconds(delayColor);
-        isDisappearing = true;
-    }
-
-    public void ResetSettings()
+    /// <summary>
+    /// Начать плавное удаление объекта.
+    /// </summary>
+    public void StartDestroy()
     {
         StopCoroutine(Delay());
-        isDisappearing = false;
-        currentColor.a = 1.0f; // Присваиваем альфа каналу стандартное значение
-        spriteRenderer.color = currentColor;
+        isDisappearing = true;
     }
 }

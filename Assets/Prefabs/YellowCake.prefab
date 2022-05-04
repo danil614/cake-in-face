@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7321975060535936875}
   - component: {fileID: 8284553652688878160}
   m_Layer: 0
-  m_Name: FlyingCake
+  m_Name: YellowCake
   m_TagString: Cake
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,3 +134,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f77b7330dcb69040a03efa70cc8a7b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stepColor: 1
+  delayColor: 20

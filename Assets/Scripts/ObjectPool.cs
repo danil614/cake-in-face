@@ -4,8 +4,8 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
     [SerializeField][Header("Объекты, хранящиеся в пуле")] private GameObject[] prefabs;
-    [SerializeField][Header("Количество объектов, хранящихся в пуле")] private int numberObjects = 10;
-    [SerializeField][Header("Разрушитель тортов")] private Destroyer cakeDestroyer;
+    [SerializeField][Header("Начальное количество объектов, хранящихся в пуле")] private int numberObjects;
+    [SerializeField][Header("Разрушитель тортов по количеству")] private DestroyerByNumber cakeDestroyerByNumber;
 
     private Dictionary<string, Stack<GameObject>> pool; // Словарь - пул объектов
 
@@ -82,10 +82,13 @@ public class ObjectPool : MonoBehaviour
         // Нужно для удаления тортов по количеству
         if (gameObject.CompareTag("Cake"))
         {
-            cakeDestroyer.DeleteFromCollection(); // Удаляем из коллекции тортов
+            cakeDestroyerByNumber.DeleteFromCollection(gameObject); // Удаляем из коллекции тортов
         }
     }
 
+    /// <summary>
+    /// Устанавливает позицию, поворот и группирует.
+    /// </summary>
     private void SetTranform(Transform transform, Vector3 position, Quaternion rotation, Transform parent)
     {
         transform.parent = null; // Снимаем группировку

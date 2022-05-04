@@ -78,24 +78,12 @@ public class GameManager : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Перезапускает компонент для плавного удаления по времени.
+	/// Запускает плавное удаление объекта.
 	/// </summary>
-	public static void StartSmoothDestroyer(GameObject gameObject, ObjectPool objectPool, float delayColor, float stepColor)
-    {
-		SmoothDestroyer smoothDestroyer = gameObject.GetComponent<SmoothDestroyer>();
-		smoothDestroyer.ObjectPool = objectPool;
-		smoothDestroyer.DelayColor = delayColor;
-		smoothDestroyer.StepColor = stepColor;
-		smoothDestroyer.StartSmoothDestroyer();
-	}
-
-	/// <summary>
-	/// Останавливает компонент для плавного удаления по времени.
-	/// </summary>
-	public static void StopSmoothDestroyer(GameObject gameObject)
+	public static void StartSmoothDestroyer(GameObject gameObject)
 	{
 		SmoothDestroyer smoothDestroyer = gameObject.GetComponent<SmoothDestroyer>();
-		smoothDestroyer.ResetSettings(); // Сбрасываем все настройки
+		smoothDestroyer.StartDestroy();
 	}
 
 	/// <summary>

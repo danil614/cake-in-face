@@ -2,22 +2,19 @@ using UnityEngine;
 
 public class CakeShooting : MonoBehaviour
 {
-	[SerializeField] private GameObject cakePrefab; // Префаб торта
-	[SerializeField][Header("Удаление торта по количеству")] private Destroyer destroyer;
+	[SerializeField][Header("Префаб торта")] private GameObject cakePrefab;
+	[SerializeField][Header("Удаление торта по количеству")] private DestroyerByNumber destroyerByNumber;
 	[SerializeField][Header("Пул объектов")] private ObjectPool objectPool;
-	[SerializeField][Header("Скорость угасания торта")] private float stepColor;
-	[SerializeField][Header("Задержка удаления торта")] private float delayColor;
-
 	[SerializeField][Header("Точка старта перезарядки")] private Transform reloadPoint;
 	[SerializeField][Header("Скорость перезарядки")] private float speed;
 
 	[HideInInspector] public Vector3 Position { get => transform.position; }
 
-	private GameObject cakeClone;
-	private Rigidbody2D cakeCloneRigidbody;
-	private CapsuleCollider2D cakeCloneCollider;
+	private GameObject currentCake;
+	private Rigidbody2D currentCakeRigidbody;
+	private CapsuleCollider2D currentCakeCollider;
 
-	private bool isReloading;
+	private bool isReloading; // Перезарядка
 
     private void Start()
     {
@@ -30,32 +27,30 @@ public class CakeShooting : MonoBehaviour
         if (isReloading) // Если перезарядка
         {
 			// Плавно сдвигаем объект из текущей позиции в стартовую
-			cakeClone.transform.position = Vector2.Lerp(cakeClone.transform.position, transform.position, speed * Time.deltaTime);
+			currentCake.transform.position = Vector2.Lerp(currentCake.transform.position, transform.position, speed * Time.deltaTime);
 
-			if (Vector3.Distance(cakeClone.transform.position, transform.position) <= 0.05f)
+			if (Vector3.Distance(currentCake.transform.position, transform.position) <= 0.05f) // Если торт досиг точки
 			{
-				isReloading = false;
+				isReloading = false; // Выключаем перезарядку
             }
 		}
-    }
+	}
 
-    /// <summary>
-    /// Создает торт и задает ему силу метания.
-    /// </summary>
-    /// <param name="force">Сила метания</param>
-    public void Push(Vector2 force)
+	/// <summary>
+	/// Создает торт и задает ему силу метания.
+	/// </summary>
+	/// <param name="force">Сила метания</param>
+	public void Push(Vector2 force)
 	{
-		GameManager.StartSmoothDestroyer(cakeClone, objectPool, delayColor, stepColor); // Перезапускаем компонент для плавного удаления по времени
+		isReloading = false; // Останавливаем перезарядку
 
-		cakeCloneCollider.transform.parent = null;
+		currentCake.transform.parent = null; // Убираем группировку
 
-		cakeCloneRigidbody.isKinematic = false;
-		cakeCloneRigidbody.AddForce(force, ForceMode2D.Impulse); // Устанавливаем скорость полета торта
-		cakeCloneCollider.enabled = true; // Включаем коллайдер
+		currentCakeRigidbody.isKinematic = false; // Включаем Rigidbody
+		currentCakeRigidbody.AddForce(force, ForceMode2D.Impulse); // Устанавливаем скорость полета торта
+		currentCakeCollider.enabled = true; // Включаем коллайдер
 
-		destroyer.AddToCollection(cakeClone); // Добавляем торт в коллекцию
-		destroyer.DeleteOldObject(); // Удаляем старый торт
-
+		destroyerByNumber.AddToCollection(currentCake); // Добавляем торт в коллекцию
 		ReloadCake(); // Перезаряжаем пушку
 	}
 
@@ -64,12 +59,12 @@ public class CakeShooting : MonoBehaviour
 	/// </summary>
 	private void ReloadCake()
     {
-		cakeClone = objectPool.GetObject(cakePrefab, reloadPoint.position, transform.rotation, transform); // Создаем новый торт
-		cakeCloneRigidbody = cakeClone.GetComponent<Rigidbody2D>(); // Получаем Rigidbody2D
-		cakeCloneRigidbody.isKinematic = true;
+		currentCake = objectPool.GetObject(cakePrefab, reloadPoint.position, transform.rotation, transform); // Создаем новый торт
+		currentCakeRigidbody = currentCake.GetComponent<Rigidbody2D>(); // Получаем Rigidbody2D
+		currentCakeRigidbody.isKinematic = true;
 
-		cakeCloneCollider = cakeClone.GetComponent<CapsuleCollider2D>();
-		cakeCloneCollider.enabled = false;
+		currentCakeCollider = currentCake.GetComponent<CapsuleCollider2D>(); // Получаем Collider2D
+		currentCakeCollider.enabled = false; // Выключаем коллайдер
 
 		isReloading = true;
 	}

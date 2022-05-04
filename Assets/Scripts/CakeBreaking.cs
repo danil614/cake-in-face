@@ -2,12 +2,10 @@ using UnityEngine;
 
 public class CakeBreaking : MonoBehaviour
 {
-    [SerializeField] private GameObject splashes; // Эффект брызг
-    [SerializeField] private GameObject[] splats; // Разные формы пятен
+    [SerializeField][Header("Эффект брызг")] private GameObject splashes;
+    [SerializeField][Header("Разные формы пятен")] private GameObject[] splats;
     [SerializeField][Header("Пул объектов")] private ObjectPool objectPool;
-    [SerializeField][Header("Скорость угасания пятна")] private float stepColor;
-    [SerializeField][Header("Задержка удаления пятна")] private float delayColor;
-    [SerializeField][Header("Скорость для разрушения")] private float speedDestruction;
+    [SerializeField][Header("Скорость разрушения торта")] private float speedDestruction;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -15,7 +13,6 @@ public class CakeBreaking : MonoBehaviour
         {
             if (IsBreak(collision.relativeVelocity))
             {
-                GameManager.StopSmoothDestroyer(collision.gameObject); // Останавливаем компонент плавного удаления
                 objectPool.ReturnObject(collision.gameObject); // Убираем торт в пул объектов
 
                 if (collision.contactCount > 0)
@@ -40,8 +37,7 @@ public class CakeBreaking : MonoBehaviour
 
         float shift = Random.Range(5, 14) / 10; // Сдвиг пятна
         Vector3 splatPosition = new Vector3(collisionPoint.x + shift, collisionPoint.y, 0);
-        GameObject splat = objectPool.GetObject(prefab, splatPosition, Quaternion.identity, transform); // Создание пятна на поваре
-        GameManager.StartSmoothDestroyer(splat, objectPool, delayColor, stepColor); // Перезапускаем компонент для плавного удаления по времени
+        objectPool.GetObject(prefab, splatPosition, Quaternion.identity, transform); // Создание пятна на поваре
     }
 
     private void CreateSplashes(Vector2 collisionPoint)
