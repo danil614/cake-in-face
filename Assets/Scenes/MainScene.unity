@@ -3697,7 +3697,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowedNumber: 5
   objectPool: {fileID: 641977655}
-  delay: 1
+  delay: 0.5
 --- !u!1 &894006558
 GameObject:
   m_ObjectHideFlags: 0
@@ -5229,7 +5229,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1319193448}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.28, y: -2.864, z: 0}
+  m_LocalPosition: {x: -0, y: 0.98, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 752465045}

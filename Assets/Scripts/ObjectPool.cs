@@ -72,7 +72,10 @@ public class ObjectPool : MonoBehaviour
 
         if (pool.TryGetValue(gameObject.name, out Stack<GameObject> stackObjects)) // Получаем объект из словаря
         {
-            stackObjects.Push(gameObject); // Добавляем в стек
+            if (!stackObjects.Contains(gameObject)) // Если в стеке нет такого объекта
+            {
+                stackObjects.Push(gameObject); // Добавляем в стек
+            }
         }
         else
         {

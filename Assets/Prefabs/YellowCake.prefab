@@ -134,5 +134,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f77b7330dcb69040a03efa70cc8a7b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepColor: 1
+  stepColor: 1.5
   delayColor: 15

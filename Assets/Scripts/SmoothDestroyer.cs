@@ -28,16 +28,17 @@ public class SmoothDestroyer : MonoBehaviour
     {
         if (withDelay)
         {
-            StartCoroutine(Delay()); // Задержка удаления
+            StartCoroutine(Delay()); // Удаление с задержкой
         }
         else
         {
-            isDisappearing = true;
+            isDisappearing = true; // Удаление сразу
         }
     }
 
     private void OnEnable()
     {
+        StopAllCoroutines();
         isDisappearing = false;
         spriteRenderer.color = originalColor; // Устанавливаем изначальный цвет объекта
         currentColor = originalColor; // Устанавливаем текущий цвет объекта
@@ -51,11 +52,6 @@ public class SmoothDestroyer : MonoBehaviour
     {
         yield return new WaitForSeconds(delayColor);
         isDisappearing = true;
-    }
-
-    private void OnDisable()
-    {
-        StopCoroutine(Delay());
     }
 
     private void Update()

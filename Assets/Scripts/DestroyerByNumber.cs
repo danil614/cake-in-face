@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using System;
 
 public class DestroyerByNumber : MonoBehaviour
 {
@@ -15,8 +16,8 @@ public class DestroyerByNumber : MonoBehaviour
 		objectsOnScene = new LinkedList<GameObject>(); // Инициализируем коллекцию
 	}
 
-	private void Update()
-	{
+    private void Start()
+    {
 		StartCoroutine(DeleteOldObjectByNumber()); // Удаление тортов по количеству
 	}
 
@@ -36,8 +37,8 @@ public class DestroyerByNumber : MonoBehaviour
 	/// Добавляет объект в коллекцию.
 	/// </summary>
 	public void AddToCollection(GameObject gameObject)
-    {
-		if (objectsOnScene != null)
+	{
+		if (objectsOnScene != null && !objectsOnScene.Contains(gameObject))
 		{
 			objectsOnScene.AddLast(gameObject); // Добавляем в конец списка
 		}
