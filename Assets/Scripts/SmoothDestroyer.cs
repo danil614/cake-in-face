@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class SmoothDestroyer : MonoBehaviour
 {
-    const string ObjectPoolName = "ObjectPool";
-
     private Color originalColor; // Изначальный цвет объекта
     private float currentAlpha; // Текущий альфа канал
     private Color currentColor; // Текущий цвет
@@ -17,7 +15,7 @@ public class SmoothDestroyer : MonoBehaviour
 
     private void Awake()
     {
-        objectPool = GameObject.Find(ObjectPoolName).GetComponent<ObjectPool>();
+        objectPool = GameObject.Find(ObjectPool.ObjectPoolName).GetComponent<ObjectPool>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         originalColor = spriteRenderer.color;
         isDisappearing = false;

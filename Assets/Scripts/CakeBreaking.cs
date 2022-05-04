@@ -43,7 +43,6 @@ public class CakeBreaking : MonoBehaviour
     private void CreateSplashes(Vector2 collisionPoint)
     {
         Vector3 splashesPosition = new Vector3(collisionPoint.x, collisionPoint.y, 0);
-        GameObject splashesClone = objectPool.GetObject(splashes, splashesPosition, Quaternion.identity, null);
-        GameManager.StartParticleSystemManager(splashesClone, objectPool); // Перезапускаем компонент для активации и деактивации системы частиц
+        objectPool.GetObject(splashes, splashesPosition, Quaternion.identity, null);
     }
 }

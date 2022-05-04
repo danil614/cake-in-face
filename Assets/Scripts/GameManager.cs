@@ -85,14 +85,4 @@ public class GameManager : MonoBehaviour
 		SmoothDestroyer smoothDestroyer = gameObject.GetComponent<SmoothDestroyer>();
 		smoothDestroyer.StartDestroy();
 	}
-
-	/// <summary>
-	/// Перезапускает компонент для активации и деактивации системы частиц.
-	/// </summary>
-	public static void StartParticleSystemManager(GameObject gameObject, ObjectPool objectPool)
-	{
-		ParticleSystemManager particleSystemDestroyer = gameObject.GetComponent<ParticleSystemManager>();
-		particleSystemDestroyer.ObjectPool = objectPool;
-		particleSystemDestroyer.StartParticleSystem();
-	}
 }

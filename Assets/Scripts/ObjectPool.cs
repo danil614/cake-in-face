@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
+    public const string ObjectPoolName = "ObjectPool";
+
     [SerializeField][Header("Объекты, хранящиеся в пуле")] private GameObject[] prefabs;
     [SerializeField][Header("Начальное количество объектов, хранящихся в пуле")] private int numberObjects;
     [SerializeField][Header("Разрушитель тортов по количеству")] private DestroyerByNumber cakeDestroyerByNumber;

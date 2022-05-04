@@ -135,4 +135,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stepColor: 1
-  delayColor: 20
+  delayColor: 15

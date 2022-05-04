@@ -1866,7 +1866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -536601812019141313, guid: 9364c7f034ee33241952e498b3d967b2, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -536601812019141313, guid: 9364c7f034ee33241952e498b3d967b2, type: 3}
       propertyPath: m_LocalScale.x
@@ -3750,9 +3750,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd6887978c382d4981801fb9b1b0066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allowedNumber: 8
+  allowedNumber: 5
   objectPool: {fileID: 641977655}
-  delay: 0.01
+  delay: 0.001
 --- !u!1 &894006558
 GameObject:
   m_ObjectHideFlags: 0
@@ -6053,7 +6053,7 @@ Transform:
   - {fileID: 250336170}
   - {fileID: 298955349}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1540663969
 GameObject:
