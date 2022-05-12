@@ -3,7 +3,9 @@ guid: a90cd5028bc12e444bc1d3290f2de10d
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - splashes: {fileID: 8025093541793130475, guid: 9bff7bb2f0348a04393a038b52fde885, type: 3}
+  - objectPool: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

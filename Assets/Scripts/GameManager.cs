@@ -82,7 +82,11 @@ public class GameManager : MonoBehaviour
 	/// </summary>
 	public static void StartSmoothDestroyer(GameObject gameObject, ObjectPool objectPool, float delayColor, float stepColor)
     {
-		SmoothDestroyer smoothDestroyer = gameObject.GetComponent<SmoothDestroyer>();
+		SmoothDestroyer smoothDestroyer;
+		if (gameObject.name == "OrangeSplat" | gameObject.name == "WhiteSplat")
+			smoothDestroyer = gameObject.GetComponentInChildren<SmoothDestroyer>();
+		else
+			smoothDestroyer = gameObject.GetComponent<SmoothDestroyer>();
 		smoothDestroyer.ObjectPool = objectPool;
 		smoothDestroyer.DelayColor = delayColor;
 		smoothDestroyer.StepColor = stepColor;
@@ -94,7 +98,11 @@ public class GameManager : MonoBehaviour
 	/// </summary>
 	public static void StopSmoothDestroyer(GameObject gameObject)
 	{
-		SmoothDestroyer smoothDestroyer = gameObject.GetComponent<SmoothDestroyer>();
+		SmoothDestroyer smoothDestroyer;
+		if (gameObject.name == "OrangeSplat" | gameObject.name == "WhiteSplat")
+			smoothDestroyer = gameObject.GetComponentInChildren<SmoothDestroyer>();
+		else
+			smoothDestroyer = gameObject.GetComponent<SmoothDestroyer>();
 		smoothDestroyer.ResetSettings(); // Сбрасываем все настройки
 	}
 
