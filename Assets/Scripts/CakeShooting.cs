@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CakeShooting : MonoBehaviour
 {
-	[SerializeField][Header("Префаб торта")] private GameObject cakePrefab;
+	[SerializeField][Header("Префабы торта")] private GameObject[] cakePrefabs;
 	[SerializeField][Header("Удаление торта по количеству")] private DestroyerByNumber destroyerByNumber;
 	[SerializeField][Header("Пул объектов")] private ObjectPool objectPool;
 	[SerializeField][Header("Точка старта перезарядки")] private Transform reloadPoint;
@@ -29,7 +29,7 @@ public class CakeShooting : MonoBehaviour
 			// Плавно сдвигаем объект из текущей позиции в стартовую
 			currentCake.transform.position = Vector2.Lerp(currentCake.transform.position, transform.position, speed * Time.deltaTime);
 
-			if (Vector3.Distance(currentCake.transform.position, transform.position) <= 0.05f) // Если торт досиг точки
+			if (Vector3.Distance(currentCake.transform.position, transform.position) <= 0.05f) // Если торт достиг точки
 			{
 				isReloading = false; // Выключаем перезарядку
             }
@@ -60,6 +60,7 @@ public class CakeShooting : MonoBehaviour
 	/// </summary>
 	private void ReloadCake()
     {
+		GameObject cakePrefab = cakePrefabs[Random.Range(0, cakePrefabs.Length)];
 		currentCake = objectPool.GetObject(cakePrefab, reloadPoint.position, transform.rotation, transform); // Создаем новый торт
 		currentCakeRigidbody = currentCake.GetComponent<Rigidbody2D>(); // Получаем Rigidbody2D
 		currentCakeRigidbody.isKinematic = true;
