@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private CakeShooting cakeShooting;
 	[SerializeField] private Trajectory trajectory;
 	[SerializeField] private DragHero dragHero;
+	[SerializeField] private DragCook[] dragCook;
 	[SerializeField] private Transform turningPoint; // Точка поворота
 	[SerializeField] private float pushForce; // Сила нажатия
 	[SerializeField] private float startPushForce; // Стартовая сила нажатия
@@ -23,7 +24,7 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
 	{
-		if (!dragHero.IsDragging) // Если не перетаскиваем персонажа
+		if (!IsHeroDragging()) // Если не перетаскиваем персонажа
         {
 			if (Input.GetMouseButtonDown(0)) // Если кнопка была нажата
 			{
@@ -46,6 +47,23 @@ public class GameManager : MonoBehaviour
 				OnClick(); // Обновление траектории при нажатии
 			}
 		}
+	}
+
+	/// <summary>
+	/// Проверяект есть ли перемещение какого-либо героя.
+	/// </summary>
+	private bool IsHeroDragging()
+    {
+		bool isDragging = dragHero.IsDragging;
+		if (isDragging) return isDragging;
+
+		foreach (DragCook bodyPart in dragCook)
+        {
+			isDragging |= bodyPart.IsDragging;
+			if (isDragging) break;
+		}
+
+		return isDragging;
 	}
 
 	/// <summary>
