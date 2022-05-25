@@ -54,8 +54,10 @@ public class MovementCannon : MonoBehaviour
     {
         foreach (WheelJoint2D wheel in wheels)
         {
-            JointMotor2D motor = wheel.motor; // Для перемещения пушки будем использовать мотор
-            motor.motorSpeed = speed; // Устанавливаем скорость мотора
+            // Для перемещения пушки будем использовать мотор
+            JointMotor2D motor = wheel.motor;
+            // Устанавливаем скорость мотора
+            motor.motorSpeed = speed;
             wheel.motor = motor;
             wheel.useMotor = useMotor;
         }

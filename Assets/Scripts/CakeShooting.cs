@@ -47,11 +47,14 @@ public class CakeShooting : MonoBehaviour
 		currentCake.transform.parent = null; // Убираем группировку
 
 		currentCakeRigidbody.isKinematic = false; // Включаем Rigidbody
-		currentCakeRigidbody.AddForce(force, ForceMode2D.Impulse); // Устанавливаем скорость полета торта
+		// Устанавливаем скорость полета торта
+		currentCakeRigidbody.AddForce(force, ForceMode2D.Impulse);
 		currentCakeCollider.enabled = true; // Включаем коллайдер
 
-		destroyerByNumber.AddToCollection(currentCake); // Добавляем торт в коллекцию
-		GameManager.StartSmoothDestroyer(currentCake, true); // Запускаем плавное удаление торта по времени
+		// Добавляем торт в коллекцию
+		destroyerByNumber.AddToCollection(currentCake);
+		// Запускаем плавное удаление торта по времени
+		GameManager.StartSmoothDestroyer(currentCake, true);
 		ReloadCake(); // Перезаряжаем пушку
 	}
 

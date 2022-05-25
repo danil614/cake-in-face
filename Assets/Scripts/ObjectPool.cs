@@ -18,10 +18,12 @@ public class ObjectPool : MonoBehaviour
         // Предварительное заполнение пула
         foreach (GameObject prefab in prefabs)
         {
-            Stack<GameObject> stackObjects = new Stack<GameObject>(); // Стек объектов
+            // Стек объектов
+            Stack<GameObject> stackObjects = new Stack<GameObject>();
             for (int i = 0; i < numberObjects; i++)
             {
-                GameObject gameObject = Instantiate(prefab, transform); // Создаем объект
+                // Создаем объект
+                GameObject gameObject = Instantiate(prefab, transform);
                 gameObject.SetActive(false); // Скрываем объект
                 gameObject.name = prefab.name; // Меняем имя
                 stackObjects.Push(gameObject); // Добавляем в стек
@@ -38,11 +40,14 @@ public class ObjectPool : MonoBehaviour
     /// <returns>Объект на сцене</returns>
     public GameObject GetObject(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent)
     {
-        if (pool.TryGetValue(prefab.name, out Stack<GameObject> stackObjects)) // Получаем объект из словаря
+        // Получаем объект из словаря
+        if (pool.TryGetValue(prefab.name, out Stack<GameObject> stackObjects))
         {
-            if (stackObjects.Count > 0) // Если объекты есть
+            // Если объекты есть
+            if (stackObjects.Count > 0)
             {
-                GameObject gameObject = stackObjects.Pop(); // Возвращаем и удаляем верхний элемент стека
+                // Возвращаем и удаляем верхний элемент стека
+                GameObject gameObject = stackObjects.Pop(); 
                 gameObject.SetActive(true); // Активируем объект
                 SetTranform(gameObject.transform, position, rotation, parent);
                 return gameObject;
@@ -69,10 +74,11 @@ public class ObjectPool : MonoBehaviour
     {
         gameObject.SetActive(false); // Скрываем объект
         gameObject.transform.parent = transform; // Группируем
-
-        if (pool.TryGetValue(gameObject.name, out Stack<GameObject> stackObjects)) // Получаем объект из словаря
+        // Получаем объект из словаря
+        if (pool.TryGetValue(gameObject.name, out Stack<GameObject> stackObjects))
         {
-            if (!stackObjects.Contains(gameObject)) // Если в стеке нет такого объекта
+            // Если в стеке нет такого объекта
+            if (!stackObjects.Contains(gameObject))
             {
                 stackObjects.Push(gameObject); // Добавляем в стек
             }
