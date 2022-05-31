@@ -5,102 +5,97 @@ public class ObjectPool : MonoBehaviour
 {
     public const string ObjectPoolName = "ObjectPool";
 
-    [SerializeField][Header("Объекты, хранящиеся в пуле")] private GameObject[] prefabs;
-    [SerializeField][Header("Начальное количество объектов, хранящихся в пуле")] private int numberObjects;
-    [SerializeField][Header("Разрушитель тортов по количеству")] private DestroyerByNumber cakeDestroyerByNumber;
+    [SerializeField] [Header("Объекты, хранящиеся в пуле")]
+    private GameObject[] prefabs;
 
-    private Dictionary<string, Stack<GameObject>> pool; // Словарь - пул объектов
+    [SerializeField] [Header("Начальное количество объектов, хранящихся в пуле")]
+    private int numberObjects;
+
+    [SerializeField] [Header("Разрушитель тортов по количеству")]
+    private DestroyerByNumber cakeDestroyerByNumber;
+
+    private Dictionary<string, Stack<GameObject>> _pool; // Словарь - пул объектов
 
     private void Awake()
     {
-        pool = new Dictionary<string, Stack<GameObject>>();
-        
+        _pool = new Dictionary<string, Stack<GameObject>>();
+
         // Предварительное заполнение пула
-        foreach (GameObject prefab in prefabs)
+        foreach (var prefab in prefabs)
         {
             // Стек объектов
-            Stack<GameObject> stackObjects = new Stack<GameObject>();
-            for (int i = 0; i < numberObjects; i++)
+            var stackObjects = new Stack<GameObject>();
+            for (var i = 0; i < numberObjects; i++)
             {
                 // Создаем объект
-                GameObject gameObject = Instantiate(prefab, transform);
-                gameObject.SetActive(false); // Скрываем объект
-                gameObject.name = prefab.name; // Меняем имя
-                stackObjects.Push(gameObject); // Добавляем в стек
+                var item = Instantiate(prefab, transform);
+                item.SetActive(false); // Скрываем объект
+                item.name = prefab.name; // Меняем имя
+                stackObjects.Push(item); // Добавляем в стек
             }
 
-            pool.Add(prefab.name, stackObjects); // Добавляем в пул
+            _pool.Add(prefab.name, stackObjects); // Добавляем в пул
         }
     }
 
     /// <summary>
-    /// Получает объект из пула объектов.
+    ///     Получает объект из пула объектов.
     /// </summary>
-    /// <param name="prefab">Префаб</param>
     /// <returns>Объект на сцене</returns>
     public GameObject GetObject(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent)
     {
         // Получаем объект из словаря
-        if (pool.TryGetValue(prefab.name, out Stack<GameObject> stackObjects))
+        if (_pool.TryGetValue(prefab.name, out var stackObjects))
         {
-            // Если объекты есть
-            if (stackObjects.Count > 0)
+            GameObject item;
+            if (stackObjects.Count > 0) // Если объекты есть
             {
                 // Возвращаем и удаляем верхний элемент стека
-                GameObject gameObject = stackObjects.Pop(); 
-                gameObject.SetActive(true); // Активируем объект
-                SetTranform(gameObject.transform, position, rotation, parent);
-                return gameObject;
+                item = stackObjects.Pop();
+                item.SetActive(true); // Активируем объект
             }
             else
             {
-                GameObject gameObject = Instantiate(prefab); // Создаем новый
-                gameObject.name = prefab.name; // Меняем имя
-                SetTranform(gameObject.transform, position, rotation, parent);
-                return gameObject;
+                item = Instantiate(prefab); // Создаем новый
+                item.name = prefab.name; // Меняем имя
             }
+
+            SetTransform(item.transform, position, rotation, parent);
+            return item;
         }
-        else
-        {
-            return null; // Объекта не было в пуле
-        }
+
+        return null; // Объекта не было в пуле
     }
 
     /// <summary>
-    /// Возвращает объект в пул объектов.
+    ///     Возвращает объект в пул объектов.
     /// </summary>
-    /// <param name="gameObject">Объект на сцене</param>
-    public void ReturnObject(GameObject gameObject)
+    /// <param name="item">Объект на сцене</param>
+    public void ReturnObject(GameObject item)
     {
-        gameObject.SetActive(false); // Скрываем объект
-        gameObject.transform.parent = transform; // Группируем
+        item.SetActive(false); // Скрываем объект
+        item.transform.parent = transform; // Группируем
         // Получаем объект из словаря
-        if (pool.TryGetValue(gameObject.name, out Stack<GameObject> stackObjects))
+        if (_pool.TryGetValue(item.name, out var stackObjects))
         {
-            // Если в стеке нет такого объекта
-            if (!stackObjects.Contains(gameObject))
-            {
-                stackObjects.Push(gameObject); // Добавляем в стек
-            }
+            // Если в стеке нет такого объекта, то добавляем
+            if (!stackObjects.Contains(item)) stackObjects.Push(item);
         }
         else
         {
             stackObjects = new Stack<GameObject>(); // Стек объектов
-            stackObjects.Push(gameObject); // Добавляем в стек
-            pool.Add(gameObject.name, stackObjects); // Добавляем в пул
+            stackObjects.Push(item); // Добавляем в стек
+            _pool.Add(item.name, stackObjects); // Добавляем в пул
         }
 
-        // Нужно для удаления тортов по количеству
-        if (gameObject.CompareTag("Cake"))
-        {
-            cakeDestroyerByNumber.DeleteFromCollection(gameObject); // Удаляем из коллекции тортов
-        }
+        // Удаляем торт из коллекции тортов
+        if (item.CompareTag("Cake")) cakeDestroyerByNumber.DeleteFromCollection(gameObject: item);
     }
 
     /// <summary>
-    /// Устанавливает позицию, поворот и группирует.
+    ///     Устанавливает позицию, поворот и группирует.
     /// </summary>
-    private void SetTranform(Transform transform, Vector3 position, Quaternion rotation, Transform parent)
+    private static void SetTransform(Transform transform, Vector3 position, Quaternion rotation, Transform parent)
     {
         transform.parent = null; // Снимаем группировку
         transform.SetPositionAndRotation(position, rotation); // Устанавливаем позицию и поворот
