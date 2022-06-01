@@ -2,105 +2,105 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-	[SerializeField] private MovementCannon movementCannon;
-	[SerializeField] private CakeShooting cakeShooting;
-	[SerializeField] private Trajectory trajectory;
-	[SerializeField] private DragHero dragHero;
-	[SerializeField] private DragCook[] dragCook;
-	[SerializeField] private Transform turningPoint; // Точка поворота
-	[SerializeField] private float pushForce; // Сила нажатия
-	[SerializeField] private float startPushForce; // Стартовая сила нажатия
+    [SerializeField] private MovementCannon movementCannon;
+    [SerializeField] private CakeShooting cakeShooting;
+    [SerializeField] private Trajectory trajectory;
+    [SerializeField] private DragHero dragHero;
+    [SerializeField] private DragCook[] dragCook;
+    [SerializeField] private Transform turningPoint; // Точка поворота
+    [SerializeField] private float pushForce; // Сила нажатия
+    [SerializeField] private float startPushForce; // Стартовая сила нажатия
+    private Vector2 _force; // Сила метания торта
 
-	private bool isClicking = false; // Нажатие на экран
-	private Vector2 force; // Сила метания торта
-	private float time; // Подсчет времени для роста траектории
+    private bool _isClicking; // Нажатие на экран
 
-	private Camera mainCamera;
+    private Camera _mainCamera;
+    private float _time; // Подсчет времени для роста траектории
 
-	private void Start()
-	{
-		mainCamera = Camera.main;
-	}
-
-	private void Update()
-	{
-		if (!IsHeroDragging()) // Если не перетаскиваем персонажа
-        {
-			if (Input.GetMouseButtonDown(0)) // Если кнопка была нажата
-			{
-				isClicking = true;
-				SetStartPushForce(); // Обнуляем время
-				trajectory.Show(); // Показываем траекторию
-			}
-
-			if (isClicking && Input.GetMouseButtonUp(0)) // Если кнопка была отпущена, но перед этим была нажата
-			{
-				isClicking = false;
-				cakeShooting.Push(force); // Метаем торт
-				trajectory.Hide(); // Прячем траекторию
-				StartCoroutine(movementCannon.DoCannonKickback()); // Делаем отдачу пушки при стрельбе
-			}
-
-			if (isClicking) // Если держим нажатие кнопки
-			{
-				time += Time.deltaTime; // Считаем время нажатия
-				OnClick(); // Обновление траектории при нажатии
-			}
-		}
-	}
-
-	/// <summary>
-	/// Проверяект есть ли перемещение какого-либо героя.
-	/// </summary>
-	private bool IsHeroDragging()
+    private void Start()
     {
-		bool isDragging = dragHero.IsDragging;
-		if (isDragging) return isDragging;
+        _mainCamera = Camera.main;
+    }
 
-		foreach (DragCook bodyPart in dragCook)
-        {
-			isDragging |= bodyPart.IsDragging;
-			if (isDragging) break;
-		}
-
-		return isDragging;
-	}
-
-	/// <summary>
-	/// Устанавливает стартовую силу полета торта в зависимости от расстояния до нажатия.
-	/// </summary>
-	private void SetStartPushForce()
+    private void Update()
     {
-		Vector2 startPoint = turningPoint.position;
-		Vector2 endPoint = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-		time = Vector2.Distance(endPoint, startPoint) * startPushForce; // Устанваливаем стартовое время
-	}
+        if (!IsHeroDragging()) // Если не перетаскиваем персонажа
+        {
+            if (Input.GetMouseButtonDown(0)) // Если кнопка была нажата
+            {
+                _isClicking = true;
+                SetStartPushForce(); // Обнуляем время
+                trajectory.Show(); // Показываем траекторию
+            }
 
-	/// <summary>
-	/// Построение траектории при нажатии.
-	/// </summary>
-	private void OnClick()
-	{
-		// Точки начала и конца направляющей линии траектории
-		Vector2 startPoint = turningPoint.position;
-		Vector2 endPoint = cakeShooting.Position;
+            if (_isClicking && Input.GetMouseButtonUp(0)) // Если кнопка была отпущена, но перед этим была нажата
+            {
+                _isClicking = false;
+                cakeShooting.Push(_force); // Метаем торт
+                trajectory.Hide(); // Прячем траекторию
+                StartCoroutine(movementCannon.DoCannonKickback()); // Делаем отдачу пушки при стрельбе
+            }
 
-		// Направляющий вектор длиной 1
-		Vector2 direction = (endPoint - startPoint).normalized;
+            if (_isClicking) // Если держим нажатие кнопки
+            {
+                _time += Time.deltaTime; // Считаем время нажатия
+                OnClick(); // Обновление траектории при нажатии
+            }
+        }
+    }
 
-		// Сила метания торта
-		force = time * pushForce * direction;
+    /// <summary>
+    ///     Проверяект есть ли перемещение какого-либо героя.
+    /// </summary>
+    private bool IsHeroDragging()
+    {
+        var isDragging = dragHero.IsDragging;
+        if (isDragging) return true;
 
-		// Расставить все точки по траектории полета
-		trajectory.UpdateDots(cakeShooting.Position, force);
-	}
+        foreach (var bodyPart in dragCook)
+        {
+            isDragging |= bodyPart.IsDragging;
+            if (isDragging) break;
+        }
 
-	/// <summary>
-	/// Запускает плавное удаление объекта.
-	/// </summary>
-	public static void StartSmoothDestroyer(GameObject gameObject, bool withDelay)
-	{
-		SmoothDestroyer smoothDestroyer = gameObject.GetComponent<SmoothDestroyer>();
-		smoothDestroyer.StartDestroy(withDelay);
-	}
+        return isDragging;
+    }
+
+    /// <summary>
+    ///     Устанавливает стартовую силу полета торта в зависимости от расстояния до нажатия.
+    /// </summary>
+    private void SetStartPushForce()
+    {
+        Vector2 startPoint = turningPoint.position;
+        Vector2 endPoint = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        _time = Vector2.Distance(endPoint, startPoint) * startPushForce; // Устанваливаем стартовое время
+    }
+
+    /// <summary>
+    ///     Построение траектории при нажатии.
+    /// </summary>
+    private void OnClick()
+    {
+        // Точки начала и конца направляющей линии траектории
+        Vector2 startPoint = turningPoint.position;
+        Vector2 endPoint = cakeShooting.Position;
+
+        // Направляющий вектор длиной 1
+        var direction = (endPoint - startPoint).normalized;
+
+        // Сила метания торта
+        _force = _time * pushForce * direction;
+
+        // Расставить все точки по траектории полета
+        trajectory.UpdateDots(cakeShooting.Position, _force);
+    }
+
+    /// <summary>
+    ///     Запускает плавное удаление объекта.
+    /// </summary>
+    public static void StartSmoothDestroyer(GameObject gameObject, bool withDelay)
+    {
+        var smoothDestroyer = gameObject.GetComponent<SmoothDestroyer>();
+        smoothDestroyer.StartDestroy(withDelay);
+    }
 }

@@ -39,7 +39,8 @@ public class CakeShooting : MonoBehaviour
             _currentCake.transform.position = Vector2.Lerp(_currentCake.transform.position, transform.position,
                 speed * Time.deltaTime);
 
-            if (Vector3.Distance(_currentCake.transform.position, transform.position) <= 0.05f) // Если торт достиг точки
+            if (Vector3.Distance(_currentCake.transform.position, transform.position) <=
+                0.05f) // Если торт достиг точки
                 _isReloading = false; // Выключаем перезарядку
         }
     }
@@ -53,7 +54,7 @@ public class CakeShooting : MonoBehaviour
         _isReloading = false; // Останавливаем перезарядку
         _currentCake.transform.parent = null; // Убираем группировку
         _currentCakeRigidbody.isKinematic = false; // Включаем Rigidbody
-        
+
         // Устанавливаем скорость полета торта
         _currentCakeRigidbody.AddForce(force, ForceMode2D.Impulse);
         _currentCakeCollider.enabled = true; // Включаем коллайдер
@@ -71,8 +72,10 @@ public class CakeShooting : MonoBehaviour
     private void ReloadCake()
     {
         var cakePrefab = cakePrefabs[Random.Range(0, cakePrefabs.Length)];
+        var transformCake = transform;
         _currentCake =
-            objectPool.GetObject(cakePrefab, reloadPoint.position, transform.rotation, transform); // Создаем новый торт
+            objectPool.GetObject(cakePrefab, reloadPoint.position, transformCake.rotation,
+                transformCake); // Создаем новый торт
         _currentCakeRigidbody = _currentCake.GetComponent<Rigidbody2D>(); // Получаем Rigidbody2D
         _currentCakeRigidbody.isKinematic = true;
 

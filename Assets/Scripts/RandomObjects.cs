@@ -1,21 +1,27 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 public class RandomObjects : MonoBehaviour
 {
-    [SerializeField][Header("Максимальное случайное число")] private int maxRandomNumber;
-    [SerializeField][Header("Задержка проверки случайного числа")] private float checkDelay;
-    [SerializeField][Header("Задержка отключения объекта")] private float disableDelay;
-    [SerializeField][Header("Объекты")] private GameObject[] objects;
+    [SerializeField] [Header("Максимальное случайное число")]
+    private int maxRandomNumber;
 
-    private int originalRandomNumber;
-    private GameObject currentObject;
-    private bool isEnable;
+    [SerializeField] [Header("Задержка проверки случайного числа")]
+    private float checkDelay;
 
-    void Start()
+    [SerializeField] [Header("Задержка отключения объекта")]
+    private float disableDelay;
+
+    [SerializeField] [Header("Объекты")] private GameObject[] objects;
+    private GameObject _currentObject;
+    private bool _isEnable;
+
+    private int _originalRandomNumber;
+
+    private void Start()
     {
-        isEnable = false;
-        originalRandomNumber = Random.Range(0, maxRandomNumber);
+        _isEnable = false;
+        _originalRandomNumber = Random.Range(0, maxRandomNumber);
         StartCoroutine(CheckRandomNumber());
     }
 
@@ -23,12 +29,12 @@ public class RandomObjects : MonoBehaviour
     {
         while (true)
         {
-            int randomNumber = Random.Range(0, maxRandomNumber);
-            if (!isEnable && randomNumber == originalRandomNumber)
+            var randomNumber = Random.Range(0, maxRandomNumber);
+            if (!_isEnable && randomNumber == _originalRandomNumber)
             {
-                currentObject = objects[Random.Range(0, objects.Length)];
-                currentObject.SetActive(true);
-                isEnable = true;
+                _currentObject = objects[Random.Range(0, objects.Length)];
+                _currentObject.SetActive(true);
+                _isEnable = true;
                 StartCoroutine(DisableObjectWithDelay());
             }
 
@@ -39,7 +45,7 @@ public class RandomObjects : MonoBehaviour
     private IEnumerator DisableObjectWithDelay()
     {
         yield return new WaitForSeconds(disableDelay);
-        currentObject.SetActive(false);
-        isEnable = false;
+        _currentObject.SetActive(false);
+        _isEnable = false;
     }
 }

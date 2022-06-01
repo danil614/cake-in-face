@@ -89,7 +89,7 @@ public class ObjectPool : MonoBehaviour
         }
 
         // Удаляем торт из коллекции тортов
-        if (item.CompareTag("Cake")) cakeDestroyerByNumber.DeleteFromCollection(gameObject: item);
+        if (item.CompareTag("Cake")) cakeDestroyerByNumber.DeleteFromCollection(item);
     }
 
     /// <summary>

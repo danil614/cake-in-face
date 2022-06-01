@@ -7,9 +7,6 @@ public class DestroyerByNumber : MonoBehaviour
     [SerializeField] [Header("Допустимое количество объектов на сцене")]
     private int allowedNumber;
 
-    [SerializeField] [Header("Пул объектов")]
-    private ObjectPool objectPool;
-
     [SerializeField] [Header("Задержка удаления объектов")]
     private float delay;
 
@@ -40,19 +37,19 @@ public class DestroyerByNumber : MonoBehaviour
     /// <summary>
     ///     Добавляет объект в коллекцию.
     /// </summary>
-    public void AddToCollection(GameObject gameObject)
+    public void AddToCollection(GameObject item)
     {
-        if (_objectsOnScene != null && !_objectsOnScene.Contains(gameObject))
-            _objectsOnScene.AddLast(gameObject); // Добавляем в конец списка
+        if (_objectsOnScene != null && !_objectsOnScene.Contains(item))
+            _objectsOnScene.AddLast(item); // Добавляем в конец списка
     }
 
     /// <summary>
     ///     Удаляет объект из коллекции.
     /// </summary>
-    public void DeleteFromCollection(GameObject gameObject)
+    public void DeleteFromCollection(GameObject item)
     {
         if (_objectsOnScene != null && _objectsOnScene.Count > 0)
-            _objectsOnScene.Remove(gameObject); // Удаляем объект из списка
+            _objectsOnScene.Remove(item); // Удаляем объект из списка
     }
 
     /// <summary>

@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class ParticleSystemManager : MonoBehaviour
 {
-    private ObjectPool objectPool; // Пул объектов
+    private ObjectPool _objectPool; // Пул объектов
 
     private void Awake()
     {
-        objectPool = GameObject.Find(ObjectPool.ObjectPoolName).GetComponent<ObjectPool>();
+        _objectPool = GameObject.Find(ObjectPool.ObjectPoolName).GetComponent<ObjectPool>();
     }
 
     private void OnParticleSystemStopped()
     {
-        objectPool.ReturnObject(gameObject); // Убираем в пул объектов
+        _objectPool.ReturnObject(gameObject); // Убираем в пул объектов
     }
 }

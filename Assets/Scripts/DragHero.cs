@@ -7,55 +7,55 @@ public class DragHero : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     [SerializeField] private float speed; // Скорость перетаскивания hero
     [SerializeField] private CannonArea cannonArea; // Область пушки
     [SerializeField] private float shiftCenterOfMassY; // Смещение центра масс по Y
+    private Rigidbody2D _heroCenterRigidbody; // Rigidbody2D точки поворота hero
 
-    private bool isDragging = false; // Перетаскивание Hero
-    private Rigidbody2D heroCenterRigidbody; // Rigidbody2D точки поворота hero
-    private Camera mainCamera;
+    private Camera _mainCamera;
 
     /// <summary>
-    /// Начато ли перетаскивание?
+    ///     Начато ли перетаскивание?
     /// </summary>
-    [HideInInspector] public bool IsDragging { get => isDragging; }
+    public bool IsDragging { get; private set; }
 
     private void Start()
     {
-        mainCamera = Camera.main;
+        _mainCamera = Camera.main;
 
-        heroCenterRigidbody = heroCenter.GetComponent<Rigidbody2D>();
-        
-        Rigidbody2D heroRigidbody = GetComponent<Rigidbody2D>(); // Получаем компонент
+        _heroCenterRigidbody = heroCenter.GetComponent<Rigidbody2D>();
+
+        var heroRigidbody = GetComponent<Rigidbody2D>(); // Получаем компонент
         heroRigidbody.centerOfMass = new Vector2(0, shiftCenterOfMassY); // Сдвигаем центр масс по Y
     }
 
     private void FixedUpdate()
     {
-        if (isDragging && !cannonArea.IsPressing) // Если есть нажатие на hero, и hero не в области пушки
+        if (IsDragging && !cannonArea.IsPressing) // Если есть нажатие на hero, и hero не в области пушки
         {
-            Vector2 endClick = mainCamera.ScreenToWorldPoint(Input.mousePosition); // Получаем координаты нажатия
-            heroCenterRigidbody.MovePosition(Vector2.Lerp(heroCenter.position, endClick, speed * Time.fixedDeltaTime)); // Плавно передвигаем
+            Vector2 endClick = _mainCamera.ScreenToWorldPoint(Input.mousePosition); // Получаем координаты нажатия
+            _heroCenterRigidbody.MovePosition(Vector2.Lerp(heroCenter.position, endClick,
+                speed * Time.fixedDeltaTime)); // Плавно передвигаем
         }
     }
 
     /// <summary>
-    /// Выполняется при нажатии на объект.
+    ///     Выполняется при нажатии на объект.
     /// </summary>
     public void OnPointerDown(PointerEventData eventData)
     {
-        isDragging = true; // Перетаскивание начато
+        IsDragging = true; // Перетаскивание начато
 
         transform.parent = null; // Для изменения позиции убираем группировку от спрайта
 
-        Vector2 startClick = mainCamera.ScreenToWorldPoint(Input.mousePosition); // Позиция нажатия
+        Vector2 startClick = _mainCamera.ScreenToWorldPoint(Input.mousePosition); // Позиция нажатия
         heroCenter.SetPositionAndRotation(startClick, transform.rotation); // Устанавливаем позицию и угол поворота
 
         transform.parent = heroCenter; // Ставим группировку для спрайта
     }
 
     /// <summary>
-    /// Выполняется при отпускании нажатия на объект.
+    ///     Выполняется при отпускании нажатия на объект.
     /// </summary>
     public void OnPointerUp(PointerEventData eventData)
     {
-        isDragging = false; // Перетаскивание закончено
+        IsDragging = false; // Перетаскивание закончено
     }
 }

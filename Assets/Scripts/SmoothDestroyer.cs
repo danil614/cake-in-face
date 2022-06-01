@@ -3,70 +3,69 @@ using UnityEngine;
 
 public class SmoothDestroyer : MonoBehaviour
 {
-    private Color originalColor; // Изначальный цвет объекта
-    private float currentAlpha; // Текущий альфа канал
-    private Color currentColor; // Текущий цвет
-    private bool isDisappearing; // Исчезание
-    private SpriteRenderer spriteRenderer; // Спрайт
-    private ObjectPool objectPool; // Пул объектов
+    [SerializeField] [Header("Скорость угасания объекта")]
+    private float stepColor = 1;
 
-    [SerializeField][Header("Скорость угасания объекта")] private float stepColor = 1;
-    [SerializeField][Header("Задержка удаления объекта")] private float delayColor = 20;
+    [SerializeField] [Header("Задержка удаления объекта")]
+    private float delayColor = 20;
+
+    private float _currentAlpha; // Текущий альфа канал
+    private Color _currentColor; // Текущий цвет
+    private bool _isDisappearing; // Исчезание
+    private ObjectPool _objectPool; // Пул объектов
+    private Color _originalColor; // Изначальный цвет объекта
+    private SpriteRenderer _spriteRenderer; // Спрайт
 
     private void Awake()
     {
-        objectPool = GameObject.Find(ObjectPool.ObjectPoolName).GetComponent<ObjectPool>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        originalColor = spriteRenderer.color;
-        isDisappearing = false;
+        _objectPool = GameObject.Find(ObjectPool.ObjectPoolName).GetComponent<ObjectPool>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _originalColor = _spriteRenderer.color;
+        _isDisappearing = false;
     }
 
-    /// <summary>
-    /// Начать плавное удаление объекта.
-    /// </summary>
-    public void StartDestroy(bool withDelay)
+    private void Update()
     {
-        if (withDelay)
+        if (_isDisappearing)
         {
-            StartCoroutine(Delay()); // Удаление с задержкой
-        }
-        else
-        {
-            isDisappearing = true; // Удаление сразу
+            _currentAlpha -= Time.deltaTime * stepColor; // Уменьшаем альфа канал с каждым Update
+            _currentColor.a = _currentAlpha; // Присваиваем альфа каналу новое значение
+            _spriteRenderer.color = _currentColor;
+
+            if (_currentAlpha <= 0.0f) // Когда объект не виден
+            {
+                _isDisappearing = false;
+                _objectPool.ReturnObject(gameObject); // Убираем в пул объектов
+            }
         }
     }
 
     private void OnEnable()
     {
         StopAllCoroutines();
-        isDisappearing = false;
-        spriteRenderer.color = originalColor; // Устанавливаем изначальный цвет объекта
-        currentColor = originalColor; // Устанавливаем текущий цвет объекта
-        currentAlpha = originalColor.a; // Устанавливаем текущий альфа канал
+        _isDisappearing = false;
+        _spriteRenderer.color = _originalColor; // Устанавливаем изначальный цвет объекта
+        _currentColor = _originalColor; // Устанавливаем текущий цвет объекта
+        _currentAlpha = _originalColor.a; // Устанавливаем текущий альфа канал
     }
 
     /// <summary>
-    /// Задержка угасания объекта.
+    ///     Начать плавное удаление объекта.
+    /// </summary>
+    public void StartDestroy(bool withDelay)
+    {
+        if (withDelay)
+            StartCoroutine(Delay()); // Удаление с задержкой
+        else
+            _isDisappearing = true; // Удаление сразу
+    }
+
+    /// <summary>
+    ///     Задержка угасания объекта.
     /// </summary>
     private IEnumerator Delay()
     {
         yield return new WaitForSeconds(delayColor);
-        isDisappearing = true;
-    }
-
-    private void Update()
-    {
-        if (isDisappearing)
-        {
-            currentAlpha -= Time.deltaTime * stepColor; // Уменьшаем альфа канал с каждым Update
-            currentColor.a = currentAlpha; // Присваиваем альфа каналу новое значение
-            spriteRenderer.color = currentColor;
-
-            if (currentAlpha <= 0.0f) // Когда объект не виден
-            {
-                isDisappearing = false;
-                objectPool.ReturnObject(gameObject); // Убираем в пул объектов
-            }
-        }
+        _isDisappearing = true;
     }
 }
