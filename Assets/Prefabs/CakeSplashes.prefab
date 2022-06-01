@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: -5267038866422244876}
   - component: {fileID: 1518914286555316673}
   - component: {fileID: 2202453567215975524}
-  - component: {fileID: -8921595395629187086}
   m_Layer: 0
   m_Name: CakeSplashes
   m_TagString: Untagged
@@ -4877,15 +4876,3 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &-8921595395629187086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8025093541793130475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbb7df770fb221d428388f29ae2e80bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

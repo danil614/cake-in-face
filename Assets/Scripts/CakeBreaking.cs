@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class CakeBreaking : MonoBehaviour
 {
@@ -9,17 +8,9 @@ public class CakeBreaking : MonoBehaviour
     [SerializeField][Header("Скорость угасания пятна")] private float stepColor;
     [SerializeField][Header("Задержка удаления пятна")] private float delayColor;
     [SerializeField][Header("Скорость для разрушения")] private float speedDestruction;
-    [SerializeField] private Collider2D[] collidersCook;
-    //[SerializeField] private CircleCollider2D circleCollider;
-    [SerializeField] private float MinShift;
-    [SerializeField] private float MaxShift;
-    
-
-    //private void Start()
-    //{
-    //    //if (gameObject.name == "Head") StartCoroutine(PrintTouch(circleCollider));
-    //}
-
+    [SerializeField] private Collider2D[] collidersCook; //Группа коллайдеров частей тела
+    [SerializeField] private float MinShift; //Минимально возможное смещение по координате x
+    [SerializeField] private float MaxShift; //Маскимально возможное смещение по координате x
     
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -40,93 +31,30 @@ public class CakeBreaking : MonoBehaviour
             }
         }
     }
-    //static bool flag = false;
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.IsTouching(capsuleCollider2D))
-    //    {
-    //        flag = true;
-    //    }
-
-    //}
-    //private void FixedUpdate()
-    //{
-
-    //}
-    //private void MovingSplats()
-    //{
-    //    float shift;
-    //    shift = Random.Range(0.0f, 3.0f); // Сдвиг пятна
-    //    for (float i = 0; i < shift; i += 0.1f)
-    //    {
-    //        if(flag == true)
-    //        {
-
-    //        }
-    //    }
-    //}
 
     private bool IsBreak(Vector2 velocity)
     {
         return velocity.magnitude > speedDestruction;
     }
-    //IEnumerator PrintTouch(GameObject splat, Vector3 positionLocal)
-    //{
-        
-    //    yield return new WaitForFixedUpdate();
-    //    yield return new WaitForFixedUpdate();
-    //    if (!CheckTouch(splatCol))
-    //    {
-    //        splat.transform.localPosition = positionLocal;
-    //        //splat.GetComponent<SpriteRenderer>().enabled = false;
-    //        //for (float i = 0; i < 2.5; i += 0.1f)
-    //        //{
-    //        //    //yield return new WaitForSeconds(0.004f);
-    //        //    yield return new WaitForFixedUpdate();
-    //        //    yield return new WaitForFixedUpdate();
-    //        //    if (CheckTouch(splatCol))
-    //        //    {
-    //        //        //splat.GetComponent<SpriteRenderer>().enabled = true;
-    //        //        break;
-    //        //    }
-    //        //    else
-    //        //        splat.transform.Translate(-0.1f, 0, 0);
-    //        //}
-    //        //splat.GetComponent<SpriteRenderer>().enabled = true;
-    //        //do
-    //        //{
-    //        //    yield return new WaitForFixedUpdate();
-    //        //    yield return new WaitForFixedUpdate();
-    //        //} while (!CheckTouch(_circleCollider));
-    //    }
-    //}
-    //private bool CheckTouch(Collider2D collision, string text = "")
-    //{
-    //    if (colliderCook.IsTouching(collision))
-    //    {
-    //        Debug.Log(text + " Вау оно работает");
-    //        return true;
-    //    }
-            
-    //    else
-    //    {
-    //        Debug.Log(text + " НЕЕ работает");
-    //        return false;
-    //    }
-    //}
+
+    /// <summary>
+    /// Создает пятно
+    /// </summary>
+    /// <param name="collisionPoint"></param>
+
     private void CreateSplat(Vector2 collisionPoint)
     {
-        float shift = Random.Range(MinShift, MaxShift);
+        float shift = Random.Range(MinShift, MaxShift); //Генерация смещения
         
         Vector3 checkPosition = new Vector3(collisionPoint.x + shift, collisionPoint.y, 0); //Смещаем на shift
         Vector3 splatPosition = new Vector3(collisionPoint.x, collisionPoint.y, 0); //Запоминаем начальное положение пятна
         int numberSplat = Random.Range(0, splats.Length); // Генерация для выбора формы пятна       
         GameObject prefab = splats[numberSplat];
-        Transform currentTransform = transform; 
+        Transform currentTransform = transform; //Присваивание просто чтобы среда не ругалась
         foreach(Collider2D cookPart in collidersCook) //Перебираем коллайдеры частей тела которые находятся в данном массиве
         {
             currentTransform = cookPart.transform;
-            if (cookPart.OverlapPoint(checkPosition)) //Проверяет попало ли пятно на повара
+            if (cookPart.OverlapPoint(checkPosition)) //Проверяет попали ли координаты позиции на коллайдер
             {
                 splatPosition = new Vector3(collisionPoint.x + shift, collisionPoint.y, 0); //Если попало, то берем координаты со смещением
                 break;

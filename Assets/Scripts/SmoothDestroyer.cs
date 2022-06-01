@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class SmoothDestroyer : MonoBehaviour
 {
-    private Color currentColor;
-    private float currentAlpha;
-    private bool isDisappearing;
-    private SpriteRenderer spriteRenderer;
+    private Color currentColor; //RGBA объекта
+    private float currentAlpha; //Альфа канал
+    private bool isDisappearing; //Переменная для начала исчезновения
+    private SpriteRenderer spriteRenderer; //Рендер спрайта
 
     private float stepColor;  // Скорость угасания объекта
     private float delayColor; // Задержка удаления объекта
@@ -47,7 +47,7 @@ public class SmoothDestroyer : MonoBehaviour
 
     private IEnumerator Delay()
     {
-        yield return new WaitForSeconds(delayColor);
+        yield return new WaitForSeconds(delayColor);  //Ждем время указанное в инспекторе перед началом исчезновения 
         isDisappearing = true;
     }
 
@@ -56,6 +56,6 @@ public class SmoothDestroyer : MonoBehaviour
         StopCoroutine(Delay());
         isDisappearing = false;
         currentColor.a = 1.0f; // Присваиваем альфа каналу стандартное значение
-        spriteRenderer.color = currentColor;
+        spriteRenderer.color = currentColor; //Восстанавливаем RGBA
     }
 }
