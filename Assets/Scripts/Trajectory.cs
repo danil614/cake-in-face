@@ -55,7 +55,8 @@ public class Trajectory : MonoBehaviour
 			position.x = startPosition.x + forceApplied.x * timeStamp;
 
 			// y = y0 + V0 * t - g * t^2 / 2 - уравнение равноускоренного движения
-			position.y = startPosition.y + forceApplied.y * timeStamp - Physics2D.gravity.magnitude * timeStamp * timeStamp / 2f;
+			position.y = startPosition.y + forceApplied.y * timeStamp - 
+				Physics2D.gravity.magnitude * timeStamp * timeStamp / 2f;
 
 			dotsList[i].position = position; // Применяем положение точки
 			timeStamp += dotSpacing; // Увеличиваем время

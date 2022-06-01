@@ -18,10 +18,7 @@ public class SmoothDestroyer : MonoBehaviour
 
     private void Awake()
     {
-        if (gameObject.name == "OrangeSplat" | gameObject.name == "WhiteSplat")
-            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        else
-            spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         isDisappearing = false;
     }
 

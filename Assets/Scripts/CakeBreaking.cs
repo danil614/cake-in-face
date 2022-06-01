@@ -9,10 +9,10 @@ public class CakeBreaking : MonoBehaviour
     [SerializeField][Header("Скорость угасания пятна")] private float stepColor;
     [SerializeField][Header("Задержка удаления пятна")] private float delayColor;
     [SerializeField][Header("Скорость для разрушения")] private float speedDestruction;
-    [SerializeField] private Collider2D collider2D;
+    [SerializeField] private Collider2D[] collidersCook;
     //[SerializeField] private CircleCollider2D circleCollider;
-    [SerializeField] private float MinShift = 0.0f;
-    [SerializeField] private float MaxShift = 2.5f;
+    [SerializeField] private float MinShift;
+    [SerializeField] private float MaxShift;
     
 
     //private void Start()
@@ -70,74 +70,69 @@ public class CakeBreaking : MonoBehaviour
     {
         return velocity.magnitude > speedDestruction;
     }
-    IEnumerator PrintTouch(Collider2D _circleCollider, GameObject splat)
-    {
-        float shift = Random.Range(MinShift, MaxShift);
-        splat.GetComponentInChildren<SpriteRenderer>().enabled = false;
-        yield return new WaitForSeconds(0.02f);
-        if (CheckTouch(_circleCollider))
-        {
-            splat.transform.Translate(shift, 0, 0);
-            splat.GetComponentInChildren<SpriteRenderer>().enabled = true;
-        }
+    //IEnumerator PrintTouch(GameObject splat, Vector3 positionLocal)
+    //{
+        
+    //    yield return new WaitForFixedUpdate();
+    //    yield return new WaitForFixedUpdate();
+    //    if (!CheckTouch(splatCol))
+    //    {
+    //        splat.transform.localPosition = positionLocal;
+    //        //splat.GetComponent<SpriteRenderer>().enabled = false;
+    //        //for (float i = 0; i < 2.5; i += 0.1f)
+    //        //{
+    //        //    //yield return new WaitForSeconds(0.004f);
+    //        //    yield return new WaitForFixedUpdate();
+    //        //    yield return new WaitForFixedUpdate();
+    //        //    if (CheckTouch(splatCol))
+    //        //    {
+    //        //        //splat.GetComponent<SpriteRenderer>().enabled = true;
+    //        //        break;
+    //        //    }
+    //        //    else
+    //        //        splat.transform.Translate(-0.1f, 0, 0);
+    //        //}
+    //        //splat.GetComponent<SpriteRenderer>().enabled = true;
+    //        //do
+    //        //{
+    //        //    yield return new WaitForFixedUpdate();
+    //        //    yield return new WaitForFixedUpdate();
+    //        //} while (!CheckTouch(_circleCollider));
+    //    }
+    //}
+    //private bool CheckTouch(Collider2D collision, string text = "")
+    //{
+    //    if (colliderCook.IsTouching(collision))
+    //    {
+    //        Debug.Log(text + " Вау оно работает");
+    //        return true;
+    //    }
             
-        yield return new WaitForSeconds(0.02f);
-        if (!CheckTouch(_circleCollider))
-        {
-            
-            for (float i = 0; i < shift; i += 0.1f)
-            {
-                yield return new WaitForSeconds(0.02f);
-                if (CheckTouch(_circleCollider))
-                {
-                    //splat.GetComponent<SpriteRenderer>().enabled = true;
-                    break;
-                }
-                else
-                    splat.transform.Translate(-0.1f, 0, 0);
-            }
-            splat.GetComponentInChildren<SpriteRenderer>().enabled = true;
-            //do
-            //{
-            //    yield return new WaitForFixedUpdate();
-            //    yield return new WaitForFixedUpdate();
-
-            //} while (!CheckTouch(_circleCollider));
-        }
-        //CheckTouch(_circleCollider, "--CORRRR");
-
-
-
-    }
-    private bool CheckTouch(Collider2D collision, string text = "")
-    {
-        if (collider2D.IsTouching(collision))
-        {
-            Debug.Log(text + " Вау оно работает");
-            return true;
-        }
-            
-        else
-        {
-            Debug.Log(text + " НЕЕ работает");
-            return false;
-        }
-    }
+    //    else
+    //    {
+    //        Debug.Log(text + " НЕЕ работает");
+    //        return false;
+    //    }
+    //}
     private void CreateSplat(Vector2 collisionPoint)
     {
-        int numberSplat = Random.Range(0, 2); // Генерация для выбора формы пятна
+        float shift = Random.Range(MinShift, MaxShift);
+        
+        Vector3 checkPosition = new Vector3(collisionPoint.x + shift, collisionPoint.y, 0); //Смещаем на shift
+        Vector3 splatPosition = new Vector3(collisionPoint.x, collisionPoint.y, 0); //Запоминаем начальное положение пятна
+        int numberSplat = Random.Range(0, splats.Length); // Генерация для выбора формы пятна       
         GameObject prefab = splats[numberSplat];
-        //float shift = Random.Range(0.0f, 3.0f); // Сдвиг пятна
-        Vector3 splatPosition = new Vector3(collisionPoint.x+0.5f, collisionPoint.y, 0);
-        GameObject splat = objectPool.GetObject(prefab, splatPosition, Quaternion.Euler(0,0,0), transform); // Создание пятна на поваре
-
-        Collider2D splatCol = splat.GetComponent<Collider2D>();
-        if (splatCol)
-            Debug.Log("Все нормуль");
-        else
-            Debug.Log("Его нет");
-
-        if (gameObject.name == "Head") StartCoroutine(PrintTouch(splatCol,splat));
+        Transform currentTransform = transform; 
+        foreach(Collider2D cookPart in collidersCook) //Перебираем коллайдеры частей тела которые находятся в данном массиве
+        {
+            currentTransform = cookPart.transform;
+            if (cookPart.OverlapPoint(checkPosition)) //Проверяет попало ли пятно на повара
+            {
+                splatPosition = new Vector3(collisionPoint.x + shift, collisionPoint.y, 0); //Если попало, то берем координаты со смещением
+                break;
+            }          
+        }       
+        GameObject splat = objectPool.GetObject(prefab, splatPosition, Quaternion.Euler(0, 0, Random.Range(0, 360)), currentTransform); // Создание пятна на поваре
 
         GameManager.StartSmoothDestroyer(splat, objectPool, delayColor, stepColor); // Перезапускаем компонент для плавного удаления по времени
     }
