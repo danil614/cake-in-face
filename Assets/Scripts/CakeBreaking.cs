@@ -59,9 +59,8 @@ public class CakeBreaking : MonoBehaviour
                 break;
             }
         }
-
-        var currentSplat = objectPool.GetObject(prefab, splatPosition, Quaternion.Euler(0, 0, Random.Range(0, 360)),
-            currentTransform); // Создание пятна на поваре
+        // Создание пятна на поваре
+        var currentSplat = objectPool.GetObject(prefab, splatPosition, Quaternion.Euler(0, 0, Random.Range(0, 360)), currentTransform);
         GameManager.StartSmoothDestroyer(currentSplat, true); // Запускаем плавное удаление пятна по времени
     }
 
