@@ -13,6 +13,11 @@ public class CakeBreaking : MonoBehaviour
 
     [SerializeField] [Header("Скорость разрушения торта")]
     private float speedDestruction;
+    [SerializeField] private Collider2D[] collidersCook; //Группа коллайдеров частей тела
+
+    [SerializeField] private float MinShift; //Минимально возможное смещение по координате x
+    [SerializeField] private float MaxShift; //Маскимально возможное смещение по координате x
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -28,6 +33,7 @@ public class CakeBreaking : MonoBehaviour
                     CreateSplashes(collisionPoint);
                 }
             }
+        }
     }
 
     private bool IsBreak(Vector2 velocity)
@@ -37,13 +43,24 @@ public class CakeBreaking : MonoBehaviour
 
     private void CreateSplat(Vector2 collisionPoint)
     {
-        var numberSplat = Random.Range(0, 4); // Генерация для выбора формы пятна
-        var prefab = splats[numberSplat];
+        float shift = Random.Range(MinShift, MaxShift); //Генерация смещения
+        
+        Vector3 checkPosition = new Vector3(collisionPoint.x + shift, collisionPoint.y, 0); //Смещаем на shift
+        Vector3 splatPosition = new Vector3(collisionPoint.x, collisionPoint.y, 0); //Запоминаем начальное положение пятна
+        int numberSplat = Random.Range(0, splats.Length); // Генерация для выбора формы пятна       
+        GameObject prefab = splats[numberSplat];
+        Transform currentTransform = transform; //Присваивание просто чтобы среда не ругалась
+        foreach(Collider2D cookPart in collidersCook) //Перебираем коллайдеры частей тела которые находятся в данном массиве
+        {
+            currentTransform = cookPart.transform;
+            if (cookPart.OverlapPoint(checkPosition)) //Проверяет попали ли координаты позиции на коллайдер
+            {
+                splatPosition = new Vector3(collisionPoint.x + shift, collisionPoint.y, 0); //Если попало, то берем координаты со смещением
+                break;
+            }          
+        }       
+        GameObject currentSplat = objectPool.GetObject(prefab, splatPosition, Quaternion.Euler(0, 0, Random.Range(0, 360)), currentTransform); // Создание пятна на поваре
 
-        var shift = Random.Range(0.5f, 4); // Сдвиг пятна
-        var splatPosition = new Vector3(collisionPoint.x + shift, collisionPoint.y, 0);
-        var currentSplat =
-            objectPool.GetObject(prefab, splatPosition, Quaternion.identity, transform); // Создание пятна на поваре
         GameManager.StartSmoothDestroyer(currentSplat, true); // Запускаем плавное удаление пятна по времени
     }
 

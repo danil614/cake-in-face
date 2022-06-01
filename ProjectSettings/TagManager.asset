@@ -7,6 +7,9 @@ TagManager:
   - Cake
   - Hero
   - LeftHand
+  - Undefined
+  - NewSplat2
+  - NewSplat1
   layers:
   - Default
   - TransparentFX
