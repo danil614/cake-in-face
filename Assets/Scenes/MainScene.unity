@@ -296,10 +296,10 @@ MonoBehaviour:
   objectPool: {fileID: 641977655}
   speedDestruction: 15
   collidersCook:
-  - {fileID: 71546148}
   - {fileID: 194991575}
+  - {fileID: 71546148}
   minShift: 0
-  maxShift: 0
+  maxShift: 3
 --- !u!70 &71546148
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -728,10 +728,10 @@ MonoBehaviour:
   objectPool: {fileID: 641977655}
   speedDestruction: 15
   collidersCook:
-  - {fileID: 194991575}
   - {fileID: 71546148}
+  - {fileID: 194991575}
   minShift: 0
-  maxShift: 0
+  maxShift: 3
 --- !u!70 &194991575
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -3080,9 +3080,9 @@ GameObject:
   - component: {fileID: 977489675}
   - component: {fileID: 977489674}
   - component: {fileID: 977489673}
-  - component: {fileID: 977489672}
   - component: {fileID: 977489671}
   - component: {fileID: 977489677}
+  - component: {fileID: 977489672}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -3128,9 +3128,9 @@ MonoBehaviour:
   collidersCook:
   - {fileID: 977489672}
   minShift: 0
-  maxShift: 0
---- !u!70 &977489672
-CapsuleCollider2D:
+  maxShift: 2.5
+--- !u!60 &977489672
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3142,9 +3142,48 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.40165424, y: -0.25586763}
-  m_Size: {x: 14.863831, y: 20.107647}
-  m_Direction: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 24.48, y: 21.17}
+    newSize: {x: 24.48, y: 21.17}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 12.030269, y: 1.8173473}
+      - {x: 12.347696, y: 4.313329}
+      - {x: 10.427477, y: 7.398526}
+      - {x: 8.025476, y: 8.318163}
+      - {x: 5.0466995, y: 8.288462}
+      - {x: 1.0783942, y: 10.36789}
+      - {x: -3.3223104, y: 10.257965}
+      - {x: -6.928458, y: 7.352342}
+      - {x: -10.101015, y: 6.6580534}
+      - {x: -12.132055, y: 4.2920113}
+      - {x: -12.34309, y: 1.6556872}
+      - {x: -11.735335, y: 0.045804262}
+      - {x: -9.689161, y: -1.0751337}
+      - {x: -7.8116274, y: -0.7203972}
+      - {x: -7.463608, y: -2.4714453}
+      - {x: -6.5921545, y: -4.811365}
+      - {x: -7.0099583, y: -5.755827}
+      - {x: -6.4883404, y: -7.095998}
+      - {x: -5.671487, y: -7.649721}
+      - {x: -3.6570153, y: -9.836271}
+      - {x: -1.440902, y: -10.331444}
+      - {x: 0.49365187, y: -10.618105}
+      - {x: 2.0460908, y: -10.276985}
+      - {x: 3.9117665, y: -9.6641445}
+      - {x: 6.158458, y: -7.9936213}
+      - {x: 7.621471, y: -7.101486}
+      - {x: 8.101852, y: -5.9486003}
+      - {x: 7.629421, y: -4.4472055}
+      - {x: 8.570326, y: 0.45845795}
+      - {x: 10.323955, y: 0.39580306}
 --- !u!233 &977489673
 HingeJoint2D:
   m_ObjectHideFlags: 0
@@ -4567,11 +4606,11 @@ MonoBehaviour:
   objectPool: {fileID: 641977655}
   speedDestruction: 15
   collidersCook:
-  - {fileID: 2104882789}
-  - {fileID: 965011404}
   - {fileID: 2125166768}
+  - {fileID: 965011404}
+  - {fileID: 2104882789}
   minShift: 0
-  maxShift: 0
+  maxShift: 2.5
 --- !u!70 &2104882789
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -4789,11 +4828,11 @@ MonoBehaviour:
   objectPool: {fileID: 641977655}
   speedDestruction: 15
   collidersCook:
-  - {fileID: 2125166768}
-  - {fileID: 965011404}
   - {fileID: 2104882789}
+  - {fileID: 965011404}
+  - {fileID: 2125166768}
   minShift: 0
-  maxShift: 0
+  maxShift: 2.5
 --- !u!70 &2125166768
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
