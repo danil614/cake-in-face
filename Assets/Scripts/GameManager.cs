@@ -16,15 +16,21 @@ public class GameManager : MonoBehaviour
 
     private Camera _mainCamera;
     private float _time; // Подсчет времени для роста траектории
+    
+    /// <summary>
+    /// Открыто ли меню выбора?
+    /// </summary>
+    public bool IsMenuOpen { get; set; }
 
     private void Start()
     {
         _mainCamera = Camera.main;
+        IsMenuOpen = false;
     }
 
     private void Update()
     {
-        if (!IsHeroDragging()) // Если не перетаскиваем персонажа
+        if (!IsHeroDragging() && !IsMenuOpen) // Если не перетаскиваем персонажа
         {
             if (Input.GetMouseButtonDown(0)) // Если кнопка была нажата
             {
