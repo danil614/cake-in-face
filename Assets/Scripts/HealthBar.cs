@@ -21,6 +21,8 @@ public class HealthBar : MonoBehaviour
     
     [SerializeField] [Header("Звуки")] private Sounds sounds;
 
+    [SerializeField] [Header("Взрыв")] private GameObject splashes;
+    
     private int _currentHealth; // Текущее здоровье
 
     private void Start()
@@ -86,6 +88,9 @@ public class HealthBar : MonoBehaviour
     /// </summary>
     private void DisableGingerbread()
     {
+        // Создаем взрыв
+        Instantiate(splashes, gingerbread.transform.position, Quaternion.identity);
+        // Скрываем пряник
         gingerbread.SetActive(false);
     }
 }
