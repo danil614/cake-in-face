@@ -16,9 +16,9 @@ public class GameManager : MonoBehaviour
 
     private Camera _mainCamera;
     private float _time; // Подсчет времени для роста траектории
-    
+
     /// <summary>
-    /// Открыто ли меню выбора?
+    ///     Открыто ли меню выбора?
     /// </summary>
     public bool IsMenuOpen { get; set; }
 

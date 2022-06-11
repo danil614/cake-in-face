@@ -9,36 +9,80 @@ public class HealthBar : MonoBehaviour
     [SerializeField] [Header("Картинка шкалы")]
     private Image bar;
 
-    private int _currentHealth; // Текущее здоровье
+    [SerializeField] [Header("Кнопка перезапуска")]
+    private GameObject restartButton;
 
-    [SerializeField] [Header("Персонаж")] private GameObject hero;
+    [SerializeField] [Header("Кнопка меню")]
+    private GameObject menuButton;
+
+    [SerializeField] [Header("Повар")] private GameObject cook;
+
+    [SerializeField] [Header("Пряник")] private GameObject gingerbread;
+
+    private int _currentHealth; // Текущее здоровье
 
     private void Start()
     {
-        _currentHealth = maxHealth;
+        SetMaxHealth();
     }
 
-    public void ChangeHealth(int damage)
+    /// <summary>
+    ///     Устанавливает полный уровень здоровья.
+    /// </summary>
+    public void SetMaxHealth()
     {
-        Debug.Log($"Damage = {damage}");
-        _currentHealth += damage;
-
-        if (_currentHealth <= 0)
-        {
-            _currentHealth = 0;
-            Death();
-        }
-        else if (_currentHealth > maxHealth) _currentHealth = maxHealth;
-
+        _currentHealth = maxHealth;
+        // Изменяем шкалу здоровья
         bar.fillAmount = (float)_currentHealth / maxHealth;
     }
 
-    private void Death()
+    /// <summary>
+    ///     Изменяет здоровье персонажа.
+    /// </summary>
+    public void ChangeHealth(int damage, string currentTag)
     {
-        var heroHingeJoints = hero.GetComponentsInChildren<HingeJoint2D>();
-        foreach (var joint in heroHingeJoints)
+        _currentHealth += damage; // Изменяем здоровье
+
+        if (_currentHealth <= 0) // Если у персонажа нет здоровья
         {
-            joint.enabled = false;
+            _currentHealth = 0;
+            switch (currentTag)
+            {
+                case "Cook":
+                    DisableJoints(); // Отключаем джоинты
+                    break;
+                case "Gingerbread": // Выключаем пряник
+                    DisableGingerbread();
+                    break;
+            }
+
+            restartButton.SetActive(true); // Активируем кнопку перзапуска
+            menuButton.SetActive(false); // Убираем кнопку меню
         }
+        // При превышении оставляем максимальный
+        else if (_currentHealth > maxHealth)
+        {
+            _currentHealth = maxHealth;
+        }
+
+        // Изменяем шкалу здоровья
+        bar.fillAmount = (float)_currentHealth / maxHealth;
+    }
+
+    /// <summary>
+    ///     Выключает джоинты у повара.
+    /// </summary>
+    private void DisableJoints()
+    {
+        var heroHingeJoints = cook.GetComponentsInChildren<HingeJoint2D>();
+        foreach (var joint in heroHingeJoints) joint.enabled = false;
+    }
+
+    /// <summary>
+    ///     Выключает активность пряника.
+    /// </summary>
+    private void DisableGingerbread()
+    {
+        gingerbread.SetActive(false);
     }
 }

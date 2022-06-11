@@ -20,7 +20,7 @@ public class CakeBreaking : MonoBehaviour
 
     [SerializeField] [Header("Шкала здоровья")]
     private HealthBar healthBar;
-    
+
     [SerializeField] [Header("Коэффициент урона")]
     private float damage;
 
@@ -79,6 +79,7 @@ public class CakeBreaking : MonoBehaviour
     private void ChangeHealth(float value)
     {
         if (healthBar == null) return;
-        healthBar.ChangeHealth((int)(-value * damage));
+        var resultDamage = (int)(-value * damage);
+        healthBar.ChangeHealth(resultDamage, gameObject.tag);
     }
 }

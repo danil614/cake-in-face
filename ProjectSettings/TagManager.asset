@@ -5,11 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Cake
-  - Hero
-  - LeftHand
-  - Undefined
-  - NewSplat2
-  - NewSplat1
+  - Cook
+  - Gingerbread
   layers:
   - Default
   - TransparentFX
