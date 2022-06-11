@@ -857,7 +857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a90cd5028bc12e444bc1d3290f2de10d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splashes: {fileID: 8025093541793130475, guid: 9bff7bb2f0348a04393a038b52fde885, type: 3}
+  splashes: {fileID: 4900124278809048900, guid: 98178b1320ba6f34693410317b420b70, type: 3}
   splats:
   - {fileID: 2499270787019144530, guid: ead8570e57571474eb3d4d00c13b55d5, type: 3}
   - {fileID: 3927373805359425976, guid: 8175c3f14965ca140a03505bdeb0bfaf, type: 3}
@@ -1998,7 +1998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 8025093541793130475, guid: 9bff7bb2f0348a04393a038b52fde885, type: 3}
+  - {fileID: 4900124278809048900, guid: 98178b1320ba6f34693410317b420b70, type: 3}
   - {fileID: 2499270787019144530, guid: ead8570e57571474eb3d4d00c13b55d5, type: 3}
   - {fileID: 3927373805359425976, guid: 8175c3f14965ca140a03505bdeb0bfaf, type: 3}
   - {fileID: 4555166752875201861, guid: 96dfe03e5093ed745ab8c3209b8aac03, type: 3}
@@ -2312,7 +2312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a90cd5028bc12e444bc1d3290f2de10d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splashes: {fileID: 8025093541793130475, guid: 9bff7bb2f0348a04393a038b52fde885, type: 3}
+  splashes: {fileID: 4900124278809048900, guid: 98178b1320ba6f34693410317b420b70, type: 3}
   splats:
   - {fileID: 2499270787019144530, guid: ead8570e57571474eb3d4d00c13b55d5, type: 3}
   - {fileID: 3927373805359425976, guid: 8175c3f14965ca140a03505bdeb0bfaf, type: 3}
@@ -3635,7 +3635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a90cd5028bc12e444bc1d3290f2de10d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splashes: {fileID: 8025093541793130475, guid: 9bff7bb2f0348a04393a038b52fde885, type: 3}
+  splashes: {fileID: 4900124278809048900, guid: 98178b1320ba6f34693410317b420b70, type: 3}
   splats:
   - {fileID: 2499270787019144530, guid: ead8570e57571474eb3d4d00c13b55d5, type: 3}
   - {fileID: 3927373805359425976, guid: 8175c3f14965ca140a03505bdeb0bfaf, type: 3}
@@ -6401,7 +6401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a90cd5028bc12e444bc1d3290f2de10d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splashes: {fileID: 8025093541793130475, guid: 9bff7bb2f0348a04393a038b52fde885, type: 3}
+  splashes: {fileID: 4900124278809048900, guid: 98178b1320ba6f34693410317b420b70, type: 3}
   splats:
   - {fileID: 2499270787019144530, guid: ead8570e57571474eb3d4d00c13b55d5, type: 3}
   - {fileID: 3927373805359425976, guid: 8175c3f14965ca140a03505bdeb0bfaf, type: 3}

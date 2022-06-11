@@ -3,9 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    /// <summary>
-    ///     Запустить сцену с игрой.
-    /// </summary>
     public void StartGame()
     {
         SceneManager.LoadScene(1);
@@ -17,5 +14,10 @@ public class MainMenu : MonoBehaviour
     public void LoadStartScene()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }
