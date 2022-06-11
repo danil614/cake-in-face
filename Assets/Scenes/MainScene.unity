@@ -444,6 +444,8 @@ MonoBehaviour:
   - {fileID: 71546148}
   minShift: 0
   maxShift: 3
+  healthBar: {fileID: 1494638102}
+  damage: 0.1
 --- !u!70 &71546148
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -490,7 +492,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.09997793, y: 2.0098422}
-  m_ConnectedAnchor: {x: 2.453359, y: -5.4201584}
+  m_ConnectedAnchor: {x: 2.4533572, y: -5.4201584}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -800,6 +802,8 @@ MonoBehaviour:
   collidersCook: []
   minShift: 0
   maxShift: 0
+  healthBar: {fileID: 0}
+  damage: 0
 --- !u!1 &170972988
 GameObject:
   m_ObjectHideFlags: 0
@@ -969,6 +973,8 @@ MonoBehaviour:
   - {fileID: 194991575}
   minShift: 0
   maxShift: 3
+  healthBar: {fileID: 1494638102}
+  damage: 0.1
 --- !u!70 &194991575
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1000,7 +1006,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.14158599, y: 2.0785608}
-  m_ConnectedAnchor: {x: -2.7650833, y: -5.381441}
+  m_ConnectedAnchor: {x: -2.7650847, y: -5.381441}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -1695,6 +1701,7 @@ RectTransform:
   m_Children:
   - {fileID: 912132211}
   - {fileID: 1686397547}
+  - {fileID: 1494638099}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2380,6 +2387,8 @@ MonoBehaviour:
   - {fileID: 752465048}
   minShift: 0
   maxShift: 2.5
+  healthBar: {fileID: 1494638102}
+  damage: 0.2
 --- !u!1 &767235374
 GameObject:
   m_ObjectHideFlags: 0
@@ -2541,7 +2550,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 822132611}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.87, y: -2.56, z: 0}
+  m_LocalPosition: {x: 3.44, y: -2.56, z: 0}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_Children:
   - {fileID: 965011407}
@@ -2939,6 +2948,81 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
+--- !u!1 &916895364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 916895365}
+  - component: {fileID: 916895367}
+  - component: {fileID: 916895366}
+  m_Layer: 5
+  m_Name: HealthBarFilling
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &916895365
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916895364}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1494638099}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0.000030517578}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &916895366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916895364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.29704303, g: 0.8207547, b: 0.12001601, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 1b78956012f14a547af3bb8c8241ed35, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 0
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &916895367
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916895364}
+  m_CullTransparentMesh: 1
 --- !u!1 &920778691
 GameObject:
   m_ObjectHideFlags: 0
@@ -3720,6 +3804,8 @@ MonoBehaviour:
   - {fileID: 977489672}
   minShift: 0
   maxShift: 2.5
+  healthBar: {fileID: 1494638102}
+  damage: 0.3
 --- !u!60 &977489672
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -4591,7 +4677,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1319193448}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.66, y: -2.82, z: 0}
+  m_LocalPosition: {x: 2.97, y: -2.82, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 752465045}
@@ -4704,6 +4790,98 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1494638098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1494638099}
+  - component: {fileID: 1494638101}
+  - component: {fileID: 1494638100}
+  - component: {fileID: 1494638102}
+  m_Layer: 5
+  m_Name: HealthBar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1494638099
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494638098}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 916895365}
+  m_Father: {fileID: 394609977}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 393, y: -100}
+  m_SizeDelta: {x: 600, y: 60}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1494638100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494638098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1494638101
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494638098}
+  m_CullTransparentMesh: 1
+--- !u!114 &1494638102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494638098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac13eee865f5dc745b96c171aca7153a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 200
+  bar: {fileID: 916895366}
+  hero: {fileID: 822132611}
 --- !u!1 &1523028816
 GameObject:
   m_ObjectHideFlags: 0
@@ -4830,9 +5008,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -3637246228055369663, guid: 9364c7f034ee33241952e498b3d967b2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e55641c3bd1fb6548a026586d5cf62c4, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -5084,6 +5262,8 @@ MonoBehaviour:
   - {fileID: 1557996077}
   minShift: 0
   maxShift: 0
+  healthBar: {fileID: 0}
+  damage: 0
 --- !u!1 &1686397546
 GameObject:
   m_ObjectHideFlags: 0
@@ -5833,6 +6013,8 @@ MonoBehaviour:
   - {fileID: 2104882789}
   minShift: 0
   maxShift: 2.5
+  healthBar: {fileID: 1494638102}
+  damage: 0.2
 --- !u!70 &2104882789
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -6069,6 +6251,8 @@ MonoBehaviour:
   - {fileID: 2125166768}
   minShift: 0
   maxShift: 2.5
+  healthBar: {fileID: 1494638102}
+  damage: 0.2
 --- !u!70 &2125166768
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -6100,7 +6284,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.98663735, y: 3.9842021}
-  m_ConnectedAnchor: {x: -5.8533063, y: 4.6508694}
+  m_ConnectedAnchor: {x: -5.8533077, y: 4.6508694}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0

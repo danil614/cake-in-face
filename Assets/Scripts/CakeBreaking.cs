@@ -18,21 +18,25 @@ public class CakeBreaking : MonoBehaviour
     [SerializeField] private float minShift; // Минимально возможное смещение по координате x
     [SerializeField] private float maxShift; // Маскимально возможное смещение по координате x
 
+    [SerializeField] [Header("Шкала здоровья")]
+    private HealthBar healthBar;
+    
+    [SerializeField] [Header("Коэффициент урона")]
+    private float damage;
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Cake"))
-            if (IsBreak(collision.relativeVelocity))
-            {
-                objectPool.ReturnObject(collision.gameObject); // Убираем торт в пул объектов
+        if (!collision.gameObject.CompareTag("Cake")) return;
+        if (!IsBreak(collision.relativeVelocity)) return;
+        objectPool.ReturnObject(collision.gameObject); // Убираем торт в пул объектов
 
-                if (collision.contactCount > 0)
-                {
-                    var collisionPoint = collision.GetContact(0).point; // Точка касания
-                    CreateSplat(collisionPoint);
-                    CreateSplashes(collisionPoint);
-                }
-            }
+        if (collision.contactCount <= 0) return;
+        var collisionPoint = collision.GetContact(0).point; // Точка касания
+        CreateSplat(collisionPoint);
+        CreateSplashes(collisionPoint);
+        // Изменяем здоровье персонажа
+        ChangeHealth(collision.relativeVelocity.magnitude);
     }
 
     private bool IsBreak(Vector2 velocity)
@@ -59,8 +63,10 @@ public class CakeBreaking : MonoBehaviour
                 break;
             }
         }
+
         // Создание пятна на поваре
-        var currentSplat = objectPool.GetObject(prefab, splatPosition, Quaternion.Euler(0, 0, Random.Range(0, 360)), currentTransform);
+        var currentSplat = objectPool.GetObject(prefab, splatPosition, Quaternion.Euler(0, 0, Random.Range(0, 360)),
+            currentTransform);
         GameManager.StartSmoothDestroyer(currentSplat, true); // Запускаем плавное удаление пятна по времени
     }
 
@@ -68,5 +74,11 @@ public class CakeBreaking : MonoBehaviour
     {
         var splashesPosition = new Vector3(collisionPoint.x, collisionPoint.y, 0);
         objectPool.GetObject(splashes, splashesPosition, Quaternion.identity, null);
+    }
+
+    private void ChangeHealth(float value)
+    {
+        if (healthBar == null) return;
+        healthBar.ChangeHealth((int)(-value * damage));
     }
 }
