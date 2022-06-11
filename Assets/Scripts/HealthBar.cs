@@ -18,6 +18,8 @@ public class HealthBar : MonoBehaviour
     [SerializeField] [Header("Повар")] private GameObject cook;
 
     [SerializeField] [Header("Пряник")] private GameObject gingerbread;
+    
+    [SerializeField] [Header("Звуки")] private Sounds sounds;
 
     private int _currentHealth; // Текущее здоровье
 
@@ -41,6 +43,7 @@ public class HealthBar : MonoBehaviour
     /// </summary>
     public void ChangeHealth(int damage, string currentTag)
     {
+        sounds.StartSound(); // Запускаем звук
         _currentHealth += damage; // Изменяем здоровье
 
         if (_currentHealth <= 0) // Если у персонажа нет здоровья
