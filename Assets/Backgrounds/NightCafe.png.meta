@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Backgrounds/NightCafe.png.meta
 guid: bd96d2e09cd930a4399deb6fd7fa6c82
+========
+guid: 3e2bbfb20548f42469f50f2f8fbc5b56
+>>>>>>>> Yana:Assets/Sprites/ButtonExit.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

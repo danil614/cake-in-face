@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Backgrounds/Cafe.jpg.meta
 guid: 57f647ed45c93614a85502fd851aa7b8
+========
+guid: 69950f3c9293e65428422b945ed4027a
+>>>>>>>> Yana:Assets/Backgrounds/StartPage.jpg.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
