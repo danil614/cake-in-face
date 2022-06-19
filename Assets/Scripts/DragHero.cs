@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 public class DragHero : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    [SerializeField] private Transform heroCenter; // Точка поворота hero
+    [SerializeField] private RectTransform heroCenter; // Точка поворота hero
     [SerializeField] private float speed; // Скорость перетаскивания hero
     [SerializeField] private CannonArea cannonArea; // Область пушки
     [SerializeField] private float shiftCenterOfMassY; // Смещение центра масс по Y
@@ -46,8 +46,14 @@ public class DragHero : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         transform.parent = null; // Для изменения позиции убираем группировку от спрайта
 
         Vector2 startClick = _mainCamera.ScreenToWorldPoint(Input.mousePosition); // Позиция нажатия
-        heroCenter.SetPositionAndRotation(startClick, transform.rotation); // Устанавливаем позицию и угол поворота
-
+        
+        heroCenter.SetPositionAndRotation(new Vector3(startClick.x, startClick.y, 0),
+            transform.rotation); // Устанавливаем позицию и угол поворота
+        
+        // Обнуляем координату Z для Rect Transform
+        var localPosition = heroCenter.localPosition;
+        heroCenter.localPosition = new Vector3(localPosition.x, localPosition.y, 0);
+        
         transform.parent = heroCenter; // Ставим группировку для спрайта
     }
 

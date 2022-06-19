@@ -502,7 +502,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.09997793, y: 2.0098422}
-  m_ConnectedAnchor: {x: 2.4533572, y: -5.420154}
+  m_ConnectedAnchor: {x: 2.4533546, y: -5.4201555}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -901,7 +901,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.14158599, y: 2.0785608}
-  m_ConnectedAnchor: {x: -2.765084, y: -5.381441}
+  m_ConnectedAnchor: {x: -2.7650871, y: -5.381442}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -3314,8 +3314,9 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -0.70274, y: 1.1783174}
-      - {x: -0.9341045, y: 0.9206195}
-      - {x: -1.1262875, y: 0.5731381}
+      - {x: -1.0066423, y: 1.0875677}
+      - {x: -1.2085516, y: 1.0894488}
+      - {x: -1.1765159, y: 0.4902306}
       - {x: -0.88979656, y: 0.07718623}
       - {x: -0.6464305, y: 0.13495298}
       - {x: -0.33044988, y: 0.4980237}
@@ -5203,7 +5204,7 @@ RectTransform:
   m_GameObject: {fileID: 1319193448}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 146.86418, y: 146.86418, z: 146.86418}
+  m_LocalScale: {x: 143.31888, y: 143.31888, z: 143.31888}
   m_Children:
   - {fileID: 752465045}
   m_Father: {fileID: 760059281}
@@ -5211,7 +5212,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -441.72003, y: 340.2}
+  m_AnchoredPosition: {x: -417, y: 322}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!255 &1319193450
@@ -5289,7 +5290,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1128, y: 523}
+  m_AnchoredPosition: {x: 1124, y: 523}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1387545605
@@ -5392,7 +5393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.36078432}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6980,7 +6981,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 2047126437}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 42fd3ec816b8f3c438ebcdfef5ecfea0, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -7010,7 +7011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7255,7 +7256,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0.00000023571647, y: 3.863078}
-  m_ConnectedAnchor: {x: 5.3999977, y: 4.263078}
+  m_ConnectedAnchor: {x: 5.399996, y: 4.263079}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -7493,7 +7494,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.98663735, y: 3.9842021}
-  m_ConnectedAnchor: {x: -5.853309, y: 4.650871}
+  m_ConnectedAnchor: {x: -5.85331, y: 4.650871}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
