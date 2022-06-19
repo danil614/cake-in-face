@@ -469,8 +469,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0000015894572, y: -0.9382287}
-  m_Size: {x: 3.0541005, y: 6.2722826}
+  m_Offset: {x: -0.11593374, y: -0.93822885}
+  m_Size: {x: 3.352223, y: 6.2722826}
   m_Direction: 0
 --- !u!114 &71546149
 MonoBehaviour:
@@ -883,8 +883,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.06218751, y: -0.8084146}
-  m_Size: {x: 3.1884732, y: 6.407545}
+  m_Offset: {x: -0.029063344, y: -0.8084145}
+  m_Size: {x: 3.3872232, y: 6.4075446}
   m_Direction: 0
 --- !u!233 &194991576
 HingeJoint2D:
@@ -3313,9 +3313,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.70274, y: 1.1783174}
-      - {x: -1.0066423, y: 1.0875677}
-      - {x: -1.2085516, y: 1.0894488}
+    - - {x: -0.68265265, y: 1.171663}
+      - {x: -0.9262933, y: 0.9611323}
+      - {x: -1.2353352, y: 0.78334236}
       - {x: -1.1765159, y: 0.4902306}
       - {x: -0.88979656, y: 0.07718623}
       - {x: -0.6464305, y: 0.13495298}
@@ -4931,7 +4931,7 @@ Transform:
   m_GameObject: {fileID: 1248784976}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.205626, y: -3.638436, z: 0}
-  m_LocalScale: {x: 8.090849, y: 8.090849, z: 8.090849}
+  m_LocalScale: {x: 6.3456984, y: 6.3456984, z: 6.3456984}
   m_Children: []
   m_Father: {fileID: 1382408323}
   m_RootOrder: 3
