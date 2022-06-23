@@ -36,8 +36,9 @@ public class CakeShooting : MonoBehaviour
         if (_isReloading) // Если перезарядка
         {
             // Плавно сдвигаем объект из текущей позиции в стартовую
-            _currentCake.transform.position = Vector2.Lerp(_currentCake.transform.position, transform.position,
-                speed * Time.deltaTime);
+            _currentCake.transform.position = Vector2.Lerp(
+                _currentCake.transform.position,
+                transform.position, speed * Time.deltaTime);
 
             if (Vector3.Distance(_currentCake.transform.position, transform.position) <=
                 0.05f) // Если торт достиг точки

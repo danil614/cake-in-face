@@ -27,7 +27,8 @@ public class DragCook : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         if (IsDragging && !cannonArea.IsPressing) // Если есть нажатие на hero, и hero не в области пушки
         {
-            Vector2 endClick = _mainCamera.ScreenToWorldPoint(Input.mousePosition); // Получаем координаты нажатия
+            // Получаем координаты нажатия
+            Vector2 endClick = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
             _bodyPartRigidbody.MovePosition(Vector2.Lerp(_bodyPartRigidbody.position, endClick,
                 speed * Time.fixedDeltaTime)); // Плавно передвигаем
         }

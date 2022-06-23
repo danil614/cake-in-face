@@ -14,6 +14,7 @@ public class ReturnStartPosition : MonoBehaviour
     private void Update()
     {
         // Плавно сдвигаем объект из текущей позиции в стартовую
-        transform.position = Vector2.Lerp(transform.position, _startPosition, speed * Time.deltaTime);
+        transform.position = Vector2.Lerp(transform.position, 
+            _startPosition, speed * Time.deltaTime);
     }
 }

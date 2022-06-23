@@ -18,11 +18,11 @@ public class HealthBar : MonoBehaviour
     [SerializeField] [Header("Повар")] private GameObject cook;
 
     [SerializeField] [Header("Пряник")] private GameObject gingerbread;
-    
+
     [SerializeField] [Header("Звуки")] private Sounds sounds;
 
     [SerializeField] [Header("Взрыв")] private GameObject splashes;
-    
+
     private int _currentHealth; // Текущее здоровье
 
     private void Start()
@@ -60,16 +60,14 @@ public class HealthBar : MonoBehaviour
                     DisableGingerbread();
                     break;
             }
-
             restartButton.SetActive(true); // Активируем кнопку перзапуска
-            menuButton.SetActive(false); // Убираем кнопку меню
+            menuButton.SetActive(false); // Убираем кнопки меню
         }
         // При превышении оставляем максимальный
         else if (_currentHealth > maxHealth)
         {
             _currentHealth = maxHealth;
         }
-
         // Изменяем шкалу здоровья
         bar.fillAmount = (float)_currentHealth / maxHealth;
     }

@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    ///     Проверяект есть ли перемещение какого-либо героя.
+    ///     Проверяет есть ли перемещение какого-либо героя.
     /// </summary>
     private bool IsHeroDragging()
     {
