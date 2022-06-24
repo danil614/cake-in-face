@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Cake
+  - Cook
+  - Gingerbread
   layers:
   - Default
   - TransparentFX
