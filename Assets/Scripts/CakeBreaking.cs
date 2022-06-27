@@ -57,16 +57,14 @@ public class CakeBreaking : MonoBehaviour
             currentTransform = cookPart.transform;
             if (cookPart.OverlapPoint(checkPosition)) // Проверяет попали ли координаты позиции на коллайдер
             {
-                splatPosition =
-                    new Vector3(collisionPoint.x + shift, collisionPoint.y,
-                        0); // Если попало, то берем координаты со смещением
+                // Если попало, то берем координаты со смещением
+                splatPosition = new Vector3(collisionPoint.x + shift, collisionPoint.y, 0);
                 break;
             }
         }
-
         // Создание пятна на поваре
-        var currentSplat = objectPool.GetObject(prefab, splatPosition, Quaternion.Euler(0, 0, Random.Range(0, 360)),
-            currentTransform);
+        var currentSplat = objectPool.GetObject(prefab, splatPosition,
+            Quaternion.Euler(0, 0, Random.Range(0, 360)), currentTransform);
         GameManager.StartSmoothDestroyer(currentSplat, true); // Запускаем плавное удаление пятна по времени
     }
 
